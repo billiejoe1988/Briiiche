@@ -8,5 +8,3 @@ export interface User {
     rol:string;
     comision: string;
   }
-
-export type Country = 'ARG' | 'BRA' | 'COL' | 'MEX' | 'USA' | 'URU';

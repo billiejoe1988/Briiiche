@@ -1,6 +1,6 @@
 # Brioche Culinary Academy - Angular Material Repository
 
-Welcome to the official repository of Brioche Culinary Academy, a leading gastronomy education platform developed with Angular Material & Tailwind!
+Welcome to the official repository of Brioche Culinary Academy, a leading gastronomy education platform developed with Angular, TypeScript Angular Material & Tailwind!
 
 ## Project Description
 

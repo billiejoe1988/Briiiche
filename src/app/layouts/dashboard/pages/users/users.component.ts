@@ -14,7 +14,7 @@ export class UsersComponent {
    id: 1,
    firstName: 'Ricardo',
    lastName: 'Pala',
-   password: '1234',
+   password: 'a1234',
    country: 'Argentina',
    email: 'ricardo@gmail.com',
    rol: 'Admin',
@@ -24,7 +24,7 @@ export class UsersComponent {
     id: 2,
     firstName: 'America',
     lastName: 'Zardelli',
-    password: '1122',
+    password: 'b1122',
     country: 'Chile',
     email: 'Americao@gmail.com',
     rol: 'User',
@@ -34,11 +34,15 @@ export class UsersComponent {
     id: 3,
     firstName: 'Judith',
     lastName: 'Sanz',
-    password: '4321',
+    password: 'c4321',
     country: 'USA',
     email: 'js@gmail.com',
     rol: 'User',
     comision: 'Pastry',
    },
- ]
+ ];
+
+ onUserSubmitted(ev: User): void{
+  this.dataSource = [... this.dataSource, {...ev, id: new Date().getTime() }];
+ }
 }
