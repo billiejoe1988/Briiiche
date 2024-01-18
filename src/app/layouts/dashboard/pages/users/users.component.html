@@ -1,14 +1,16 @@
 <div class="mb-5">
+  <h1 appUppercaseTitles class="text-black p-3 text-center">User Management</h1>
   <app-users-form (userSubmitted)="onUserSubmitted($event)"></app-users-form>
 </div>
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<h2  class="text-black p-3 text-center" appUppercaseTitles>User Management Table</h2>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 shadow-2xl">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
       <td mat-cell *matCellDef="let user"> {{user.id}} </td>
     </ng-container>
     <ng-container matColumnDef="fullName">
       <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let user"> {{user.firstName + " " + user.lastName}} </td>
+      <td mat-cell *matCellDef="let user"> {{ user | fullNamePipe }} </td>
     </ng-container>
     <ng-container matColumnDef="password">
         <th mat-header-cell *matHeaderCellDef> Password </th>
@@ -23,16 +25,88 @@
         <td mat-cell *matCellDef="let user"> {{user.email}} </td>
       </ng-container>
     <ng-container matColumnDef="rol">
-      <th mat-header-cell *matHeaderCellDef> Rol </th>
+      <th mat-header-cell *matHeaderCellDef> Role </th>
       <td mat-cell *matCellDef="let user"> {{user.rol}} </td>
     </ng-container>
     <ng-container matColumnDef="comision">
         <th mat-header-cell *matHeaderCellDef> Comision </th>
         <td mat-cell *matCellDef="let user"> {{user.comision}} </td>
     </ng-container>
-  
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let user">
+        <button mat-icon-button (click)="onModify(user)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="onDelete(user)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  
+  <div *ngIf="editingUser">
+    <form [formGroup]="userForm" (ngSubmit)="onSaveEdit()" class="py-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div>
+          <mat-form-field class="example-form-field">
+            <mat-label class="pt-4">First Name</mat-label>
+            <input matInput formControlName="firstName" type="text">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-form-field">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" type="text">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-form-field">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-form-field">
+            <mat-label>Country</mat-label>
+            <input matInput formControlName="country" type="text">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-form-field">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-form-field">
+            <mat-label>Rol</mat-label>
+            <mat-select formControlName="rol">
+              <mat-option value="Admin">Admin</mat-option>
+              <mat-option value="User">User</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-form-field">
+            <mat-label>Comision</mat-label>
+            <mat-select formControlName="comision">
+              <mat-option value="CuisinePro">CuisinePro</mat-option>
+              <mat-option value="CuisineBegin">CuisineBegin</mat-option>
+              <mat-option value="Pastry">Pastry</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <div class="flex justify-center mt-4">
+        <button mat-flat-button class="boton text-xl" type="submit">Save</button>
+        <button mat-flat-button class="boton text-xl" type="button" (click)="onCancelEdit()">Cancel</button>
+      </div>
+    </form>
+  </div>
   
   

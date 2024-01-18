@@ -8,11 +8,15 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatIconModule} from '@angular/material/icon';
+import { FullNamePipe } from '../../../../shared/pipeFullName';
+import { UppercaseTitlesDirective } from '../../../../shared/uppercasetitles.directive';
+
 
 @NgModule({
-  declarations: [UsersComponent, UsersFormComponent],
+  declarations: [UsersComponent, UsersFormComponent, FullNamePipe, UppercaseTitlesDirective],
   imports: [
-    CommonModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, ReactiveFormsModule, 
+    CommonModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, ReactiveFormsModule, MatIconModule,
   ],
   exports: [UsersComponent],
 })

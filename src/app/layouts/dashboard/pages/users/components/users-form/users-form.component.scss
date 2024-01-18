@@ -1,3 +1,18 @@
 .example-form-field {
     width: 400px;
+    height: 80px;
   }
+  .example-full-width {
+    width: 100%;
+  }
+.boton{
+   background: goldenrod;
+   padding: 8px;
+   margin: 2px;
+}
+.boton:hover{
+  border: solid 2px gray;
+}
+.iconMenu{
+  color: goldenrod;
+}

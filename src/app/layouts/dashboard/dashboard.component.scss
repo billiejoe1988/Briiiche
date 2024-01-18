@@ -1,3 +1,35 @@
 .dashboard-container{
   height: 100%;
 }
+.logo{
+  width: 85px;
+}
+.toolbar{
+  background-color: rgb(26, 25, 25);
+}
+.iconMenu{
+  background-color: white;
+  border-radius: 10px;
+  height: 25px;
+  width: 25px;
+}
+.perfil{
+  width: 35px;
+  border-radius: 100px;
+}
+.side{
+  background-color: rgb(26, 25, 25);
+}
+.listLinks{
+  background: rgba(255, 255, 255, 0.734);
+}
+.listLinks:hover{
+  background-color: goldenrod;
+  cursor: pointer ;
+}
+.boton{
+  background: white;
+}
+.boton:hover{
+ border: solid 2px goldenrod;
+}

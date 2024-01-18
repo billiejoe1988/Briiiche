@@ -1,53 +1,50 @@
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="p-2">
-    <div>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="p-2">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <mat-form-field class="example-form-field">
-            <mat-label>First Name</mat-label>
-            <input matInput formControlName="firstName" type="text" >
+            <mat-label class="pt-4">First Name</mat-label>
+            <input matInput formControlName="firstName" type="text" class="mx-2">
         </mat-form-field>
-    </div>
-    <div>
+
         <mat-form-field class="example-form-field">
             <mat-label>Last Name</mat-label>
-            <input matInput formControlName="lastName"type="text" >
+            <input matInput formControlName="lastName" type="text" class="mx-2">
         </mat-form-field>
-    </div>
-    <div>
+
         <mat-form-field class="example-form-field">
             <mat-label>Password</mat-label>
-            <input matInput formControlName="password" type="password" >
+            <input matInput formControlName="password" type="password" class="mx-2">
         </mat-form-field>
-    </div>
+
         <mat-form-field class="example-form-field">
             <mat-label>Country</mat-label>
-            <input matInput formControlName="country" type="text" >
+            <input matInput formControlName="country" type="text" class="mx-2">
         </mat-form-field>
-    <div>
+
         <mat-form-field class="example-form-field">
             <mat-label>Email</mat-label>
-            <input matInput formControlName="email"  type="email" >
+            <input matInput formControlName="email" type="email" class="mx-2">
         </mat-form-field>
-    </div>
-    <div>
-        <mat-form-field>
-            <mat-label>Rol</mat-label>
-            <mat-select formControlName="rol">
+
+        <mat-form-field class="example-form-field">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="rol" class="mx-2">
                 <mat-option value="Admin">Admin</mat-option>
                 <mat-option value="User">User</mat-option>
             </mat-select>
         </mat-form-field>
-    </div>
-    <div>
-        <mat-form-field>
+
+        <mat-form-field class="example-form-field">
             <mat-label>Comision</mat-label>
-            <mat-select formControlName="comision">
+            <mat-select formControlName="comision" class="mx-2">
                 <mat-option value="CuisinePro">CuisinePro</mat-option>
                 <mat-option value="CuisineBegin">CuisineBegin</mat-option>
                 <mat-option value="Pastry">Pastry</mat-option>
             </mat-select>
         </mat-form-field>
     </div>
-    <div>
-        <button mat-flat-button class="" >Send</button>
+
+    <div class="flex justify-center mt-4">
+        <button mat-flat-button class="boton text-xl" >Send</button>
     </div>
 </form>
 

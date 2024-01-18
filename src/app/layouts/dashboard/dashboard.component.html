@@ -1,32 +1,47 @@
 <mat-drawer-container class="dashboard-container" autosize>
-    <mat-drawer #drawer class="example-sidenav" mode="side">
-      <p>Auto-resizing sidenav</p>
+    <mat-drawer #drawer class="side" mode="side">
+      <span><img src="../../../assets/logo.png" alt="logo" class="logo mx-auto"></span>
       @if (showFiller) {
-        <p>Lorem, ipsum dolor sit amet consectetur.</p>
+        <div class="text-white text-center">
+          Inputs to log in
+        </div>
       }
-      <button (click)="showFiller = !showFiller" mat-raised-button>
-        Toggle extra text
+
+      <mat-list role="list" class="py-5 text-center">
+        <mat-list-item role="listitem" class="listLinks">Item 1</mat-list-item>
+        <mat-list-item role="listitem" class="listLinks">Item 2</mat-list-item>
+        <mat-list-item role="listitem" class="listLinks">Item 3</mat-list-item>
+        <mat-list-item role="listitem" class="listLinks">Item 4</mat-list-item>
+        <mat-list-item role="listitem" class="listLinks">Item 5</mat-list-item>
+      </mat-list>
+
+      <button  mat-raised-button class="boton p-2 m-2">
+        Sign In
       </button>
+      <button (click)="showFiller = !showFiller" mat-raised-button class="boton p-2 mx-3">
+        Log In
+      </button>
+
     </mat-drawer>
   
     <div class="example-sidenav-content">
-        <mat-toolbar color="primary">
+        <mat-toolbar class="toolbar">
             <button  (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-              <mat-icon>menu</mat-icon>
+              <mat-icon class="iconMenu">menu</mat-icon>
             </button>
-            <span>My App</span>
+            <span><img src="../../../assets/logo.png" alt="logo" class="logo"></span>
+            <span class="mx-2 text-xl text-yellow-600">Cuisine Academy</span>
             <span class="example-spacer"></span>
-            <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-              <mat-icon>favorite</mat-icon>
-            </button>
-            <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-              <mat-icon>share</mat-icon>
-            </button>
+            <div class="mx-auto">
+              <img src="../../../assets/perfil.jpeg" alt="perfil" class="perfil">
+              <span class="text-white mx-auto">User Name</span>
+              <span class="text-yellow-600">(Admin)</span>
+            </div>
+            <span class="text-gray-400">{{ currentDateTime }}</span>
           </mat-toolbar>
           <div class="p-3">
              <app-users></app-users>
           </div>
     </div>
-  
-  </mat-drawer-container>
+</mat-drawer-container>
   
