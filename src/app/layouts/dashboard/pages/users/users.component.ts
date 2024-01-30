@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from './models/';
+import { UsersService } from '../../../../core/services/users.service';
 
 @Component({
   selector: 'app-users',
@@ -46,17 +47,21 @@ export class UsersComponent {
  editingUser: User | null = null;
  userForm: FormGroup;
 
- constructor(private fb: FormBuilder) {
-   this.userForm = this.fb.group({
-     firstName: ['', Validators.required],
-     lastName: ['', Validators.required],
-     password: ['', Validators.required],
-     country: ['', Validators.required],
-     email: ['', [Validators.required, Validators.email]],
-     rol: ['', Validators.required],
-     comision: ['', Validators.required],
-   });
- }
+
+ constructor(
+  private fb: FormBuilder,
+  private usersService: UsersService
+) {
+  this.userForm = this.fb.group({
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    password: ['', Validators.required],
+    country: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    rol: ['', Validators.required],
+    comision: ['', Validators.required],
+  });
+}
 
  onModify(user: User) {
    this.editingUser = user;

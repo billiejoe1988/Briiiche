@@ -11,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import { FullNamePipe } from '../../../../shared/pipeFullName';
 import { UppercaseTitlesDirective } from '../../../../shared/uppercasetitles.directive';
+import { UsersService } from '../../../../core/services/users.service';
+import { UsersMockService } from '../../../../core/services/users-mock.service';
 
 
 @NgModule({
@@ -19,5 +21,12 @@ import { UppercaseTitlesDirective } from '../../../../shared/uppercasetitles.dir
     CommonModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, ReactiveFormsModule, MatIconModule,
   ],
   exports: [UsersComponent],
+  providers: [
+    UsersService,
+    {
+      provide: UsersService,
+      useClass: UsersMockService,
+    }
+  ],
 })
 export class UsersModule { }
