@@ -12,8 +12,6 @@ import {MatIconModule} from '@angular/material/icon';
 import { FullNamePipe } from '../../../../shared/pipeFullName';
 import { UppercaseTitlesDirective } from '../../../../shared/uppercasetitles.directive';
 import { UsersService } from '../../../../core/services/users.service';
-import { UsersMockService } from '../../../../core/services/users-mock.service';
-
 
 @NgModule({
   declarations: [UsersComponent, UsersFormComponent, FullNamePipe, UppercaseTitlesDirective],
@@ -23,10 +21,6 @@ import { UsersMockService } from '../../../../core/services/users-mock.service';
   exports: [UsersComponent],
   providers: [
     UsersService,
-    {
-      provide: UsersService,
-      useClass: UsersMockService,
-    }
   ],
 })
 export class UsersModule { }

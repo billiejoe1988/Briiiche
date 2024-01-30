@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoursesComponent } from './courses.component';
+import { ProductDialogComponent } from './components/product-dialog/product-dialog.component';
 
 
 
 @NgModule({
   declarations: [
-    CoursesComponent
+    CoursesComponent,
+    ProductDialogComponent
   ],
   imports: [
     CommonModule
