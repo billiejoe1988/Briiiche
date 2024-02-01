@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class DashboardComponent implements OnInit {
   currentDateTime: string = '';
   showFiller = false;
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
  
@@ -21,5 +24,10 @@ export class DashboardComponent implements OnInit {
   private updateCurrentDateTime() {
     const now = new Date();
     this.currentDateTime = `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
+  }
+
+  logout(): void {
+    localStorage.removeItem('access-token');
+    this.router.navigate(['auth', 'login']);
   }
 }

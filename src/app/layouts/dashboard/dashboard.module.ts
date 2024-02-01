@@ -9,6 +9,7 @@ import { UsersModule } from './pages/users/users.module';
 import { CoursesModule } from './pages/courses/courses.module';
 import {MatListModule} from '@angular/material/list';
 import { HomeModule } from './pages/home/home.module';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { HomeModule } from './pages/home/home.module';
   ],
   imports: [
     CommonModule, MatSidenavModule, MatButtonModule, MatToolbarModule, MatIconModule, 
-    UsersModule, CoursesModule, MatListModule, HomeModule,
+    UsersModule, CoursesModule, MatListModule, HomeModule, RouterOutlet, RouterModule
   ],
   exports: [DashboardComponent],
 })

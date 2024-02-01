@@ -7,13 +7,12 @@
         </div>
       }
 
-      <mat-list role="list" class="py-5 text-center">
-        <mat-list-item role="listitem" class="listLinks">Item 1</mat-list-item>
-        <mat-list-item role="listitem" class="listLinks">Item 2</mat-list-item>
-        <mat-list-item role="listitem" class="listLinks">Item 3</mat-list-item>
-        <mat-list-item role="listitem" class="listLinks">Item 4</mat-list-item>
-        <mat-list-item role="listitem" class="listLinks">Item 5</mat-list-item>
-      </mat-list>
+      <mat-nav-list role="list" class="py-5 text-center">
+        <a #homeLink="routerLinkActive" routerLinkActive [activated]="homeLink.isActive" routerLink='home' mat-list-item class="listLinks">Home</a>
+        <a #usersLink='routerLinkActive' routerLinkActive [activated]="usersLink.isActive" routerLink='users' mat-list-item class="listLinks">Users</a>
+        <a #coursesLink='routerLinkActive' routerLinkActive [activated]="coursesLink.isActive" routerLink='courses' mat-list-item class="listLinks">Courses</a>
+        <a (click)="logout()" mat-list-item class="listLinks">Log Out</a>
+      </mat-nav-list>
 
       <button  mat-raised-button class="boton p-2 m-2">
         Sign In
@@ -40,7 +39,7 @@
             <span class="text-gray-400">{{ currentDateTime }}</span>
           </mat-toolbar>
           <div class="p-3">
-             <app-users></app-users>
+             <router-outlet></router-outlet>
           </div>
     </div>
 </mat-drawer-container>
