@@ -26,11 +26,12 @@ export class AlertsService {
     });
   }
 
-  showError(message?: string): void {
+  showError(title: string, message: string): void {
     this.notification$.next({
       icon: 'error',
-      title: 'Error!',
+      title,
       text: message,
     });
   }
+  
 }

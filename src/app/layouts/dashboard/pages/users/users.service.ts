@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Observable, of, tap, delay, throwError } from 'rxjs';
+import { Injectable, Inject } from '@angular/core';
 import { User } from './models';
-import { AlertsService } from '../../../../core/services/alets.service';
+import { Observable, of } from 'rxjs';
+import { AlertsService } from '../../../../core/services/alerts.service'
+
 
 const ROLES_DB: string[] = ['ADMIN', 'USER'];
 
@@ -38,43 +39,43 @@ let USERS_DB: User[] = [
     },
 ];
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class UsersService {
-  constructor(private alerts: AlertsService) {}
+  constructor(@Inject(AlertsService) private alerts: AlertsService) {}
 
   getUserById(id: number | string): Observable<User | undefined> {
-    return of(USERS_DB.find((user) => user.id == id)).pipe(delay(1000));
+    return of(USERS_DB.find((user) => user.id == id));
   }
 
   getRoles(): Observable<string[]> {
-    return of(ROLES_DB).pipe(delay(1000));
+    return of(ROLES_DB);
   }
 
   loadUsers(): Observable<User[]> {
-    return of(USERS_DB).pipe(delay(1000));
+    return of(USERS_DB);
   }
 
   createUser(payload: User): Observable<User[]> {
     USERS_DB.push(payload);
-    return this.loadUsers(); 
+    return of(USERS_DB);
   }
 
   deleteUser(userID: number): Observable<User[]> {
     USERS_DB = USERS_DB.filter((user) => user.id !== userID);
-    return this.loadUsers().pipe(
-      tap(() =>
-        this.alerts.showSuccess('Realizado', 'Se elimino correctamente')
-      )
-    );
+    this.alerts.showSuccess('Realizado', 'Se elimino correctamente');
+    return of(USERS_DB);
   }
 
-  updateUser(updatedUser: User): Observable<User> {
-    const index = USERS_DB.findIndex((user) => user.id === updatedUser.id);
+  updateUser(updatedUser: User): Observable<User[]> {
+    const index = USERS_DB.findIndex(user => user.id === updatedUser.id);
     if (index !== -1) {
-      USERS_DB[index] = { ...USERS_DB[index], ...updatedUser };
-      return of(USERS_DB[index]);
+      USERS_DB[index] = updatedUser;
+      this.alerts.showSuccess('Realizado', 'Usuario actualizado correctamente');
     } else {
-      return throwError('Usuario no encontrado');
+      this.alerts.showError('Error', 'Usuario no encontrado');
     }
+    return of(USERS_DB);
   }
 }

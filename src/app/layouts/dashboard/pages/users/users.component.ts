@@ -16,7 +16,7 @@ export class UsersComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private usersService: UsersService
+    private usersService: UsersService,
   ) {
     this.userForm = this.fb.group({
       firstName: ['', Validators.required],
