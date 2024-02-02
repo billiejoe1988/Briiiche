@@ -5,22 +5,25 @@ import {MatTableModule} from '@angular/material/table';
 import { UsersFormComponent } from './components/users-form/users-form.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
-import { FullNamePipe } from '../../../../shared/pipeFullName';
-import { UppercaseTitlesDirective } from '../../../../shared/uppercasetitles.directive';
-import { UsersService } from '../../../../core/services/users.service';
+import { UsersService } from './users.service';
+import { UserDetailComponent } from './pages/user-details/user-details.component';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '../../../../shared/shared.module';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  declarations: [UsersComponent, UsersFormComponent, FullNamePipe, UppercaseTitlesDirective],
+  declarations: [
+    UsersComponent,
+    UsersFormComponent,
+    UserDetailComponent,
+  ],
   imports: [
-    CommonModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, ReactiveFormsModule, MatIconModule,
+    CommonModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, ReactiveFormsModule, MatIconModule, RouterModule, SharedModule,
   ],
   exports: [UsersComponent],
-  providers: [
-    UsersService,
-  ],
+  providers: [UsersService],
 })
 export class UsersModule { }

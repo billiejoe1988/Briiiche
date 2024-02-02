@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>User</h2>
+
+<mat-dialog-content>
+    <form [formGroup]="coursesForm">
+        <p>Agree your information</p>
+        <mat-form-field>
+            <mat-label>Course Name</mat-label>
+            <input matInput formControlName="courseName">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Creator Date</mat-label>
+            <input formControlName="createAt" matInput [matDatepicker]="dateCreatorPicker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="dateCreatorPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dateCreationPicker></mat-datepicker>
+          </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>No Thanks</button>
+    <button mat-button (click)="onSave()">Save</button>
+</mat-dialog-actions>

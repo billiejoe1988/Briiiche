@@ -1,1 +1,39 @@
-<p>courses works!</p>
+<div class="flex justify-end mb-3">
+   <button (click)="onCreate()" mat-button>
+     Agree
+   </button>
+</div>
+
+<table mat-table [dataSource]="[courses]" class="mat-elevation-z8 demo-table">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="courseName">
+      <th mat-header-cell *matHeaderCellDef> Course Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef> Created Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'dd/MM/YYYY hh:mm' }} </td>
+      </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button>
+          <mat-icon (click)="onDelete(element.id)">delete</mat-icon>
+        </button>
+        <button (click)="onEdit(element)" mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  

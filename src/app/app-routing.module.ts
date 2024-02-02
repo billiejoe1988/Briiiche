@@ -5,7 +5,7 @@ import { LoginComponent } from './layouts/auth/pages/login/login.component';
 import { UsersComponent } from './layouts/dashboard/pages/users/users.component';
 import { HomeComponent } from './layouts/dashboard/pages/home/home.component';
 import { NotFoundModuleComponent } from './layouts/not-found-module/not-found-module.component';
-import { CoursesComponent } from './layouts/dashboard/pages/courses/courses.component';
+import { UserDetailComponent } from './layouts/dashboard/pages/users/pages/user-details/user-details.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent, 
@@ -14,10 +14,17 @@ const routes: Routes = [
             path: 'home', component: HomeComponent,
           },
           {
-            path: 'users', component: UsersComponent,
+            path: 'users',
+            component: UsersComponent,
           },
           {
-            path: 'courses', component: CoursesComponent,
+            path: 'users/:id', 
+            component: UserDetailComponent,
+          },
+          {
+            path: 'courses', loadChildren: () => import('./layouts/dashboard/pages/courses/courses.module').then(
+              (m) => m.CoursesModule
+            ),
           },
           {
             path: '**', redirectTo:'home',

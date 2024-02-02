@@ -1,106 +1,85 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from './models/';
-import { UsersService } from '../../../../core/services/users.service';
+import { User } from './models';
+import { UsersService } from './users.service';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-
-export class UsersComponent {
+export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['id', 'fullName', 'password', 'country', 'email', 'rol', 'comision', 'actions'];
-  dataSource: User[] = [
-  {
-   id: 1,
-   firstName: 'Ricardo',
-   lastName: 'Pala',
-   password: 'a1234',
-   country: 'Argentina',
-   email: 'ricardo@gmail.com',
-   rol: 'Admin',
-   comision: 'CuisineBegin',
-  },
-  {
-    id: 2,
-    firstName: 'America',
-    lastName: 'Zardelli',
-    password: 'b1122',
-    country: 'Chile',
-    email: 'Americao@gmail.com',
-    rol: 'User',
-    comision: 'CuisinePro',
-   },
-   {
-    id: 3,
-    firstName: 'Judith',
-    lastName: 'Sanz',
-    password: 'c4321',
-    country: 'USA',
-    email: 'js@gmail.com',
-    rol: 'User',
-    comision: 'Pastry',
-   },
- ];
+  dataSource: User[] = [];
+  userForm: FormGroup;
+  editingUser: User | null = null;
 
- editingUser: User | null = null;
- userForm: FormGroup;
+  constructor(
+    private fb: FormBuilder,
+    private usersService: UsersService
+  ) {
+    this.userForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      password: ['', Validators.required],
+      country: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      rol: ['', Validators.required],
+      comision: ['', Validators.required],
+    });
+  }
 
+  ngOnInit(): void {
+    this.getUsers();
+  }
 
- constructor(
-  private fb: FormBuilder,
-  private usersService: UsersService
-) {
-  this.userForm = this.fb.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-    password: ['', Validators.required],
-    country: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    rol: ['', Validators.required],
-    comision: ['', Validators.required],
-  });
-}
+  getUsers(): void {
+    this.usersService.getUsers().subscribe(users => {
+      this.dataSource = users;
+    });
+  }
 
- onModify(user: User) {
-   this.editingUser = user;
-   this.userForm.setValue({
-     firstName: user.firstName,
-     lastName: user.lastName,
-     password: user.password,
-     country: user.country,
-     email: user.email,
-     rol: user.rol,
-     comision: user.comision,
-   });
- }
+  onModify(user: User): void {
+    this.editingUser = user;
+    this.userForm.setValue({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      password: user.password,
+      country: user.country,
+      email: user.email,
+      rol: user.rol,
+      comision: user.comision,
+    });
+  }
 
- onCancelEdit() {
-   this.editingUser = null;
-   this.userForm.reset();
- }
-
- onSaveEdit() {
-  if (this.editingUser && this.userForm.valid) {
-    this.dataSource = this.dataSource.map(user => 
-      user.id === this.editingUser!.id ? { ...this.editingUser, ...this.userForm.value } : user
-    );
-    
+  onCancelEdit(): void {
     this.editingUser = null;
     this.userForm.reset();
   }
-}
-  
-  onDelete(user: User) {
+
+  onSaveEdit(): void {
+    if (this.editingUser && this.userForm.valid) {
+      const updatedUser: User = { ...this.editingUser, ...this.userForm.value };
+      this.usersService.updateUser(updatedUser).subscribe(() => {
+        this.getUsers(); 
+        this.editingUser = null;
+        this.userForm.reset();
+      });
+    }
+  }
+
+  onDelete(user: User): void {
     const confirmDelete = confirm('¿Estás seguro de que deseas eliminar este usuario?');
     if (confirmDelete) {
-      console.log('Eliminar usuario:', user);
-      this.dataSource = this.dataSource.filter(u => u.id !== user.id);
+      this.usersService.deleteUser(user.id).subscribe(() => {
+        this.getUsers(); 
+      });
     }
   }
 
   onUserSubmitted(ev: User): void {
-    this.dataSource = [...this.dataSource, { ...ev, id: new Date().getTime() }];
+    this.usersService.createUser(ev).subscribe(() => {
+      this.getUsers(); 
+    });
   }
 }
