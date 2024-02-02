@@ -13,7 +13,9 @@ import { SharedModule } from '../../../../shared/shared.module';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-
+import { UsersRoutingModule } from './users-routing.module';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -22,9 +24,32 @@ import { MatInputModule } from '@angular/material/input';
     UserDetailComponent,
   ],
   imports: [
-    CommonModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, ReactiveFormsModule, MatIconModule, RouterModule, SharedModule,
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule,
+    SharedModule,
+    UsersRoutingModule,
+    MatListModule,
+    MatIconModule,
+    MatToolbarModule,
+    CommonModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    UsersRoutingModule,
   ],
   exports: [UsersComponent],
-  providers: [UsersService],
+  providers: [UsersService], 
 })
 export class UsersModule { }
+

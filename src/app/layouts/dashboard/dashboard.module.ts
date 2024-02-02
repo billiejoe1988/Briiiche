@@ -6,10 +6,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { UsersModule } from './pages/users/users.module';
-import { CoursesModule } from './pages/courses/courses.module';
-import { HomeModule } from './pages/home/home.module';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { DashboardRoutingModule } from './dashboard-routing.module';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,12 +23,13 @@ import { RouterModule, RouterOutlet } from '@angular/router';
     MatToolbarModule,
     MatIconModule,
     MatListModule,
-    MatSidenavModule,
-    UsersModule,
-    CoursesModule,
-    HomeModule,
     RouterModule,
-    RouterOutlet,
+    DashboardRoutingModule,
+    MatSidenavModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
   ],
   exports: [DashboardComponent],
 })
