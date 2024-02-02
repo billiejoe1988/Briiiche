@@ -30,11 +30,11 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUsers();
+    this.loadUsers();
   }
 
-  getUsers(): void {
-    this.usersService.getUsers().subscribe(users => {
+  loadUsers(): void {
+    this.usersService.loadUsers().subscribe(users => {
       this.dataSource = users;
     });
   }
@@ -61,25 +61,34 @@ export class UsersComponent implements OnInit {
     if (this.editingUser && this.userForm.valid) {
       const updatedUser: User = { ...this.editingUser, ...this.userForm.value };
       this.usersService.updateUser(updatedUser).subscribe(() => {
-        this.getUsers(); 
+        this.loadUsers(); 
         this.editingUser = null;
         this.userForm.reset();
       });
     }
   }
 
-  onDelete(user: User): void {
-    const confirmDelete = confirm('¿Estás seguro de que deseas eliminar este usuario?');
-    if (confirmDelete) {
-      this.usersService.deleteUser(user.id).subscribe(() => {
-        this.getUsers(); 
-      });
-    }
+  deleteUser(id: number): void {
+    this.usersService.deleteUser(id).subscribe(() => {
+      this.loadUsers(); 
+    });
   }
 
-  onUserSubmitted(ev: User): void {
-    this.usersService.createUser(ev).subscribe(() => {
-      this.getUsers(); 
+  updateUser(user: User): void {
+    this.usersService.updateUser(user).subscribe(() => {
+      this.loadUsers(); 
+    });
+  }
+
+  createUser(user: User): void {
+    this.usersService.createUser(user).subscribe(() => {
+      this.loadUsers(); 
+    });
+
+  }
+  onUserSubmitted(user: User): void {
+    this.usersService.createUser(user).subscribe(() => {
+      this.loadUsers(); 
     });
   }
 }

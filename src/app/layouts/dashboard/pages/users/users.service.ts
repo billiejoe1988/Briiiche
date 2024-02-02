@@ -50,18 +50,18 @@ export class UsersService {
     return of(ROLES_DB).pipe(delay(1000));
   }
 
-  getUsers(): Observable<User[]> {
+  loadUsers(): Observable<User[]> {
     return of(USERS_DB).pipe(delay(1000));
   }
 
   createUser(payload: User): Observable<User[]> {
     USERS_DB.push(payload);
-    return this.getUsers();
+    return this.loadUsers(); 
   }
 
   deleteUser(userID: number): Observable<User[]> {
     USERS_DB = USERS_DB.filter((user) => user.id !== userID);
-    return this.getUsers().pipe(
+    return this.loadUsers().pipe(
       tap(() =>
         this.alerts.showSuccess('Realizado', 'Se elimino correctamente')
       )
