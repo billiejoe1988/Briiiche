@@ -65,19 +65,27 @@ export class UsersComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: User | undefined) => {
       if (result) {
         result.id = user.id;
+        
         this.usersService.updateUserById(result).subscribe({
           next: () => {
-            this.loadUsers();
+            this.loadUsers(); 
             this.alertsService.showSuccess('Success', 'User updated successfully.');
+            
+
+            this.users = this.users.filter(u => u.id !== user.id);
+
+            this.users.push(result);
           },
           error: (error: any) => {
             console.error('Error updating user:', error);
             this.alertsService.showError('Error', 'An error occurred while updating the user.');
           }
         });
+        dialogRef.componentInstance.onSave();
       }
     });
   }
+  
 
   deleteUser(user: User): void {
     this.alertsService.showAlert({
