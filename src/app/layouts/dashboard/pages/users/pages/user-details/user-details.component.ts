@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../users.service';
 import { LoadingService } from '../../../../../../core/services/loading.service';
+import { User } from '../../models/index';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-detail',
@@ -9,15 +11,19 @@ import { LoadingService } from '../../../../../../core/services/loading.service'
   styleUrls: ['./user-details.component.scss'],
 })
 export class UserDetailComponent {
+  user: User | undefined;
+
   constructor(
     private route: ActivatedRoute,
     private usersService: UsersService,
     private loadingService: LoadingService
   ) {
     this.loadingService.setIsLoading(true);
-    this.usersService.getUserById(this.route.snapshot.params['id']).subscribe({
-      next: (findedUser) => {
-        console.log(findedUser);
+    this.route.params.pipe(
+      switchMap(params => this.usersService.getUserById(params['id']))
+    ).subscribe({
+      next: (foundUser: User | undefined) => {
+        this.user = foundUser;
       },
       complete: () => {
         this.loadingService.setIsLoading(false);

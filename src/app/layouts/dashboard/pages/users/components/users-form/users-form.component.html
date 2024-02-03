@@ -1,4 +1,4 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="p-2">
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="py-5">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <mat-form-field class="example-form-field">
             <mat-label class="pt-4">First Name</mat-label>
@@ -36,10 +36,10 @@
         <mat-form-field class="example-form-field">
             <mat-label>Comision</mat-label>
             <mat-select formControlName="comision" class="mx-2">
-                <mat-option value="CuisinePro">CuisinePro</mat-option>
-                <mat-option value="CuisineBegin">CuisineBegin</mat-option>
-                <mat-option value="PastryPro">PastryPro</mat-option>
-                <mat-option value="Pastry">PastryBegin</mat-option>
+                <mat-option value="CuisinePro">Cuisine Pro</mat-option>
+                <mat-option value="CuisineBegin">Cuisin Begin</mat-option>
+                <mat-option value="PastryPro">Pastry Pro</mat-option>
+                <mat-option value="Pastry">Pastry Begin</mat-option>
             </mat-select>
         </mat-form-field>
     </div>
@@ -48,8 +48,6 @@
         <button mat-flat-button class="boton text-xl" >Send</button>
     </div>
 </form>
-
-<pre>{{userForm.value | json}}</pre>
 
 
   

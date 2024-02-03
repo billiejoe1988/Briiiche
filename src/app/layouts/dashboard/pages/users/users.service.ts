@@ -1,10 +1,9 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { User } from './models';
 import { Observable, of } from 'rxjs';
-import { AlertsService } from '../../../../core/services/alerts.service'
+import { AlertsService } from '../../../../core/services/alerts.service';
 
-
-const ROLES_DB: string[] = ['ADMIN', 'USER'];
+const ROLES_DB: string[] = ['Admin', 'User'];
 
 let USERS_DB: User[] = [
   {
@@ -15,7 +14,7 @@ let USERS_DB: User[] = [
     country: 'Argentina',
     email: 'ricardo@gmail.com',
     rol: 'Admin',
-    comision: 'CuisineBegin',
+    comision: 'Cuisine Begin',
    },
    {
      id: 2,
@@ -23,9 +22,9 @@ let USERS_DB: User[] = [
      lastName: 'Zardelli',
      password: 'b1122',
      country: 'Chile',
-     email: 'Americao@gmail.com',
+     email: 'America@gmail.com',
      rol: 'User',
-     comision: 'CuisinePro',
+     comision: 'Cuisine Pro',
     },
     {
      id: 3,
@@ -35,7 +34,7 @@ let USERS_DB: User[] = [
      country: 'USA',
      email: 'js@gmail.com',
      rol: 'User',
-     comision: 'Pastry',
+     comision: 'Pastry Pro',
     },
 ];
 
@@ -43,38 +42,39 @@ let USERS_DB: User[] = [
   providedIn: 'root'
 })
 export class UsersService {
-  constructor(@Inject(AlertsService) private alerts: AlertsService) {}
+  constructor(private alerts: AlertsService) {}
 
-  getUserById(id: number | string): Observable<User | undefined> {
-    return of(USERS_DB.find((user) => user.id == id));
+  getUsers(): Observable<User[]> {
+    return of(USERS_DB);
+  }
+
+  getUserById(id: number): Observable<User | undefined> {
+    return of(USERS_DB.find(user => user.id === id));
   }
 
   getRoles(): Observable<string[]> {
     return of(ROLES_DB);
   }
 
-  loadUsers(): Observable<User[]> {
-    return of(USERS_DB);
-  }
-
   createUser(payload: User): Observable<User[]> {
-    USERS_DB.push(payload);
+    USERS_DB = [...USERS_DB, {...payload, id: USERS_DB.length + 1}];
+    this.alerts.showSuccess('Success', 'User created successfully.');
     return of(USERS_DB);
   }
 
-  deleteUser(userID: number): Observable<User[]> {
+  deleteUserById(userID: number): Observable<User[]> {
     USERS_DB = USERS_DB.filter((user) => user.id !== userID);
-    this.alerts.showSuccess('Realizado', 'Se elimino correctamente');
+    this.alerts.showSuccess('Success', 'User deleted successfully.');
     return of(USERS_DB);
   }
 
-  updateUser(updatedUser: User): Observable<User[]> {
+  updateUserById(updatedUser: User): Observable<User[]> {
     const index = USERS_DB.findIndex(user => user.id === updatedUser.id);
     if (index !== -1) {
       USERS_DB[index] = updatedUser;
-      this.alerts.showSuccess('Realizado', 'Usuario actualizado correctamente');
+      this.alerts.showSuccess('Success', 'User updated successfully.');
     } else {
-      this.alerts.showError('Error', 'Usuario no encontrado');
+      this.alerts.showError('Error', 'User not found.');
     }
     return of(USERS_DB);
   }
