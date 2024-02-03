@@ -1,26 +1,27 @@
-<h2 mat-dialog-title>User</h2>
+<h2 mat-dialog-title>Courses</h2>
 
 <mat-dialog-content>
-    <form [formGroup]="coursesForm">
-        <mat-form-field>
-          <mat-label>Course Name</mat-label>
-          <input matInput formControlName="courseName">
-          <mat-error *ngIf="coursesForm.get('courseName')?.hasError('required')">Course Name is required</mat-error>
-        </mat-form-field>
-      
-        <mat-form-field>
-          <mat-label>Creator Date</mat-label>
-          <input matInput formControlName="createdAt" [matDatepicker]="dateCreatorPicker">
-          <mat-datepicker-toggle matSuffix [for]="dateCreatorPicker"></mat-datepicker-toggle>
-          <mat-datepicker #dateCreatorPicker></mat-datepicker>
-          <mat-error *ngIf="coursesForm.get('createdAt')?.hasError('required')">Creator Date is required</mat-error>
-          <mat-error *ngIf="coursesForm.get('createdAt')?.hasError('pattern')">Invalid Date Format (MM/DD/YYYY)</mat-error>
-        </mat-form-field>
-      </form>
+  <form [formGroup]="coursesForm">
+    <mat-form-field>
+      <mat-label>Course Name</mat-label>
+      <input matInput formControlName="courseName">
+      <mat-error *ngIf="coursesForm.get('courseName')?.hasError('required')">Course Name is required</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field class="p-3">
+      <mat-label>Creator Date</mat-label>
+      <input matInput [matDatepicker]="dateCreatorPicker" formControlName="createdAt" class="p-2">
+      <mat-datepicker-toggle matSuffix [for]="dateCreatorPicker"></mat-datepicker-toggle>
+      <mat-datepicker #dateCreatorPicker></mat-datepicker>
+      <mat-error *ngIf="coursesForm.get('createdAt')?.hasError('required')">Date is required</mat-error>
+    </mat-form-field>
+    
+  </form>
+  
       
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close>No Thanks</button>
-    <button mat-button (click)="onSave()">Save</button>
+    <button mat-button mat-dialog-close class="boton">No Thanks</button>
+    <button mat-button (click)="onSave()" class="boton">Save</button>
 </mat-dialog-actions>

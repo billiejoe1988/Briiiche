@@ -16,12 +16,14 @@ import { MatInputModule } from '@angular/material/input';
 import { UsersRoutingModule } from './users-routing.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
+import { UsersDialogComponent } from './components/users-dialog/users-dialog.component';
 
 @NgModule({
   declarations: [
     UsersComponent,
     UsersFormComponent,
     UserDetailComponent,
+    UsersDialogComponent,
   ],
   imports: [
     CommonModule,

@@ -1,8 +1,7 @@
 <div class="mb-5">
-  <h1 appUppercaseTitles class="text-black p-3 text-center">User Management</h1>
+  <h1 appUppercaseTitles class="text-black p-3 text-center bg-white/80 rounded mb-4">User Management</h1>
   <app-users-form (userSubmitted)="onUserSubmitted($event)"></app-users-form>
 </div>
-<h2  class="text-black p-3 text-center" appUppercaseTitles>User Management Table</h2>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 shadow-2xl">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>

@@ -1,6 +1,6 @@
 // Importaciones de Angular Material
 @use '@angular/material' as mat;
-
+@include mat.core();
 // Tema personalizado para Angular Material
 // Define los paletas de color para tu tema
 $Briiiche-primary: mat.define-palette(mat.$indigo-palette);
@@ -29,5 +29,5 @@ html, body {
   height: 100%;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  overflow-x: hidden;
 }
+

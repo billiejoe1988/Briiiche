@@ -6,22 +6,22 @@ import { LoadingService } from '../../../../core/services/loading.service';
     let courses: Courses [] = [
         {
           id: 1,
-          name: 'Cuisine Begin',
+          courseName: 'Cuisine Begin',
           createdAt: new Date (),
         },
         {
           id: 2,
-          name: 'Cuisine Professional',
+          courseName: 'Cuisine Professional',
           createdAt: new Date (),
         },
         {
           id: 3,
-          name: 'Pastry Begin',
+          courseName: 'Pastry Begin',
           createdAt: new Date (),
         },
         {
           id: 4,
-          name: 'Pastr Professional',
+          courseName: 'Pastry Professional',
           createdAt: new Date (),
         }
     ];
@@ -46,7 +46,7 @@ import { LoadingService } from '../../../../core/services/loading.service';
         return of (courses);
       }
      
-      updateCoursesById(id: number, data:Courses){
+      updateCoursesById(id: number, data: Courses){
         courses = courses.map((el) =>(el.id === id ? {...el, ...data} : el));
         return this.getCourses();
       }

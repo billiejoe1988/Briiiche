@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CoursesService } from './courses.service';
 import { Courses } from './models/index';
 import { MatDialog } from '@angular/material/dialog';
+import { AlertsService } from '../../../../core/services/alerts.service';
 import { CoursesDialogComponent } from './components/courses-dialog/courses-dialog.component';
 
 @Component({
@@ -14,8 +15,7 @@ export class CoursesComponent {
 
   courses: Courses[] = [];
 
-  constructor(private coursesService: CoursesService, public dialog: MatDialog) { 
-
+  constructor(private coursesService: CoursesService, public dialog: MatDialog, private alertsService: AlertsService) { 
     this.coursesService.getCourses().subscribe({
       next: (courses) => {
         this.courses = courses;
@@ -23,45 +23,67 @@ export class CoursesComponent {
     });
   }
 
-  onCreate() :void {
+  onCreate(): void {
     this.dialog.open(CoursesDialogComponent).afterClosed().subscribe({
       next: (result) => {
         if (result) {
           this.coursesService.createCourses(result).subscribe({
-            next: (courses) => (this.courses = courses),
-          })
+            next: (courses) => {
+              this.courses = courses;
+              this.alertsService.showSuccess('Success', 'Course added successfully.'); 
+            },
+            error: (error) => {
+              console.error('Error creating course:', error);
+              this.alertsService.showError('Error', 'An error occurred while creating the course.');
+            }
+          });
         }
       }
     });
   }
 
   onEdit(courses: Courses) {
-    const dialogRef = this.dialog.open(CoursesDialogComponent, {
+    this.dialog.open(CoursesDialogComponent, {
       data: courses,
-    });
-  
-    dialogRef.afterClosed().subscribe((result: Courses) => {
-      if (result) {
-        this.coursesService.updateCoursesById(courses.id, result)
-          .subscribe({
-            next: (updatedCourses) => {
-              this.courses = updatedCourses;
+    }).afterClosed().subscribe({
+      next: (result) => {
+        if (result) {
+          this.coursesService.updateCoursesById(courses.id, result).subscribe({
+            next: (courses) => {
+              this.courses = courses;
+              this.alertsService.showSuccess('Success', 'Course updated successfully.');
             },
-            error: (err) => {
-              console.error('Error updating course:', err);
+            error: (error) => {
+              console.error('Error updating course:', error);
+              this.alertsService.showError('Error', 'An error occurred while updating the course.');
             }
           });
+        }
       }
     });
   }
-
+  
   onDelete(id: number) {
-    if (confirm ('Are you sure?')){
-      this.coursesService.deleteCoursesById(id).subscribe({
-        next: (courses) => {
-          this.courses = courses;
-        },
-      });
-    }
+    this.alertsService.showAlert({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.coursesService.deleteCoursesById(id).subscribe({
+          next: (courses) => {
+            this.courses = courses;
+            this.alertsService.showSuccess('Success', 'Course deleted successfully.');
+          },
+          error: (error) => {
+            console.error('Error deleting course:', error);
+            this.alertsService.showError('Error', 'An error occurred while deleting the course.');
+          }
+        });
+      }
+    });
   }
 }

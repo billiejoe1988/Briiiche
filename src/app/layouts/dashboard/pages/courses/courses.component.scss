@@ -5,4 +5,19 @@ table {
   .error-message {
     color: red;
   }
-  
+
+  .boton{
+    background: goldenrod;
+    padding: 8px;
+    margin: 2px;
+ }
+ .boton:hover{
+   border: solid 2px gray;
+ }
+ .example-form-field {
+  width: 400px;
+  height: 80px;
+}
+.example-full-width {
+  width: 100%;
+}

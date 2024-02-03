@@ -13,7 +13,7 @@ import { CoursesService } from './courses.service';
     CoursesDialogComponent,
   ],
   imports:[
-    CommonModule, SharedModule, CoursesRoutingModule, ReactiveFormsModule 
+    CommonModule, SharedModule, CoursesRoutingModule, ReactiveFormsModule, 
   ],
   providers: [CoursesService],
 })
