@@ -1,0 +1,30 @@
+.login-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    height: 100vh;
+}
+
+.boton{
+    background: goldenrod;
+    padding: 8px;
+    margin: 2px;
+    border-radius: 20;
+ }
+ .boton:hover{
+   border: solid 2px gray;
+ }
+ .example-form-field {
+  width: 400px;
+  height: 80px;
+}
+.example-full-width {
+  width: 100%;
+}
+
+.fondo{
+  background-image: url(../../../../../assets/f6.webp);
+  background-size: cover;
+  height: 100%;
+}

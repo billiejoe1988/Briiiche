@@ -11,11 +11,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCardModule } from '@angular/material/card';
+import { ValidationErrorsPipe } from './validation-errors.pipe';
 
 @NgModule({
   declarations: [
     FullNamePipe, 
-    UppercaseTitlesDirective,
+    UppercaseTitlesDirective, ValidationErrorsPipe,
   ],
   imports: [CommonModule],
   exports: [
@@ -30,6 +32,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatFormFieldModule, 
     ReactiveFormsModule, 
     MatDatepickerModule,
+    MatCardModule,
+    ValidationErrorsPipe,
   ],
 })
 export class SharedModule {}
