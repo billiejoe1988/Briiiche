@@ -1,18 +1,22 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AbstractControl} from '@angular/forms';
+import { ValidationErrors } from '@angular/forms';
 
 @Pipe({
   name: 'validationErrors'
 })
 export class ValidationErrorsPipe implements PipeTransform {
 
-  transform(control?: AbstractControl | null, ...args: unknown[]): unknown {
+  transform(errors?: ValidationErrors | null, ...args: unknown[]): unknown {
+     if (!!errors) {
+      let messages = [];
 
-    if (typeof control!== 'undefined' && !!control) {
-      if (control.hasError('email')) return 'Invalid Email';
-      if (control.hasError('required')) return 'Complete this Field';
+      if (errors['required']) messages.push('Complete this Field');
+      if (errors['email'])  messages.push('Its not the valid format');
+      if (errors['maxLength']) messages.push(`Max ${errors['maxLength']?.requiredLength} characters`);
+      if (errors['minLength']) messages.push(`Min ${errors['minLength']?.requiredLength} characters`);
+
+      return messages.join('. ') + '.';
     }
-
     return null;
   }
 }

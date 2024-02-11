@@ -17,6 +17,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { UsersDialogComponent } from './components/users-dialog/users-dialog.component';
 import { UserDetailComponent } from './pages/user-details/user-details.component';
+import { authGuard } from '../../../../core/guards/auth.guard';
 
 @NgModule({
   declarations: [

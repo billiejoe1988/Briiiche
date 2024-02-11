@@ -10,6 +10,7 @@ import { User } from '../../models';
 })
 export class UsersDialogComponent { 
   userFormEdit: FormGroup;
+  revealPassword =false;
 
   constructor (
     private fb: FormBuilder, 
@@ -17,13 +18,13 @@ export class UsersDialogComponent {
     @Inject(MAT_DIALOG_DATA) private editingUser?: User
   ) {
     this.userFormEdit = this.fb.group({
-      firstName: [editingUser ? editingUser.firstName : '', [Validators.required]],
-      lastName: [editingUser ? editingUser.lastName : '', [Validators.required]],
-      password: [editingUser ? editingUser.password : '', [Validators.required]],
-      country: [editingUser ? editingUser.country : '', [Validators.required]],
-      email: [editingUser ? editingUser.email : '', [Validators.required, Validators.email]],
-      rol: [editingUser ? editingUser.rol : '', [Validators.required]],
-      comision: [editingUser ? editingUser.comision : '', [Validators.required]]
+      firstName: this.fb.control('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]), 
+      lastName: this.fb.control('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]),
+      password: this.fb.control('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]), 
+      country: this.fb.control('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]),
+      email: this.fb.control('', [ Validators.required, Validators.email, Validators.maxLength(25), Validators.minLength(4)]),
+      rol: this.fb.control('', [Validators.required]),
+      comision:  this.fb.control('', [Validators.required]),
     });
   }
 

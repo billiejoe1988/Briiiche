@@ -12,7 +12,7 @@
                         <mat-form-field class="w-full">
                             <mat-label>Email</mat-label>
                             <input formControlName='email' matInput />
-                            <mat-error>{{ loginForm.get('email') | validationErrors }}</mat-error>
+                            <mat-error>{{ loginForm.get('email')?.errors | validationErrors }}</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="p-5">
@@ -22,7 +22,7 @@
                             <button (click)='revealPassword = !revealPassword' matSuffix mat-icon-button >
                                 <mat-icon>visibility</mat-icon>
                             </button>
-                            <mat-error>{{ loginForm.get('password') | validationErrors }}</mat-error>
+                            <mat-error>{{ loginForm.get('password')?.errors | validationErrors }}</mat-error>
                         </mat-form-field>
                     </div>
                     <div>

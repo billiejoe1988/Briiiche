@@ -6,26 +6,34 @@
       <mat-form-field class="example-form-field">
         <mat-label class="pt-4">First Name</mat-label>
         <input matInput formControlName="firstName" type="text">
+        <mat-error>{{ userFormEdit.get('firstName')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-form-field">
         <mat-label>Last Name</mat-label>
         <input matInput formControlName="lastName" type="text">
+        <mat-error>{{ userFormEdit.get('lastName')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-form-field">
         <mat-label>Password</mat-label>
-        <input matInput formControlName="password" type="password">
+        <input [type]="revealPassword ? 'text' : 'password'" formControlName='password' matInput/>
+        <button (click)='revealPassword = !revealPassword' matSuffix mat-icon-button >
+            <mat-icon>visibility</mat-icon>
+        </button>
+        <mat-error>{{ userFormEdit.get('password')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-form-field">
         <mat-label>Country</mat-label>
         <input matInput formControlName="country" type="text">
+        <mat-error>{{ userFormEdit.get('country')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-form-field">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" type="email">
+        <mat-error>{{ userFormEdit.get('email')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-form-field">
@@ -34,6 +42,7 @@
           <mat-option value="Admin">Admin</mat-option>
           <mat-option value="User">User</mat-option>
         </mat-select>
+        <mat-error>{{ userFormEdit.get('rol')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-form-field">
@@ -44,6 +53,7 @@
           <mat-option value="PastryPro">Pastry Pro</mat-option>
           <mat-option value="PastryBegin">Pastry Begin</mat-option>
         </mat-select>
+        <mat-error>{{ userFormEdit.get('comision')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
     </div>
   </form>
