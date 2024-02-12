@@ -41,6 +41,7 @@ export class AuthService {
     logout(): void {
         this.authUser = null ;
         this.router.navigate(['auth', 'login']);
+        localStorage.removeItem('token');
     }
 
     verifyToken() {
