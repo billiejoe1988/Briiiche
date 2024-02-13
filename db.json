@@ -52,7 +52,7 @@
         "country": "Japan",
         "email": "sanji@gmail.com",
         "rol": "ADMIN",
-        "comision": "CuisinePro",
+        "comision": "Cuisine Pro",
         "token": "P23U3"
       },
       {
@@ -63,7 +63,7 @@
         "country": "Coco Island",
         "email": "nami@gmail.com",
         "rol": "USER",
-        "comision": "PastryPro",
+        "comision": "Pastry Pro",
         "token": "RCsGh"
       },
       {
@@ -74,8 +74,8 @@
         "country": "East Blue",
         "email": "luffy@gmail.com",
         "rol": "ADMIN",
-        "comision": "Straw Hat",
-        "token": "luffy123"
+        "comision": "Cuisine Begin",
+        "token": "luf23"
       },
       {
         "id": "6232",
@@ -85,8 +85,8 @@
         "country": "East Blue",
         "email": "zoro@gmail.com",
         "rol": "USER",
-        "comision": "Straw Hat",
-        "token": "zoro123"
+        "comision": "Cuisine Begin",
+        "token": "zo123"
       },
       {
         "id": "7sd4f",
@@ -96,8 +96,8 @@
         "country": "East Blue",
         "email": "robin@gmail.com",
         "rol": "USER",
-        "comision": "Straw Hat",
-        "token": "robin123"
+        "comision": "Cuisine Begin",
+        "token": "rn123"
       },
       {
         "id": "8ert",
@@ -107,8 +107,8 @@
         "country": "East Blue",
         "email": "usopp@gmail.com",
         "rol": "ADMIN",
-        "comision": "Straw Hat",
-        "token": "usopp123"
+        "comision": "Cuisine Pro",
+        "token": "up123"
       },
       {
         "id": "asd4",
@@ -118,8 +118,8 @@
         "country": "East Blue",
         "email": "franky@gmail.com",
         "rol": "USER",
-        "comision": "Straw Hat",
-        "token": "franky123"
+        "comision": "Cuisine Pro",
+        "token": "fraky123"
       },
       {
         "id": "bsdf",
@@ -129,8 +129,19 @@
         "country": "Drum Island",
         "email": "chopper@gmail.com",
         "rol": "USER",
-        "comision": "Straw Hat",
-        "token": "chopper123"
+        "comision": "Pastry Pro",
+        "token": "cnper3"
+      },
+      {
+        "id": "1ss1",
+        "firstName": "Brook",
+        "lastName": "Soul King",
+        "password": "skeleton",
+        "country": "Florian Triangle",
+        "email": "brook@gmail.com",
+        "rol": "USER",
+        "comision": "Pastry Pro",
+        "token": "brk12"
       }
   ],
   "courses": [
