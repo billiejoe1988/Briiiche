@@ -17,6 +17,8 @@ import { CoursesService } from './courses.service';
   ],
   providers: [CoursesService],
 })
-export class CoursesModule { }
+export class CoursesModule {
+  constructor(private coursesService: CoursesService) {}
+ }
 
 

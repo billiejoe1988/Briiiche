@@ -20,7 +20,7 @@ export class UserDetailComponent {
   ) {
     this.loadingService.setIsLoading(true);
     this.route.params.pipe(
-      switchMap(params => this.usersService.getUserById(Number(params['id']))),take(1)
+      switchMap(params => this.usersService.getUserById(params['id'])),take(1)
     ).subscribe({
       next: (foundUser: User | undefined) => {
         this.user = foundUser;

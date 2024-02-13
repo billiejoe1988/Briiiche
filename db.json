@@ -41,5 +41,26 @@
       "comision": "Cuisine Pro"
     }
   ],
-  "courses": []
+  "courses": [
+    {
+      "id": 1,
+      "courseName": "Cuisine Begin",
+      "createdAt": "2024-12-12T10:06:00Z"
+    },
+    {
+      "id": 2,
+      "courseName": "Cuisine Professional",
+      "createdAt": "2024-02-12T03:03:00Z"
+    },
+    {
+      "id": 3,
+      "courseName": "Pastry Begin",
+      "createdAt": "2024-02-12T03:10:00Z"
+    },
+    {
+      "id": 4,
+      "courseName": "Pastry Professional",
+      "createdAt": "2024-02-12T01:22:00Z"
+    }
+  ]
 }

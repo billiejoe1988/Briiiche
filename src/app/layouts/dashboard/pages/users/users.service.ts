@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { User } from './models';
-import { Observable, of, mergeMap } from 'rxjs';
+import { Observable, of, mergeMap, catchError, throwError } from 'rxjs';
 import { AlertsService } from '../../../../core/services/alerts.service';
-import { HttpClient } from '@angular/common/http';
-import { enviroment } from '../../../../../enviroments/enviroment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { enviroment } from '../../../../enviroments/enviroment';
 
 const ROLES_DB: string[] = ['Admin', 'User'];
 
@@ -39,13 +39,16 @@ export class UsersService {
   }
 
   updateUserById(updatedUser: User): Observable<User[]> {
-    const index = USERS_DB.findIndex(user => user.id === updatedUser.id);
-    if (index !== -1) {
-      USERS_DB[index] = updatedUser;
-      this.alerts.showSuccess('Success', 'User updated successfully.');
-    } else {
-      this.alerts.showError('Error', 'User not found.');
-    }
-    return of(USERS_DB);
+    return this.httpClient.put<User>(`${enviroment.apiURL}/users/${updatedUser.id}`, updatedUser)
+      .pipe(
+        mergeMap(() => {
+          this.alerts.showSuccess('Success', 'User updated successfully.');
+          return this.getUsers();
+        }),
+        catchError(error => {
+          this.alerts.showError('Error', 'Failed to update user.');
+          return throwError(error);
+        })
+      );
   }
-}
+} 
