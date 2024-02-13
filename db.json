@@ -1,45 +1,137 @@
 {
-  "users": [
-    {
-      "id": "1",
-      "firstName": "Ricardo",
-      "lastName": "Pala",
-      "password": "a1234",
-      "country": "Argentina",
-      "email": "ricardo@gmail.com",
-      "rol": "Admin",
-      "comision": "Cuisine Begin"
-    },
-    {
-      "id": "2",
-      "firstName": "America",
-      "lastName": "Zardelli",
-      "password": "b1122",
-      "country": "Chile",
-      "email": "America@gmail.com",
-      "rol": "User",
-      "comision": "Cuisine Pro"
-    },
-    {
-      "id": "3",
-      "firstName": "Judith",
-      "lastName": "Sanz",
-      "password": "c4321",
-      "country": "USA",
-      "email": "js@gmail.com",
-      "rol": "User",
-      "comision": "Pastry Pro"
-    },
-    {
-      "id": "4",
-      "firstName": "Dracule",
-      "lastName": "Mihawk",
-      "password": "espada",
-      "country": "Argentina",
-      "email": "dracule@gmail.com",
-      "rol": "Admin",
-      "comision": "Cuisine Pro"
-    }
+    "users": [
+      {
+        "id": "1adf",
+        "firstName": "Ricardo",
+        "lastName": "Pala",
+        "password": "a1234",
+        "country": "Argentina",
+        "email": "ricardo@gmail.com",
+        "rol": "ADMIN",
+        "comision": "Cuisine Begin",
+        "token": "a123"
+      },
+      {
+        "id": "as2d",
+        "firstName": "America",
+        "lastName": "Zardelli",
+        "password": "b1122",
+        "country": "Chile",
+        "email": "America@gmail.com",
+        "rol": "USER",
+        "comision": "Cuisine Pro",
+        "token": "b123"
+      },
+      {
+        "id": "d3as",
+        "firstName": "Judith",
+        "lastName": "Sanz",
+        "password": "c4321",
+        "country": "USA",
+        "email": "js@gmail.com",
+        "rol": "USER",
+        "comision": "Pastry Pro",
+        "token": "c123"
+      },
+      {
+        "id": "334ff",
+        "firstName": "Dracule",
+        "lastName": "Mihawk",
+        "password": "espada",
+        "country": "Argentina",
+        "email": "dracule@gmail.com",
+        "rol": "ADMIN",
+        "comision": "Cuisine Pro",
+        "token": "d123"
+      },
+      {
+        "id": "002b",
+        "firstName": "Sanji",
+        "lastName": "Chief",
+        "password": "kick",
+        "country": "Japan",
+        "email": "sanji@gmail.com",
+        "rol": "ADMIN",
+        "comision": "CuisinePro",
+        "token": "P23U3"
+      },
+      {
+        "id": "e02f",
+        "firstName": "Nami",
+        "lastName": "Tripulation",
+        "password": "clima",
+        "country": "Coco Island",
+        "email": "nami@gmail.com",
+        "rol": "USER",
+        "comision": "PastryPro",
+        "token": "RCsGh"
+      },
+      {
+        "id": "43sd5",
+        "firstName": "Monkey D.",
+        "lastName": "Luffy",
+        "password": "gumgum",
+        "country": "East Blue",
+        "email": "luffy@gmail.com",
+        "rol": "ADMIN",
+        "comision": "Straw Hat",
+        "token": "luffy123"
+      },
+      {
+        "id": "6232",
+        "firstName": "Roronoa",
+        "lastName": "Zoro",
+        "password": "swordsman",
+        "country": "East Blue",
+        "email": "zoro@gmail.com",
+        "rol": "USER",
+        "comision": "Straw Hat",
+        "token": "zoro123"
+      },
+      {
+        "id": "7sd4f",
+        "firstName": "Nico",
+        "lastName": "Robin",
+        "password": "history",
+        "country": "East Blue",
+        "email": "robin@gmail.com",
+        "rol": "USER",
+        "comision": "Straw Hat",
+        "token": "robin123"
+      },
+      {
+        "id": "8ert",
+        "firstName": "Usopp",
+        "lastName": "Sniper",
+        "password": "sniperking",
+        "country": "East Blue",
+        "email": "usopp@gmail.com",
+        "rol": "ADMIN",
+        "comision": "Straw Hat",
+        "token": "usopp123"
+      },
+      {
+        "id": "asd4",
+        "firstName": "Franky",
+        "lastName": "Shipwright",
+        "password": "colt",
+        "country": "East Blue",
+        "email": "franky@gmail.com",
+        "rol": "USER",
+        "comision": "Straw Hat",
+        "token": "franky123"
+      },
+      {
+        "id": "bsdf",
+        "firstName": "Tony Tony",
+        "lastName": "Chopper",
+        "password": "doctor",
+        "country": "Drum Island",
+        "email": "chopper@gmail.com",
+        "rol": "USER",
+        "comision": "Straw Hat",
+        "token": "chopper123"
+      }
   ],
   "courses": [
     {

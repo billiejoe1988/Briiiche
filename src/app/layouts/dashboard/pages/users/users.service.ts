@@ -15,6 +15,15 @@ let USERS_DB: User[] = [];
 export class UsersService {
   constructor(private alerts: AlertsService, private httpClient: HttpClient) {}
 
+  generateString(length: number): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
   getUsers() {
     return this.httpClient.get<User[]>(`${enviroment.apiURL}/users`);
   }
@@ -29,7 +38,7 @@ export class UsersService {
 
   createUser(payload: User){
     this.alerts.showSuccess('Success', 'User created successfully.');
-    return this.httpClient.post<User[]>(`${enviroment.apiURL}/users`, payload)
+    return this.httpClient.post<User[]>(`${enviroment.apiURL}/users`, {...payload, token: this.generateString(5),})
     .pipe(mergeMap(() => this.getUsers()));
   }
 

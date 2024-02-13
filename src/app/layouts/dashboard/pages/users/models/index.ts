@@ -7,4 +7,5 @@ export interface User {
     email:string;
     rol:string;
     comision: string;
+    token: string;
   }

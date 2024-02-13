@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 import { ValidationErrorsPipe } from './validation-errors.pipe';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ValidationErrorsPipe } from './validation-errors.pipe';
     MatDatepickerModule,
     MatCardModule,
     ValidationErrorsPipe,
+    MatPaginatorModule,
   ],
 })
 export class SharedModule {}
