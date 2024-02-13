@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../users.service';
 import { LoadingService } from '../../../../../../core/services/loading.service';
 import { User } from '../../models/index';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-detail',
@@ -20,7 +20,7 @@ export class UserDetailComponent {
   ) {
     this.loadingService.setIsLoading(true);
     this.route.params.pipe(
-      switchMap(params => this.usersService.getUserById(params['id']))
+      switchMap(params => this.usersService.getUserById(Number(params['id']))),take(1)
     ).subscribe({
       next: (foundUser: User | undefined) => {
         this.user = foundUser;

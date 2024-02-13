@@ -1,71 +1,41 @@
 import { Injectable } from '@angular/core';
 import { User } from './models';
-import { Observable, of } from 'rxjs';
+import { Observable, of, mergeMap } from 'rxjs';
 import { AlertsService } from '../../../../core/services/alerts.service';
+import { HttpClient } from '@angular/common/http';
+import { enviroment } from '../../../../../enviroments/enviroment';
 
 const ROLES_DB: string[] = ['Admin', 'User'];
 
-let USERS_DB: User[] = [
-  {
-    id: 1,
-    firstName: 'Ricardo',
-    lastName: 'Pala',
-    password: 'a1234',
-    country: 'Argentina',
-    email: 'ricardo@gmail.com',
-    rol: 'Admin',
-    comision: 'Cuisine Begin',
-   },
-   {
-     id: 2,
-     firstName: 'America',
-     lastName: 'Zardelli',
-     password: 'b1122',
-     country: 'Chile',
-     email: 'America@gmail.com',
-     rol: 'User',
-     comision: 'Cuisine Pro',
-    },
-    {
-     id: 3,
-     firstName: 'Judith',
-     lastName: 'Sanz',
-     password: 'c4321',
-     country: 'USA',
-     email: 'js@gmail.com',
-     rol: 'User',
-     comision: 'Pastry Pro',
-    },
-];
+let USERS_DB: User[] = [];
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  constructor(private alerts: AlertsService) {}
+  constructor(private alerts: AlertsService, private httpClient: HttpClient) {}
 
-  getUsers(): Observable<User[]> {
-    return of(USERS_DB);
+  getUsers() {
+    return this.httpClient.get<User[]>(`${enviroment.apiURL}/users`);
   }
 
-  getUserById(id: number): Observable<User | undefined> {
-    return of(USERS_DB.find(user => user.id === id));
+  getUserById(id: number | string) {
+    return this.httpClient.get<User>(`${enviroment.apiURL}/users/${id}`);
   }
 
   getRoles(): Observable<string[]> {
     return of(ROLES_DB);
   }
 
-  createUser(payload: User): Observable<User[]> {
-    USERS_DB = [...USERS_DB, {...payload, id: USERS_DB.length + 1}];
+  createUser(payload: User){
     this.alerts.showSuccess('Success', 'User created successfully.');
-    return of(USERS_DB);
+    return this.httpClient.post<User[]>(`${enviroment.apiURL}/users`, payload)
+    .pipe(mergeMap(() => this.getUsers()));
   }
 
-  deleteUserById(userID: number): Observable<User[]> {
-    USERS_DB = USERS_DB.filter((user) => user.id !== userID);
-    this.alerts.showSuccess('Success', 'User deleted successfully.');
-    return of(USERS_DB);
+  deleteUserById(userID: number) {
+    return this.httpClient.delete<User>(`${enviroment.apiURL}/users/${userID}`)
+    .pipe(mergeMap(() => this.getUsers()));
   }
 
   updateUserById(updatedUser: User): Observable<User[]> {

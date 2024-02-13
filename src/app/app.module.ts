@@ -8,6 +8,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AlertsService } from './core/services/alerts.service';
 import { UsersService } from './layouts/dashboard/pages/users/users.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { UsersService } from './layouts/dashboard/pages/users/users.service';
     RouterModule,
     MatProgressSpinnerModule,
     MatNativeDateModule,
+    HttpClientModule
   ],
   providers: [
     AlertsService,
