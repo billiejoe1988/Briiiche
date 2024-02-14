@@ -28,9 +28,17 @@ export class CoursesComponent {
       next: (result) => {
         if (result) {
           this.coursesService.createCourses(result).subscribe({
-            next: (courses) => {
-              this.courses = courses;
-              this.alertsService.showSuccess('Success', 'Course added successfully.'); 
+            next: () => {
+              this.coursesService.getCourses().subscribe({
+                next: (courses) => {
+                  this.courses = courses;
+                  this.alertsService.showSuccess('Success', 'Course added successfully.'); 
+                },
+                error: (error) => {
+                  console.error('Error retrieving courses after creating a new course:', error);
+                  this.alertsService.showError('Error', 'An error occurred while retrieving the courses after creating a new course.');
+                }
+              });
             },
             error: (error) => {
               console.error('Error creating course:', error);
@@ -41,6 +49,7 @@ export class CoursesComponent {
       }
     });
   }
+  
 
   onEdit(courses: Courses) {
     this.dialog.open(CoursesDialogComponent, {
