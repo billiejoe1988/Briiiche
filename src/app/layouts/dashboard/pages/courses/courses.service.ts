@@ -1,53 +1,57 @@
 import {Injectable} from '@angular/core';
-import { of, delay, finalize } from 'rxjs';
+import { of, Observable, mergeMap, catchError, throwError } from 'rxjs';
 import { Courses } from './models/index'
 import { LoadingService } from '../../../../core/services/loading.service';
+import { HttpClient } from '@angular/common/http';
+import { enviroment } from '../../../../enviroments/enviroment';
+import { AlertsService } from '../../../../core/services/alerts.service';
 
-    let courses: Courses [] = [
-        {
-          id: 1,
-          courseName: 'Cuisine Begin',
-          createdAt: new Date (),
-        },
-        {
-          id: 2,
-          courseName: 'Cuisine Professional',
-          createdAt: new Date (),
-        },
-        {
-          id: 3,
-          courseName: 'Pastry Begin',
-          createdAt: new Date (),
-        },
-        {
-          id: 4,
-          courseName: 'Pastry Professional',
-          createdAt: new Date (),
-        }
-    ];
+    let courses: Courses [] = [];
 
     @Injectable()
     export class CoursesService {
+      constructor( private alerts: AlertsService, private loadingService: LoadingService, private httpClient: HttpClient) {}
 
-      constructor(private loadingService: LoadingService) {}
-
+      generateString(length: number): string {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        const charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+      }
+      
       getCourses(){
-        this.loadingService.setIsLoading(true)
-        return of (courses).pipe(delay(1000), finalize(() => this.loadingService.setIsLoading(false)))
+       return this.httpClient.get<Courses[]>(`${enviroment.apiURL}/courses`);
       }
 
       createCourses(data: Courses) {
-        courses = [...courses, {...data, id: courses.length + 1 }];
-        return this.getCourses();
+        this.alerts.showSuccess('Success', 'Course created successfully.');
+        return this.httpClient.post<Courses[]>(`${enviroment.apiURL}/courses`,  {...data, token: this.generateString(5),});
       }
 
-      deleteCoursesById (id: number) {
-        courses = courses.filter((el) => el.id != id);
-        return of (courses);
+      deleteCoursesById (courseID: number) {
+        return this.httpClient.delete<Courses>(`${enviroment.apiURL}/courses/${courseID}`)
+       .pipe(mergeMap(() => this.getCourses()));
       }
      
       updateCoursesById(id: number, data: Courses){
         courses = courses.map((el) =>(el.id === id ? {...el, ...data} : el));
         return this.getCourses();
+      }
+
+      updateCourseById(updatedCourse: Courses): Observable<Courses[]> {
+        return this.httpClient.put<Courses>(`${enviroment.apiURL}/courses/${updatedCourse.id}`, updatedCourse)
+          .pipe(
+            mergeMap(() => {
+              this.alerts.showSuccess('Success', 'Course updated successfully.');
+              return this.getCourses();
+            }),
+            catchError(error => {
+              this.alerts.showError('Error', 'Failed to update course.');
+              return throwError(error);
+            })
+          );
       }
 }
