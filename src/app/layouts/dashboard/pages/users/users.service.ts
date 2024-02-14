@@ -4,6 +4,7 @@ import { Observable, of, mergeMap, catchError, throwError } from 'rxjs';
 import { AlertsService } from '../../../../core/services/alerts.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { enviroment } from '../../../../enviroments/enviroment';
+import { Pagination } from '../../../../core/models/pagination';
 
 const ROLES_DB: string[] = ['Admin', 'User'];
 
@@ -23,7 +24,12 @@ export class UsersService {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
-}
+ }
+   
+  paginate(page: number, perPage: number): Observable<Pagination<User>> {
+    return this.httpClient.get<Pagination<User>>(`${enviroment.apiURL}/users?_page=${page}&_per_page=${perPage}`);
+  }
+
   getUsers() {
     return this.httpClient.get<User[]>(`${enviroment.apiURL}/users`);
   }
