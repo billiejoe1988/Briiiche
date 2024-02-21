@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { enviroment } from '../../../../enviroments/enviroment';
 import { Pagination } from '../../../../core/models/pagination';
 
-const ROLES_DB: string[] = ['Admin', 'User'];
+const ROLES_DB: string[] = ['ADMIN', 'USER'];
 
 let USERS_DB: User[] = [];
 

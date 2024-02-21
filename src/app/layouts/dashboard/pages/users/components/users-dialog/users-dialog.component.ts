@@ -26,6 +26,10 @@ export class UsersDialogComponent {
       rol: this.fb.control('', [Validators.required]),
       comision:  this.fb.control('', [Validators.required]),
     });
+    
+    if (this.editingUser) {
+      this.userFormEdit.patchValue(this.editingUser);
+    }
   }
 
   onSave(): void {

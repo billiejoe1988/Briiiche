@@ -50,19 +50,18 @@ export class CoursesComponent {
     });
   }
   
-
-  onEdit(courses: Courses) {
+  onEdit(course: Courses) {
     this.dialog.open(CoursesDialogComponent, {
-      data: courses,
+      data: course,
     }).afterClosed().subscribe({
-      next: (result) => {
+      next: (result: any) => { 
         if (result) {
-          this.coursesService.updateCoursesById(courses.id, result).subscribe({
-            next: (courses) => {
+          this.coursesService.updateCoursesById(course.id, result).subscribe({
+            next: (courses: Courses[]) => { 
               this.courses = courses;
               this.alertsService.showSuccess('Success', 'Course updated successfully.');
             },
-            error: (error) => {
+            error: (error: any) => {
               console.error('Error updating course:', error);
               this.alertsService.showError('Error', 'An error occurred while updating the course.');
             }
@@ -71,6 +70,8 @@ export class CoursesComponent {
       }
     });
   }
+  
+  
   
   onDelete(id: number) {
     this.alertsService.showAlert({

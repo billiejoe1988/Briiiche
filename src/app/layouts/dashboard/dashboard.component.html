@@ -31,10 +31,11 @@
             <span><img src="../../../assets/logo.png" alt="logo" class="logo"></span>
             <span class="mx-2 text-xl text-yellow-600">Cuisine Academy</span>
             <span class="example-spacer"></span>
-            <div class="mx-auto">
+            <div class="mx-auto" *ngIf="authUser$ | async">
               <img src="../../../assets/perfil.jpeg" alt="perfil" class="perfil">
-              <span class="text-white mx-auto">User Name</span>
-              <span class="text-yellow-600">(Admin)</span>
+              <span class="text-white mx-auto">{{ (authUser$ | async)?.firstName }} {{ (authUser$ | async)?.lastName }}</span>
+              <span class="text-yellow-600"> {{ (authUser$ | async)?.email }}</span>
+              <span class="text-yellow-600"> {{ (authUser$ | async)?.rol }}</span>
             </div>
             <span class="text-gray-400">{{ currentDateTime }}</span>
           </mat-toolbar>

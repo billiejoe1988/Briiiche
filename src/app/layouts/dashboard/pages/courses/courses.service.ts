@@ -36,13 +36,8 @@ import { AlertsService } from '../../../../core/services/alerts.service';
        .pipe(mergeMap(() => this.getCourses()));
       }
      
-      updateCoursesById(id: number, data: Courses){
-        courses = courses.map((el) =>(el.id === id ? {...el, ...data} : el));
-        return this.getCourses();
-      }
-
-      updateCourseById(updatedCourse: Courses): Observable<Courses[]> {
-        return this.httpClient.put<Courses>(`${enviroment.apiURL}/courses/${updatedCourse.id}`, updatedCourse)
+      updateCoursesById(id: number, data: Courses) {
+        return this.httpClient.put<Courses>(`${enviroment.apiURL}/courses/${id}`, data)
           .pipe(
             mergeMap(() => {
               this.alerts.showSuccess('Success', 'Course updated successfully.');
@@ -54,4 +49,4 @@ import { AlertsService } from '../../../../core/services/alerts.service';
             })
           );
       }
-}
+    }

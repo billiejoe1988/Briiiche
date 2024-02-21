@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { User } from './pages/users/models';
+import { selectAuthUser } from '../../core/store/auth/selectors';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,11 +14,13 @@ import { AuthService } from '../auth/auth.service';
 export class DashboardComponent implements OnInit {
   currentDateTime: string = '';
   showFiller = false;
+  authUser$: Observable<User | null>;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService, private store: Store) {
+    this.authUser$ = this.store.select(selectAuthUser);
+  }
 
   ngOnInit() {
- 
     setInterval(() => {
       this.updateCurrentDateTime();
     }, 1000);
@@ -28,8 +34,7 @@ export class DashboardComponent implements OnInit {
   }
 
   logout(): void {
-    this.authService.logout()
-    this.router.navigate(['auth', 'login'],
-    );
+    this.authService.logout();
+    this.router.navigate(['auth', 'login']);
   }
 }
