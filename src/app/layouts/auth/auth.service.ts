@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { User } from "../dashboard/pages/users/models";
 import { Router } from "@angular/router";
 import { AlertsService } from "../../core/services/alerts.service";
-import { of, delay, map, finalize, tap, Observable } from "rxjs";
+import { of, delay, map, finalize, tap, Observable, catchError } from "rxjs";
 import { LoadingService } from "../../core/services/loading.service";
 import { HttpClient } from "@angular/common/http";
 import { enviroment } from "../../enviroments/enviroment";
@@ -30,7 +30,7 @@ export class AuthService {
           .pipe(
             tap((response) => {
               if (!!response[0]) {
-                this.router.navigate(['dashboard']);
+                this.router.navigate(['dashboard', 'home']);
                 this.setAuthUser(response[0]);
               } else {
                 this.alertsService.showError('Error', 'Invalid Email or Password');
@@ -46,15 +46,22 @@ export class AuthService {
     }
 
     verifyToken() {
-      return this.httpClient.get<User[]>(`${enviroment.apiURL}/users?token=${localStorage.getItem('token')}`
-      ).pipe(map((response) => { if (response.length) {this.setAuthUser(response[0]);
-        return true;
-     } else {
-        this.store.dispatch(AuthActions.logout());
-        localStorage.removeItem('token');
-        return false;
-     }
-    })
-   );
+      return this.httpClient
+        .get<User[]>(
+          `${enviroment.apiURL}/users?token=${localStorage.getItem('token')}`
+        )
+        .pipe(
+          map((response) => {
+            if (response.length) {
+              this.setAuthUser(response[0]);
+              return true;
+            } else {
+              this.store.dispatch(AuthActions.logout());
+              localStorage.removeItem('token');
+              return false;
+            }
+          }),
+          catchError(() => of(false))
+        );
+    }
   }
-}
