@@ -16,13 +16,11 @@ interface LoginData {
 
 @Injectable ({providedIn: 'root'})
 export class AuthService {
-    authUser: User | null = null;
 
     constructor(private router: Router, private alertsService: AlertsService, private loadingService: LoadingService, private httpClient: HttpClient, private store: Store, ) {}
     
     private setAuthUser (user: User ): void{
     
-    this.authUser = user ;
     this.store.dispatch(AuthActions.setAuthUser({ user }))
     localStorage.setItem('token', user.token);
     }
@@ -42,7 +40,7 @@ export class AuthService {
       }
 
     logout(): void {
-        this.authUser = null ;
+        this.store.dispatch(AuthActions.logout());
         this.router.navigate(['auth', 'login']);
         localStorage.removeItem('token');
     }
@@ -52,7 +50,7 @@ export class AuthService {
       ).pipe(map((response) => { if (response.length) {this.setAuthUser(response[0]);
         return true;
      } else {
-        this.authUser = null;
+        this.store.dispatch(AuthActions.logout());
         localStorage.removeItem('token');
         return false;
      }
