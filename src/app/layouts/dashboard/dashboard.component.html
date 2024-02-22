@@ -32,10 +32,10 @@
             <span class="mx-2 text-xl text-yellow-600">Cuisine Academy</span>
             <span class="example-spacer"></span>
             <div class="mx-auto" *ngIf="authUser$ | async">
-              <img src="../../../assets/perfil.jpeg" alt="perfil" class="perfil">
+              <img src="../../../assets/perfil.jpeg" alt="perfil" class="perfil mx-auto">
               <span class="text-white mx-auto">{{ (authUser$ | async)?.firstName }} {{ (authUser$ | async)?.lastName }}</span>
-              <span class="text-yellow-600"> {{ (authUser$ | async)?.email }}</span>
-              <span class="text-yellow-600"> {{ (authUser$ | async)?.rol }}</span>
+              <span class="text-yellow-600"> ( {{ (authUser$ | async)?.email }} ) </span>
+              <span class="text-yellow-400"> Role: {{ (authUser$ | async)?.rol }}</span>
             </div>
             <span class="text-gray-400">{{ currentDateTime }}</span>
           </mat-toolbar>

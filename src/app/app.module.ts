@@ -11,6 +11,7 @@ import { UsersService } from './layouts/dashboard/pages/users/users.service';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { appReducers } from './core/store';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     MatProgressSpinnerModule,
     MatNativeDateModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(appReducers, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
   providers: [
