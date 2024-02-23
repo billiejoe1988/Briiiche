@@ -11,6 +11,7 @@
         <a #homeLink="routerLinkActive" routerLinkActive [activated]="homeLink.isActive" routerLink='home' mat-list-item class="listLinks">Home</a>
         <a #usersLink='routerLinkActive' routerLinkActive [activated]="usersLink.isActive" routerLink='users' mat-list-item class="listLinks">Users</a>
         <a #coursesLink='routerLinkActive' routerLinkActive [activated]="coursesLink.isActive" routerLink='courses' mat-list-item class="listLinks">Courses</a>
+        <a #inscriptionsLink="routerLinkActive" routerLinkActive [activated]="inscriptionsLink.isActive" routerLink="inscriptions" mat-list-item class="listLinks">Inscriptions</a>
         <a (click)="logout()" mat-list-item class="listLinks">Log Out</a>
       </mat-nav-list>
 

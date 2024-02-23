@@ -45,8 +45,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace":"src/enviroments/enviroment.ts",
-                  "with":"src/enviroments/enviroment.prod.ts"
+                  "replace": "src/enviroments/enviroment.ts",
+                  "with": "src/enviroments/enviroment.prod.ts"
                 }
               ],
               "budgets": [
@@ -112,6 +112,9 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "schematicCollections": [
+      "@ngrx/schematics"
+    ]
   }
 }
