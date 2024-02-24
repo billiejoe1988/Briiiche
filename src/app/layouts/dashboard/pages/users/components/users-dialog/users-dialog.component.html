@@ -41,6 +41,7 @@
         <mat-select formControlName="rol">
           <mat-option value="ADMIN">ADMIN</mat-option>
           <mat-option value="USER">USER</mat-option>
+          <mat-option value="BUYER">BUYER</mat-option>
         </mat-select>
         <mat-error>{{ userFormEdit.get('rol')?.errors | validationErrors }}</mat-error>
       </mat-form-field>

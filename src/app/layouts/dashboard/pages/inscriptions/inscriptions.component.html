@@ -1,1 +1,16 @@
-<p>inscriptions works!</p>
+<div *ngIf="isLoading$ | async; else notLoading">
+    Loading...
+</div>
+
+<ng-template #notLoading>
+    <h1 appUppercaseTitles class="p-3 text-yellow-600 text-xl text-center bg-white/80 rounded mb-4">Inscriptions</h1>
+    <div class="flex justify-end mb-3">
+        <button (click)="createInscription()" mat-button class="boton text-l">
+            Add Inscription
+        </button>
+    </div>
+
+    <pre>
+        {{ inscriptions | json }}
+    </pre>
+</ng-template>

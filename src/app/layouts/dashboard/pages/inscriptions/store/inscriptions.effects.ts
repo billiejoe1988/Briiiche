@@ -3,24 +3,52 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, concatMap } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
 import { InscriptionsActions } from './inscriptions.actions';
-
+import { InscriptionService } from '../inscription.service';
+import { UsersService } from '../../users/users.service';
+import { CoursesService } from '../../courses/courses.service';
 
 @Injectable()
 export class InscriptionsEffects {
 
   loadInscriptionss$ = createEffect(() => {
     return this.actions$.pipe(
-
       ofType(InscriptionsActions.loadInscriptionss),
       concatMap(() =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        EMPTY.pipe(
-          map(data => InscriptionsActions.loadInscriptionssSuccess({ data })),
-          catchError(error => of(InscriptionsActions.loadInscriptionssFailure({ error }))))
+          this.inscriptionService.getInscription().pipe(
+            map((data) => InscriptionsActions.loadInscriptionssSuccess({ data })),
+            catchError(error => of(InscriptionsActions.loadInscriptionssFailure({ error }))))
       )
     );
   });
 
+  loadBuyer$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(InscriptionsActions.loadBuyers), 
+      concatMap(() => 
+        this.usersService.getAllBuyers().pipe(
+          map((resp) => InscriptionsActions.loadBuyersSuccess({ data: resp })),
+          catchError((error) => of(InscriptionsActions.loadBuyersFailure({ error })))
+        )
+      )
+    ); 
+  });
 
-  constructor(private actions$: Actions) {}
+  loadCourses$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(InscriptionsActions.loadCourses),
+      concatMap(() => { 
+        return this.coursesService.getCourses().pipe(
+          map((resp) => InscriptionsActions.loadCoursesSuccess({ data: resp })),
+          catchError((error) => of(InscriptionsActions.loadCoursesFailure({ error })))
+        );
+      })
+    );
+  });
+
+  constructor(
+    private actions$: Actions,
+    private inscriptionService: InscriptionService,
+    private usersService: UsersService,
+    private coursesService: CoursesService,
+  ) {}
 }

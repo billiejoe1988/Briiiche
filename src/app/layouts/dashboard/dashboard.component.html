@@ -1,11 +1,6 @@
 <mat-drawer-container class="dashboard-container fondo" autosize>
     <mat-drawer #drawer class="side" mode="side">
       <span><img src="../../../assets/logo.png" alt="logo" class="logo mx-auto"></span>
-      @if (showFiller) {
-        <div class="text-white text-center">
-          Inputs to log in
-        </div>
-      }
 
       <mat-nav-list role="list" class="py-5 text-center">
         <a #homeLink="routerLinkActive" routerLinkActive [activated]="homeLink.isActive" routerLink='home' mat-list-item class="listLinks">Home</a>
@@ -14,13 +9,6 @@
         <a #inscriptionsLink="routerLinkActive" routerLinkActive [activated]="inscriptionsLink.isActive" routerLink="inscriptions" mat-list-item class="listLinks">Inscriptions</a>
         <a (click)="logout()" mat-list-item class="listLinks">Log Out</a>
       </mat-nav-list>
-
-      <button  mat-raised-button class="boton p-2 m-2">
-        Sign In
-      </button>
-      <button (click)="showFiller = !showFiller" mat-raised-button class="boton p-2 mx-3">
-        Log In
-      </button>
 
     </mat-drawer>
   

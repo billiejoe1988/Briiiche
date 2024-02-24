@@ -66,4 +66,8 @@ export class UsersService {
         })
       );
   }
+
+  getAllBuyers(): Observable<User[]>{
+    return this.httpClient.get<User[]>(`${enviroment.apiURL}/users?rol=BUYER`)
+  }
 } 

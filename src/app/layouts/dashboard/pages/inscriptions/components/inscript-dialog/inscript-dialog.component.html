@@ -1,0 +1,31 @@
+<div *ngIf="isLoadingBuyers$ | async; else notLoadingBuyers">
+    Loading...
+</div>
+
+<ng-template #notLoadingBuyers>
+    <h1 mat-dialog-title class="mb-3 mx-1 text-xl text-yellow-600 text-bold">Create Inscription</h1>
+    <div mat-dialog-content>
+    <form >
+        <mat-form-field class="px-5">
+        <mat-label>Buyer</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let buyer of buyers$ | async ">
+                {{buyer.firstName}} {{buyer.lastName}}
+            </mat-option>
+        </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Course</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let course of courses$ | async ">
+                   {{course.courseName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+    </div>
+    <div mat-dialog-actions class="p-3">
+        <button mat-button class="boton">Save</button>
+        <button mat-dialog-close mat-button class="boton">Cancel</button>
+    </div>
+</ng-template>

@@ -7,7 +7,7 @@
       "password": "b1122",
       "country": "Chile",
       "email": "America@gmail.com",
-      "rol": "USER",
+      "rol": "BUYER",
       "comision": "Cuisine Pro",
       "token": "b123"
     },
@@ -18,7 +18,7 @@
       "password": "c4321",
       "country": "USA",
       "email": "js@gmail.com",
-      "rol": "USER",
+      "rol": "BUYER",
       "comision": "Pastry Pro",
       "token": "c123"
     },
@@ -45,15 +45,14 @@
       "token": "P23U3"
     },
     {
-      "id": "e02f",
       "firstName": "Nami",
       "lastName": "Tripulation",
       "password": "clima",
       "country": "Coco Island",
       "email": "nami@gmail.com",
-      "rol": "USER",
+      "rol": "BUYER",
       "comision": "Pastry Pro",
-      "token": "RCsGh"
+      "id": "e02f"
     },
     {
       "id": "43sd5",
@@ -165,6 +164,13 @@
       "courseName": "Goddest Cuisine",
       "createdAt": "2025-11-22T03:00:00.000Z",
       "id": "6595"
+    }
+  ],
+  "inscriptions": [
+    {
+      "id": 1,
+      "userId": "002b",
+      "courseId": "6595"
     }
   ]
 }
