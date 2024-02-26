@@ -50,7 +50,7 @@
       "password": "clima",
       "country": "Coco Island",
       "email": "nami@gmail.com",
-      "rol": "BUYER",
+      "rol": "USER",
       "comision": "Pastry Pro",
       "id": "e02f"
     },
@@ -66,26 +66,24 @@
       "token": "luf23"
     },
     {
-      "id": "6232",
       "firstName": "Roronoa",
       "lastName": "Zoro",
       "password": "swordsman",
       "country": "East Blue",
       "email": "zoro@gmail.com",
-      "rol": "USER",
+      "rol": "BUYER",
       "comision": "Cuisine Begin",
-      "token": "zo123"
+      "id": "6232"
     },
     {
-      "id": "7sd4f",
       "firstName": "Nico",
       "lastName": "Robin",
       "password": "history",
       "country": "East Blue",
       "email": "robin@gmail.com",
-      "rol": "USER",
+      "rol": "BUYER",
       "comision": "Cuisine Begin",
-      "token": "rn123"
+      "id": "7sd4f"
     },
     {
       "id": "8ert",
@@ -168,9 +166,19 @@
   ],
   "inscriptions": [
     {
-      "id": 1,
+      "id": "1",
       "userId": "002b",
       "courseId": "6595"
+    },
+    {
+      "id": "5475",
+      "courseId": "6595",
+      "userId": "as2d"
+    },
+    {
+      "id": "399b",
+      "courseId": "fdsa4",
+      "userId": "7sd4f"
     }
   ]
 }

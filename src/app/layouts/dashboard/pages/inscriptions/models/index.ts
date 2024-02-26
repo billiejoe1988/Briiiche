@@ -8,3 +8,8 @@ export interface Inscription {
     user?: User;
     course?: Courses;
 }
+
+export interface CreateInscriptionData{
+    userId: string | number | null;
+    courseId: string | number | null;
+}

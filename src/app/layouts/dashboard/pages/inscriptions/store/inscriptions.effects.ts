@@ -45,6 +45,24 @@ export class InscriptionsEffects {
     );
   });
 
+  createInscription$ = createEffect (() => {
+     return this.actions$.pipe(
+      ofType(InscriptionsActions.createInscription),
+      concatMap((action) => {
+        return this.inscriptionService.createInscription(action.data).pipe(
+          map((resp) => InscriptionsActions.createInscriptionSuccess({data: resp})),
+          catchError((error) => of(InscriptionsActions.createInscriptionFailure({error})))
+        );
+      })
+     )
+   });
+
+   createInscriptionSuccess$ = createEffect (() => {
+     return this.actions$.pipe(ofType(InscriptionsActions.createInscriptionSuccess),
+       map(() => InscriptionsActions.loadInscriptionss())
+     );
+   });
+
   constructor(
     private actions$: Actions,
     private inscriptionService: InscriptionService,

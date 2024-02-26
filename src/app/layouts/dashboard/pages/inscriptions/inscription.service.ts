@@ -4,6 +4,7 @@ import { enviroment } from "../../../../enviroments/enviroment";
 import { catchError, concatMap, throwError } from 'rxjs';
 import { Inscription } from "./models";
 import { User } from "../users/models";
+import { CreateInscriptionData } from "./models";
 
 @Injectable({ providedIn: 'root'})
 export class InscriptionService {
@@ -25,7 +26,7 @@ export class InscriptionService {
         );
       }
     
-    //  createInscripion(data: CreateInscriptionData) {
-    //   return this.http.post<Inscription>(`${enviroment.apiURL}/sales`, data);
-    // }
+      createInscription(data: CreateInscriptionData) {
+       return this.http.post<Inscription>(`${enviroment.apiURL}/inscriptions`, data);
+     }
     }
