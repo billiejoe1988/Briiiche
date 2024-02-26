@@ -130,9 +130,9 @@
       "createdAt": "2024-07-30T03:03:00Z"
     },
     {
-      "id": "3dsad",
       "courseName": "Pastry Begin",
-      "createdAt": "2024-03-02T03:10:00Z"
+      "createdAt": "2024-08-17T03:00:00.000Z",
+      "id": "3dsad"
     },
     {
       "id": "fdsa4",
@@ -183,11 +183,6 @@
       "id": "9d82",
       "courseId": "fdsa4",
       "userId": "d3as"
-    },
-    {
-      "id": "9d28",
-      "courseId": "6595",
-      "userId": "7sd4f"
     }
   ]
 }

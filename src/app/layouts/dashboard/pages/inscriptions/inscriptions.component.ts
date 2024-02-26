@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { InscriptDialogComponent } from './components/inscript-dialog/inscript-dialog.component';
 import { Inscription } from './models';
+import { AlertsService } from '../../../../core/services/alerts.service';
 
 @Component({
   selector: 'app-inscriptions',
@@ -21,7 +22,7 @@ export class InscriptionsComponent implements OnDestroy {
 
   displayedColumns: string[] = ['userId', 'lastName', 'courseId', 'courseName', 'actions'];
 
-  constructor(private store: Store, private matDialog: MatDialog) {
+  constructor(private store: Store, private matDialog: MatDialog, private alertsService: AlertsService) {
     this.store.select(selectInscription)
       .pipe(takeUntil(this.destroyed$))
       .subscribe({
@@ -41,6 +42,11 @@ export class InscriptionsComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.destroyed$.next();
     this.destroyed$.complete();
+  }
+  deleteInscription(index: number): void {
+    const id = String(this.inscriptions[index].id);
+    this.store.dispatch(InscriptionsActions.deleteInscription({ id }));
+    this.alertsService.showSuccess('Success', 'Inscription Delete successfully.');
   }
   
 }

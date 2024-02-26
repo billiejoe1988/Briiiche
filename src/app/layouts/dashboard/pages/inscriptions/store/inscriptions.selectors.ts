@@ -24,3 +24,5 @@ export const selectInscriptionBuyers = createSelector (
 export const selectInscriptionCourses = createSelector(
   selectInscriptionsState, (state) => state.courses
 );
+
+

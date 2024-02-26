@@ -63,6 +63,17 @@ export class InscriptionsEffects {
      );
    });
 
+deleteInscription$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(InscriptionsActions.deleteInscription),
+      concatMap((action) =>
+        this.inscriptionService.deleteInscription(action.id).pipe(
+          map(() => InscriptionsActions.deleteInscriptionSuccess({ id: action.id })),
+          catchError(error => of(InscriptionsActions.deleteInscriptionFailure({ error })))
+        )
+      )
+    );
+  });
   constructor(
     private actions$: Actions,
     private inscriptionService: InscriptionService,

@@ -1,4 +1,4 @@
-import { createFeature, createReducer, on } from '@ngrx/store';
+import { createFeature, createReducer, on, Action } from '@ngrx/store';
 import { InscriptionsActions } from './inscriptions.actions';
 import { Inscription } from '../models';
 import { User } from '../../users/models';
@@ -10,7 +10,7 @@ export interface State {
   inscriptions: Inscription[];
   buyers: User[];
   courses: Courses[];
-  loading:boolean;
+  loading: boolean;
   error: unknown;
   loadingBuyers: boolean;
   loadingCourses: boolean;
@@ -19,21 +19,22 @@ export interface State {
 export const initialState: State = {
   inscriptions: [],
   buyers: [],
-  courses:[],
+  courses: [],
   loading: false,
-  loadingCourses:false,
+  loadingCourses: false,
   loadingBuyers: false,
   error: null,
 };
 
 export const reducer = createReducer(
   initialState,
-  on(InscriptionsActions.loadInscriptionss, state => ({...state, loading: true })),
-  on(InscriptionsActions.loadInscriptionssSuccess, (state, action) => ({...state, loading: false, inscriptions: action.data })),
-  on(InscriptionsActions.loadInscriptionssFailure, (state, action) => ({...state, loading: false, error: action.error })),
-  on(InscriptionsActions.loadBuyers, (state) => { return {...state, loadingBuyers: true} }),
-  on(InscriptionsActions.loadBuyersSuccess, (state, action) => { return {...state, loadingBuyers: false, buyers: action.data} }),
-  on(InscriptionsActions.loadCoursesSuccess, (state, action) => { return {...state, loadingCourses: false, courses: action.data} }),
+  on(InscriptionsActions.loadInscriptionss, state => ({ ...state, loading: true })),
+  on(InscriptionsActions.loadInscriptionssSuccess, (state, action) => ({ ...state, loading: false, inscriptions: action.data })),
+  on(InscriptionsActions.loadInscriptionssFailure, (state, action) => ({ ...state, loading: false, error: action.error })),
+  on(InscriptionsActions.loadBuyers, (state) => ({ ...state, loadingBuyers: true })),
+  on(InscriptionsActions.loadBuyersSuccess, (state, action) => ({ ...state, loadingBuyers: false, buyers: action.data })),
+  on(InscriptionsActions.loadCoursesSuccess, (state, action) => ({ ...state, loadingCourses: false, courses: action.data })),
+  on(InscriptionsActions.deleteInscriptionSuccess, (state, action) => ({ ...state, inscriptions: state.inscriptions.filter(inscription => inscription.id !== action.id) })),
 );
 
 export const inscriptionsFeature = createFeature({

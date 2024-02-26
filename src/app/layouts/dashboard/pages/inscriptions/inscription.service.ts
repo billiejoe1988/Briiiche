@@ -29,4 +29,14 @@ export class InscriptionService {
       createInscription(data: CreateInscriptionData) {
        return this.http.post<Inscription>(`${enviroment.apiURL}/inscriptions`, data);
      }
+     deleteInscription(id: string | number) {
+      return this.http.delete(`${enviroment.apiURL}/inscriptions/${id}`).pipe(
+          catchError(error => {
+              console.error('Error deleting inscription:', error);
+              return throwError(() => error);
+          })
+      );
+  }
+  
+
     }
