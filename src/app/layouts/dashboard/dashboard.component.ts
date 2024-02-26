@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { User } from './pages/users/models';
 import { selectAuthUser } from '../../core/store/auth/selectors';
+import { AlertsService } from '../../core/services/alerts.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +17,7 @@ export class DashboardComponent implements OnInit {
   showFiller = false;
   authUser$: Observable<User | null>;
 
-  constructor(private router: Router, private authService: AuthService, private store: Store) {
+  constructor(private router: Router, private authService: AuthService, private store: Store, private alertsService: AlertsService) {
     this.authUser$ = this.store.select(selectAuthUser);
   }
 
@@ -34,7 +35,19 @@ export class DashboardComponent implements OnInit {
   }
 
   logout(): void {
-    this.router.navigate(['auth', 'login']);
-    this.authService.logout();
+    this.alertsService.showAlert({
+      title: 'Logout Confirmation',
+      text: 'Are you sure you want to logout?',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, logout',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['auth', 'login']);
+        this.authService.logout();
+        this.alertsService.showSuccess('Success', 'Logged out successfully.');
+      }
+    });
   }
 }

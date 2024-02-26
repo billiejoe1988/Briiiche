@@ -3,14 +3,46 @@
 </div>
 
 <ng-template #notLoading>
-    <h1 appUppercaseTitles class="p-3 text-yellow-600 text-xl text-center bg-white/80 rounded mb-4">Inscriptions</h1>
+    <h1 appUppercaseTitles class="p-3 text-yellow-600 text-xl text-center bg-white/80 rounded mb-10">Inscriptions</h1>
     <div class="flex justify-end mb-3">
         <button (click)="createInscription()" mat-button class="boton text-l">
             Add Inscription
         </button>
     </div>
+    <table mat-table [dataSource]="inscriptions">
+        <ng-container matColumnDef="userId">
+          <th mat-header-cell *matHeaderCellDef> User ID </th>
+          <td mat-cell *matCellDef="let inscription"> {{inscription.userId}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="courseId">
+          <th mat-header-cell *matHeaderCellDef> Course ID </th>
+          <td mat-cell *matCellDef="let inscription"> {{inscription.courseId}} </td>
+        </ng-container>\
 
-    <pre>
-        {{ inscriptions | json }}
-    </pre>
+        <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef> Last Name </th>
+            <td mat-cell *matCellDef="let inscription"> {{inscription.user.lastName}} </td>
+        </ng-container>
+          
+        <ng-container matColumnDef="courseName">
+            <th mat-header-cell *matHeaderCellDef> Course Name </th>
+            <td mat-cell *matCellDef="let inscription"> {{inscription.course.courseName}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let user">
+              <button mat-icon-button >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
 </ng-template>

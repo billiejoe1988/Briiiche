@@ -1,15 +1,14 @@
 {
   "users": [
     {
-      "id": "as2d",
       "firstName": "America",
       "lastName": "Zardelli",
       "password": "b1122",
       "country": "Chile",
       "email": "America@gmail.com",
       "rol": "BUYER",
-      "comision": "Cuisine Pro",
-      "token": "b123"
+      "comision": "PastryPro",
+      "id": "as2d"
     },
     {
       "id": "d3as",
@@ -121,9 +120,9 @@
   ],
   "courses": [
     {
-      "id": "saas1",
       "courseName": "Cuisine Begin",
-      "createdAt": "2024-12-12T10:06:00Z"
+      "createdAt": "2024-12-20T03:00:00.000Z",
+      "id": "saas1"
     },
     {
       "id": "dsad2",
@@ -178,6 +177,16 @@
     {
       "id": "399b",
       "courseId": "fdsa4",
+      "userId": "7sd4f"
+    },
+    {
+      "id": "9d82",
+      "courseId": "fdsa4",
+      "userId": "d3as"
+    },
+    {
+      "id": "9d28",
+      "courseId": "6595",
       "userId": "7sd4f"
     }
   ]

@@ -1,4 +1,4 @@
-<h2 mat-dialog-title appUppercaseTitles class="text-black p-3 text-center bg-white/80 rounded mb-8">User</h2>
+<h2 mat-dialog-title appUppercaseTitles class="text-black p-3 text-center bg-white/80 rounded mb-8 text-2xl">User</h2>
 
 <mat-dialog-content>
   <form [formGroup]="userFormEdit" class="py-10">
@@ -60,7 +60,7 @@
   </form>
 </mat-dialog-content>
 
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close class="boton">Cancel</button>
+<mat-dialog-actions class="flex justify-center">
   <button mat-button (click)="onSave()" class="boton">Save</button>
+  <button mat-button mat-dialog-close class="boton">Cancel</button>
 </mat-dialog-actions>

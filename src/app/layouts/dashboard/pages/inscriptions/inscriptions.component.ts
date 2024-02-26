@@ -1,47 +1,46 @@
-import { Component } from '@angular/core';
-import { InscriptionService } from './inscription.service';
-import { Store, select } from '@ngrx/store';
+import { Component, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { InscriptionsActions } from './store/inscriptions.actions';
-import { selectInscription } from './store/inscriptions.selectors';
-import { selectInscriptionLoading } from './store/inscriptions.selectors';
-import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
-import { Inscription } from './models';
+import { selectInscription, selectInscriptionLoading } from './store/inscriptions.selectors';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { InscriptDialogComponent } from './components/inscript-dialog/inscript-dialog.component';
+import { Inscription } from './models';
 
 @Component({
   selector: 'app-inscriptions',
   templateUrl: './inscriptions.component.html',
-  styleUrl: './inscriptions.component.scss'
+  styleUrls: ['./inscriptions.component.scss']
 })
-export class InscriptionsComponent {
+export class InscriptionsComponent implements OnDestroy {
 
-  inscriptions: Inscription[] = []; 
+  inscriptions: Inscription[] = [];
   isLoading$: Observable<boolean>;
-  inscriptionsSubscripion?: Subscription;  
+  private destroyed$ = new Subject<void>();
 
-  destroyed$ = new Subject();
+  displayedColumns: string[] = ['userId', 'lastName', 'courseId', 'courseName', 'actions'];
 
-  constructor(private inscriptionsService: InscriptionService, private store: Store, private matDialog: MatDialog){
-     this.store.select(selectInscription)
-     .pipe(takeUntil(this.destroyed$))
-     .subscribe({
-      next: (inscriptions) =>{
-        this.inscriptions = inscriptions;
-      },
-    });
+  constructor(private store: Store, private matDialog: MatDialog) {
+    this.store.select(selectInscription)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe({
+        next: (inscriptions) => {
+          this.inscriptions = inscriptions;
+        },
+      });
 
     this.isLoading$ = this.store.select(selectInscriptionLoading);
     this.store.dispatch(InscriptionsActions.loadInscriptionss());
   }
-  
-  createInscription() : void{
+
+  createInscription(): void {
     this.matDialog.open(InscriptDialogComponent);
   }
 
   ngOnDestroy(): void {
-     this.destroyed$.next(true);
-     this.destroyed$.complete();
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
-
+  
 }

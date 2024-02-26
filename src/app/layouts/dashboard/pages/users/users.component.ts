@@ -89,10 +89,7 @@ export class UsersComponent implements OnInit {
           next: () => {
             this.loadUsers(); 
             this.alertsService.showSuccess('Success', 'User updated successfully.');
-            
-
             this.users = this.users.filter(u => u.id !== user.id);
-
             this.users.push(result);
           },
           error: (error: any) => {

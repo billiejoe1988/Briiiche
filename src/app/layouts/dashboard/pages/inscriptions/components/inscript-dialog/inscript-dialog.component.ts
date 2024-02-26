@@ -8,7 +8,7 @@ import { Courses } from '../../../courses/models';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-
+import { AlertsService } from '../../../../../../core/services/alerts.service'; 
 
 @Component({
   selector: 'app-inscript-dialog',
@@ -22,7 +22,11 @@ export class InscriptDialogComponent {
   courses$: Observable<Courses[]>;
   inscriptionForm: FormGroup;
 
-  constructor(private store: Store, private formBuilder: FormBuilder, private matDialogRef: MatDialogRef<InscriptDialogComponent>) {
+  constructor(private store: Store, 
+              private formBuilder: FormBuilder, 
+              private matDialogRef: MatDialogRef<InscriptDialogComponent>,
+              private alertsService: AlertsService 
+            ) {
 
     this.inscriptionForm = this.formBuilder.group({
       courseId: this.formBuilder.control('', [Validators.required]),
@@ -43,7 +47,7 @@ export class InscriptDialogComponent {
       this.store.dispatch(InscriptionsActions.createInscription ({ data: this.inscriptionForm.value })
       );
       this.matDialogRef.close();
+      this.alertsService.showSuccess('Success', 'Inscription created successfully.');
     }
-   }
+  }
 }
-

@@ -6,6 +6,7 @@
 }
 .toolbar{
   background-color: rgb(26, 25, 25);
+  padding: 5px;
 }
 .iconMenu{
   background-color: white;
@@ -18,14 +19,13 @@
   border-radius: 100px;
 }
 .side{
-  background-color: rgb(26, 25, 25);
+  background-color: #fffbfb;
+  background-image: linear-gradient(0deg, #c9c9c9 70%, #171818 90%);
   border-right: 2px solid goldenrod;
 }
-.listLinks{
-  background: rgba(255, 255, 255, 0.734);
-}
-.listLinks:hover{
-  background-color: goldenrod;
+.listItem:hover{
+  background-color: #d46f16;
+  background-image: linear-gradient(43deg, #d46f16 0%, #c8aa50 46%, #ffe570 100%);
   cursor: pointer ;
 }
 .boton{
@@ -37,4 +37,25 @@
 .fondo{
   background-image: url(../../../assets/f6.webp);
   background-size: cover;
+}
+.icon-white {
+  color: rgb(39, 37, 37);
+}
+.listItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.listLinks{
+  color: white;
+  font-size: bold;
+  padding-left: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.cuisine-title {
+  background: linear-gradient(43deg, #d46f16 0%, #c8aa50 46%, #ffe570 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

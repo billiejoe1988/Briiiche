@@ -1,15 +1,29 @@
 <mat-drawer-container class="dashboard-container fondo" autosize>
     <mat-drawer #drawer class="side" mode="side">
-      <span><img src="../../../assets/logo.png" alt="logo" class="logo mx-auto"></span>
+      <span><img src="../../../assets/logo.png" alt="logo" class="logo mx-auto my-5"></span>
 
       <mat-nav-list role="list" class="py-5 text-center">
-        <a #homeLink="routerLinkActive" routerLinkActive [activated]="homeLink.isActive" routerLink='home' mat-list-item class="listLinks">Home</a>
-        <a #usersLink='routerLinkActive' routerLinkActive [activated]="usersLink.isActive" routerLink='users' mat-list-item class="listLinks">Users</a>
-        <a #coursesLink='routerLinkActive' routerLinkActive [activated]="coursesLink.isActive" routerLink='courses' mat-list-item class="listLinks">Courses</a>
-        <a #inscriptionsLink="routerLinkActive" routerLinkActive [activated]="inscriptionsLink.isActive" routerLink="inscriptions" mat-list-item class="listLinks">Inscriptions</a>
-        <a (click)="logout()" mat-list-item class="listLinks">Log Out</a>
+        <div class="listItem">
+          <mat-icon class="icon-white">home</mat-icon>
+          <a #homeLink="routerLinkActive" routerLinkActive [activated]="homeLink.isActive" routerLink='home' mat-list-item class="listLinks text-white text-xl">Home</a>
+        </div>
+        <div class="listItem">
+          <mat-icon class="icon-white">person</mat-icon>
+          <a #usersLink='routerLinkActive' routerLinkActive [activated]="usersLink.isActive" routerLink='users' mat-list-item class="listLinks text-white text-xl">Users</a>
+        </div>
+        <div class="listItem">
+          <mat-icon class="icon-white">school</mat-icon>
+          <a #coursesLink='routerLinkActive' routerLinkActive [activated]="coursesLink.isActive" routerLink='courses' mat-list-item class="listLinks text-xl">Courses</a>
+        </div>
+        <div class="listItem mb-8">
+          <mat-icon class="icon-white">group_add</mat-icon>
+          <a #inscriptionsLink="routerLinkActive" routerLinkActive [activated]="inscriptionsLink.isActive" routerLink="inscriptions" mat-list-item class="listLinks text-xl text-white">Inscriptions</a>
+        </div>
+        <div class="listItem">
+          <mat-icon class="icon-white text-xl">enhanced_encryption</mat-icon>
+          <a (click)="logout()" mat-list-item  class="listLinks text-xl">Log Out</a>
+        </div>
       </mat-nav-list>
-
     </mat-drawer>
   
     <div class="example-sidenav-content">
@@ -18,13 +32,13 @@
               <mat-icon class="iconMenu">menu</mat-icon>
             </button>
             <span><img src="../../../assets/logo.png" alt="logo" class="logo"></span>
-            <span class="mx-2 text-xl text-yellow-600">Cuisine Academy</span>
+            <span class="mx-2 text-2xl cuisine-title">Cuisine Academy</span>
             <span class="example-spacer"></span>
             <div class="mx-auto" *ngIf="authUser$ | async">
               <img src="../../../assets/perfil.jpeg" alt="perfil" class="perfil mx-auto">
               <span class="text-white mx-auto">{{ (authUser$ | async)?.firstName }} {{ (authUser$ | async)?.lastName }}</span>
-              <span class="text-yellow-600"> ( {{ (authUser$ | async)?.email }} ) </span>
-              <span class="text-yellow-400"> Role: {{ (authUser$ | async)?.rol }}</span>
+              <span class="cuisine-title"> ( {{ (authUser$ | async)?.email }} ) </span>
+              <span class="cuisine-title"> Role: {{ (authUser$ | async)?.rol }}</span>
             </div>
             <span class="text-gray-400">{{ currentDateTime }}</span>
           </mat-toolbar>

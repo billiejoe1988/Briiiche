@@ -1,4 +1,4 @@
-<h2 mat-dialog-title appUppercaseTitles class="text-black p-3 text-center bg-white/80 rounded mb-8">Courses</h2>
+<h2 mat-dialog-title appUppercaseTitles class="text-black p-3 text-center bg-white/80 rounded mb-8 text-xl">Courses</h2>
 
 <mat-dialog-content>
   <form [formGroup]="coursesForm">
@@ -21,6 +21,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close class="boton">No Thanks</button>
     <button mat-button (click)="onSave()" class="boton">Save</button>
+    <button mat-button mat-dialog-close class="boton">No Thanks</button>
 </mat-dialog-actions>
