@@ -4,12 +4,12 @@ import { User } from "../../users/models";
 export interface Inscription {
     id: string | number;
     userId: string | number;
-    productId: string | number;
+    courseId: string | number;
     user?: User;
     course?: Courses;
 }
 
 export interface CreateInscriptionData{
-    userId: string | number | null;
-    courseId: string | number | null;
+    userId: number;
+    courseId: number;
 }

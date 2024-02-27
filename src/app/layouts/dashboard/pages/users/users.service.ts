@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { User } from './models';
-import { Observable, of, mergeMap, catchError, throwError } from 'rxjs';
+import { Observable, of, mergeMap, catchError, throwError, tap } from 'rxjs';
 import { AlertsService } from '../../../../core/services/alerts.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse  } from '@angular/common/http';
 import { enviroment } from '../../../../enviroments/enviroment';
 import { Pagination } from '../../../../core/models/pagination';
+import { UserWithCoursesAndInscriptions } from './models/complete';
 
-const ROLES_DB: string[] = ['ADMIN', 'USER'];
+const ROLES_DB: string[] = ['ADMIN', 'USER', 'BUYER'];
 
 let USERS_DB: User[] = [];
 
@@ -70,4 +71,23 @@ export class UsersService {
   getAllBuyers(): Observable<User[]>{
     return this.httpClient.get<User[]>(`${enviroment.apiURL}/users?rol=BUYER`)
   }
-} 
+
+  deleteInscription(userId: string, inscriptionId: string): Observable<void> {
+    return this.httpClient.delete<void>(`${enviroment.apiURL}/users/${userId}/inscriptions/${inscriptionId}`).pipe(
+      catchError(error => {
+        this.alerts.showError('Error', 'Failed to delete inscription.');
+        return throwError(error);
+      })
+    );
+  }
+
+  getUserByIdWithCoursesAndInscriptions(userId: string): Observable<UserWithCoursesAndInscriptions> {
+    return this.httpClient.get<UserWithCoursesAndInscriptions>(`http://localhost:3000/users/${userId}`);
+  }
+  
+  getUserDetails(userId: string): Observable<UserWithCoursesAndInscriptions> {
+    const url = `${enviroment.apiURL}/users/${userId}`;
+    return this.httpClient.get<UserWithCoursesAndInscriptions>(url).pipe(
+    );
+  }
+}

@@ -3,14 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { UsersComponent } from './users.component';
 import { UserDetailComponent } from './pages/user-details/user-details.component';
 
-
 const routes: Routes = [
   {
     path: '',
     component: UsersComponent,
   },
   {
-    path: 'detail/:id',
+    path: 'details/:id',
     component: UserDetailComponent,
   },
 ];

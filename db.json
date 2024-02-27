@@ -7,7 +7,7 @@
       "country": "Chile",
       "email": "America@gmail.com",
       "rol": "BUYER",
-      "comision": "PastryPro",
+      "comision": "CuisinePro",
       "id": "as2d"
     },
     {
@@ -170,11 +170,6 @@
       "courseId": "6595"
     },
     {
-      "id": "5475",
-      "courseId": "6595",
-      "userId": "as2d"
-    },
-    {
       "id": "399b",
       "courseId": "fdsa4",
       "userId": "7sd4f"
@@ -182,6 +177,16 @@
     {
       "id": "9d82",
       "courseId": "fdsa4",
+      "userId": "d3as"
+    },
+    {
+      "id": "f86f",
+      "courseId": "6595",
+      "userId": "d3as"
+    },
+    {
+      "id": "aa89",
+      "courseId": "096d",
       "userId": "d3as"
     }
   ]

@@ -1,0 +1,45 @@
+<h2 mat-dialog-title appUppercaseTitles class="text-black p-3 text-center bg-white/80 rounded mb-8 text-2xl">Add Buyer</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="buyerForm" class="py-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName" placeholder="Enter first name">
+        <mat-error *ngIf="buyerForm.get('firstName')?.errors?.['required']">First Name is required</mat-error>
+        <mat-error *ngIf="buyerForm.get('firstName')?.errors?.['minlength']">First Name must be at least 4 characters long</mat-error>
+        <mat-error *ngIf="buyerForm.get('firstName')?.errors?.['maxlength']">First Name cannot be more than 15 characters long</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" placeholder="Enter last name">
+        <mat-error *ngIf="buyerForm.get('lastName')?.errors?.['required']">Last Name is required</mat-error>
+        <mat-error *ngIf="buyerForm.get('lastName')?.errors?.['minlength']">Last Name must be at least 4 characters long</mat-error>
+        <mat-error *ngIf="buyerForm.get('lastName')?.errors?.['maxlength']">Last Name cannot be more than 15 characters long</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>Country</mat-label>
+        <input matInput formControlName="country" placeholder="Enter country">
+        <mat-error *ngIf="buyerForm.get('country')?.errors?.['required']">Country is required</mat-error>
+        <mat-error *ngIf="buyerForm.get('country')?.errors?.['minlength']">Country must be at least 4 characters long</mat-error>
+        <mat-error *ngIf="buyerForm.get('country')?.errors?.['maxlength']">Country cannot be more than 15 characters long</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="Enter email">
+        <mat-error *ngIf="buyerForm.get('email')?.errors?.['required']">Email is required</mat-error>
+        <mat-error *ngIf="buyerForm.get('email')?.errors?.['email']">Invalid email format</mat-error>
+        <mat-error *ngIf="buyerForm.get('email')?.errors?.['minlength']">Email must be at least 4 characters long</mat-error>
+        <mat-error *ngIf="buyerForm.get('email')?.errors?.['maxlength']">Email cannot be more than 25 characters long</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions class="flex justify-center">
+  <button mat-raised-button color="primary" (click)="onSave()">Save</button>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

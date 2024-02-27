@@ -35,10 +35,15 @@ export const reducer = createReducer(
   on(InscriptionsActions.loadBuyersSuccess, (state, action) => ({ ...state, loadingBuyers: false, buyers: action.data })),
   on(InscriptionsActions.loadCoursesSuccess, (state, action) => ({ ...state, loadingCourses: false, courses: action.data })),
   on(InscriptionsActions.deleteInscriptionSuccess, (state, action) => ({ ...state, inscriptions: state.inscriptions.filter(inscription => inscription.id !== action.id) })),
+  on(InscriptionsActions.updateInscription, (state, { id, changes }) => ({
+    ...state,
+    inscriptions: state.inscriptions.map(inscription =>
+      inscription.id === id ? { ...inscription, ...changes } : inscription
+    )
+  }))
 );
 
 export const inscriptionsFeature = createFeature({
   name: inscriptionsFeatureKey,
   reducer,
 });
-

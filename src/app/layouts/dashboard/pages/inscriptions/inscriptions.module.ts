@@ -9,13 +9,14 @@ import { inscriptionsFeature } from './store/inscriptions.reducer';
 import { InscriptDialogComponent } from './components/inscript-dialog/inscript-dialog.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { UsersModule } from '../users/users.module';
-import { CoursesService } from '../courses/courses.service';
 import { CoursesModule } from '../courses/courses.module';
+import { InscriptEditComponent } from './components/inscript-edit/inscript-edit.component';
 
 @NgModule({
   declarations: [
     InscriptionsComponent,
-    InscriptDialogComponent
+    InscriptDialogComponent,
+    InscriptEditComponent
   ],
   imports: [
     CommonModule,

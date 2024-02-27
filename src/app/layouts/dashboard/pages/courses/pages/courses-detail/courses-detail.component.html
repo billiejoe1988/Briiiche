@@ -1,0 +1,27 @@
+<div *ngIf="course">
+    <div class="boton rounded-md">
+      <button mat-raised-button (click)="goBackToList()">Back to List</button>
+    </div>
+    <mat-card class="user-card mx-auto px-auto">
+      <mat-card-header>
+        <mat-card-title class="text-yellow-600 p-3 bg-white/80 rounded mb-8 text-2xl">Course Details</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>ID:</strong> {{ course.id }}</p>
+        <p><strong>Name:</strong> {{ course.courseName }}</p>
+        <p><strong>Created At:</strong> {{ course.createdAt | date }}</p>
+        
+        <div>
+          <h2>Inscriptions</h2>
+          <mat-list>
+            <mat-list-item *ngFor="let inscription of course.inscriptions">
+              <p>Inscription ID: {{ inscription.id }}</p>
+              <p>Course ID: {{ inscription.courseId }}</p>
+              <p>User ID: {{ inscription.userId }}</p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

@@ -15,6 +15,10 @@
           <mat-icon class="icon-white">school</mat-icon>
           <a #coursesLink='routerLinkActive' routerLinkActive [activated]="coursesLink.isActive" routerLink='courses' mat-list-item class="listLinks text-xl">Courses</a>
         </div>
+        <div class="listItem">
+          <mat-icon class="icon-white">account_box</mat-icon>
+          <a #buyersLink='routerLinkActive' routerLinkActive [activated]="buyersLink.isActive" routerLink='buyers' mat-list-item class="listLinks text-xl">Buyers</a>
+        </div>
         <div class="listItem mb-8">
           <mat-icon class="icon-white">group_add</mat-icon>
           <a #inscriptionsLink="routerLinkActive" routerLinkActive [activated]="inscriptionsLink.isActive" routerLink="inscriptions" mat-list-item class="listLinks text-xl text-white">Inscriptions</a>

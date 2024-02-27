@@ -30,6 +30,10 @@
         <button (click)="onEdit(element)" mat-icon-button>
           <mat-icon>edit</mat-icon>
         </button>
+        <button [routerLink]="element.id" routerLinkActive="router-link-active" mat-icon-button >
+          <mat-icon>visibility</mat-icon>
+        </button>
+        
       </td>
     </ng-container>
   

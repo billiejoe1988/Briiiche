@@ -1,14 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
+import { catchError, map, concatMap, mergeMap } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
-import { InscriptionsActions } from './inscriptions.actions';
+import { InscriptionsActions } from './inscriptions.actions'; 
+import { Store } from '@ngrx/store';
 import { InscriptionService } from '../inscription.service';
 import { UsersService } from '../../users/users.service';
 import { CoursesService } from '../../courses/courses.service';
+import { Inscription } from '../models';
 
 @Injectable()
 export class InscriptionsEffects {
+
+  constructor(
+    private actions$: Actions,
+    private store: Store,
+    private inscriptionService: InscriptionService,
+    private usersService: UsersService,
+    private coursesService: CoursesService,
+  ) {}
 
   loadInscriptionss$ = createEffect(() => {
     return this.actions$.pipe(
@@ -21,6 +31,24 @@ export class InscriptionsEffects {
     );
   });
 
+  //updateInscription$ = createEffect(() => {
+   // return this.actions$.pipe(
+   //   ofType(InscriptionsActions.updateInscription),
+   //   mergeMap(action => {
+   //     if (action.id && (typeof action.id === 'string' || typeof action.id === 'number')) {
+   //       return this.inscriptionService.updateInscription(action.id.toString(), action.changes).pipe(
+   //         map(() => InscriptionsActions.updateInscriptionSuccess({ data: action.changes })),
+   //         catchError(error => of(InscriptionsActions.updateInscriptionFailure({ error })))
+    //      );
+     //   } else {
+      //    console.error('ID de inscripción no válido');
+       //   return EMPTY;
+        //}
+      //})
+   // );
+  //});
+  
+  
   loadBuyer$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(InscriptionsActions.loadBuyers), 
@@ -63,7 +91,7 @@ export class InscriptionsEffects {
      );
    });
 
-deleteInscription$ = createEffect(() => {
+  deleteInscription$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(InscriptionsActions.deleteInscription),
       concatMap((action) =>
@@ -74,10 +102,4 @@ deleteInscription$ = createEffect(() => {
       )
     );
   });
-  constructor(
-    private actions$: Actions,
-    private inscriptionService: InscriptionService,
-    private usersService: UsersService,
-    private coursesService: CoursesService,
-  ) {}
 }

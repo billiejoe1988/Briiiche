@@ -4,7 +4,6 @@ import { DashboardComponent } from './dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UserDetailComponent } from './pages/users/pages/user-details/user-details.component';
 import { adminGuard } from '../../core/guards/admin.guard';
-import { InscriptionsModule } from './pages/inscriptions/inscriptions.module';
 
 const routes: Routes = [
   {
@@ -15,6 +14,10 @@ const routes: Routes = [
         path: 'users',
         canActivate: [adminGuard],
         loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule) 
+      },
+      {
+        path: 'buyers',
+        loadChildren: () => import('./pages/buyers/buyers.module').then(m => m.BuyersModule)
       },
       {
         path: 'home',

@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { InscriptDialogComponent } from './components/inscript-dialog/inscript-dialog.component';
 import { Inscription } from './models';
 import { AlertsService } from '../../../../core/services/alerts.service';
+import { InscriptEditComponent } from './components/inscript-edit/inscript-edit.component';
 
 @Component({
   selector: 'app-inscriptions',
@@ -20,7 +21,7 @@ export class InscriptionsComponent implements OnDestroy {
   isLoading$: Observable<boolean>;
   private destroyed$ = new Subject<void>();
 
-  displayedColumns: string[] = ['userId', 'lastName', 'courseId', 'courseName', 'actions'];
+  displayedColumns: string[] = ['id', 'userId', 'lastName', 'courseId', 'courseName', 'actions'];
 
   constructor(private store: Store, private matDialog: MatDialog, private alertsService: AlertsService) {
     this.store.select(selectInscription)
@@ -37,6 +38,19 @@ export class InscriptionsComponent implements OnDestroy {
 
   createInscription(): void {
     this.matDialog.open(InscriptDialogComponent);
+  }
+
+  onEdit(index: number): void {
+    const inscriptionToEdit = this.inscriptions[index];
+    const dialogRef = this.matDialog.open(InscriptEditComponent, {
+      data: { inscription: inscriptionToEdit }
+    });
+
+    dialogRef.afterClosed().subscribe((updatedInscription: Inscription) => {
+      if (updatedInscription) {
+        this.inscriptions[index] = updatedInscription;
+      }
+    });
   }
 
   ngOnDestroy(): void {
