@@ -1,15 +1,15 @@
 import { Courses } from "../../courses/models";
-import { User } from "../../users/models";
+import { Buyer } from "../../buyers/model";
 
 export interface Inscription {
     id: string | number;
-    userId: string | number;
+    buyerId: string | number;
     courseId: string | number;
-    user?: User;
+    buyer?: Buyer;
     course?: Courses;
 }
 
 export interface CreateInscriptionData{
-    userId: number;
+    buyerId: number;
     courseId: number;
 }

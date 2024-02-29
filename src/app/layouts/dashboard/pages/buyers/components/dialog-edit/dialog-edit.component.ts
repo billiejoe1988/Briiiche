@@ -1,45 +1,51 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserWithCoursesAndInscriptions } from '../../../users/models/complete';
+import { Buyer } from '../../model';
 
 @Component({
   selector: 'app-dialog-edit',
   templateUrl: './dialog-edit.component.html',
   styleUrls: ['./dialog-edit.component.scss']
 })
-export class DialogEditComponent implements OnInit {
-  buyerForm!: FormGroup;
+export class DialogEditComponent {
+  buyerFormEdit!: FormGroup;
+  revealPassword =false;
 
   constructor(
+    private fb: FormBuilder,
     private dialogRef: MatDialogRef<DialogEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: UserWithCoursesAndInscriptions, 
-    private formBuilder: FormBuilder
-  ) {}
+    @Inject(MAT_DIALOG_DATA) private editingBuyer?: Buyer, 
+  ) {
 
-  ngOnInit(): void {
-    this.buyerForm = this.formBuilder.group({
-      firstName: [this.data.firstName, [Validators.required, Validators.minLength(4), Validators.maxLength(15)]],
-      lastName: [this.data.lastName, [Validators.required, Validators.minLength(4), Validators.maxLength(15)]],
-      country: [this.data.country, [Validators.required, Validators.minLength(4), Validators.maxLength(15)]],
-      email: [this.data.email, [Validators.required, Validators.email, Validators.minLength(4), Validators.maxLength(25)]],
+    this.buyerFormEdit = this.fb.group({
+      firstName: this.fb.control('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]), 
+      lastName: this.fb.control('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]),
+      password: this.fb.control('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]), 
+      country: this.fb.control('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]),
+      email: this.fb.control('', [ Validators.required, Validators.email, Validators.maxLength(25), Validators.minLength(4)]),
+      rol: this.fb.control('', [Validators.required]),
+      comision:  this.fb.control('', [Validators.required]),
     });
-  }
-
-  onSave(): void {
-    if (this.buyerForm.valid) {
-      const updatedUserData = {
-        ...this.data,
-        firstName: this.buyerForm.value.firstName,
-        lastName: this.buyerForm.value.lastName,
-        country: this.buyerForm.value.country,
-        email: this.buyerForm.value.email
-      };
-      this.dialogRef.close(updatedUserData);
+    
+    if (this.editingBuyer) {
+      this.buyerFormEdit.patchValue(this.editingBuyer);
     }
   }
-  
-  displayCourses(): string {
-    return this.data.courses.map(course => course.courseName).join(', ');
-  }
+  onSave(): void {
+      if (this.buyerFormEdit.valid) {
+        this.dialogRef.close(this.buyerFormEdit.value);
+      } else {
+        this.markFormGroupTouched(this.buyerFormEdit);
+      }
+    }
+    
+    private markFormGroupTouched(formGroup: FormGroup) {
+      Object.values(formGroup.controls).forEach(control => {
+        control.markAsTouched();
+        if (control instanceof FormGroup) {
+          this.markFormGroupTouched(control);
+        }
+      });
+    }
 }

@@ -1,27 +1,6 @@
 {
   "users": [
     {
-      "firstName": "America",
-      "lastName": "Zardelli",
-      "password": "b1122",
-      "country": "Colombia",
-      "email": "America@gmail.com",
-      "rol": "BUYER",
-      "comision": "CuisineBegin",
-      "id": "as2d"
-    },
-    {
-      "id": "d3as",
-      "firstName": "Judith",
-      "lastName": "Sanz",
-      "password": "c4321",
-      "country": "USA",
-      "email": "js@gmail.com",
-      "rol": "BUYER",
-      "comision": "Pastry Pro",
-      "token": "c123"
-    },
-    {
       "id": "334ff",
       "firstName": "Dracule",
       "lastName": "Mihawk",
@@ -29,18 +8,8 @@
       "country": "Argentina",
       "email": "dracule@gmail.com",
       "rol": "ADMIN",
-      "comision": "Cuisine Pro",
-      "token": "d123"
-    },
-    {
-      "firstName": "Sanji",
-      "lastName": "Chief",
-      "password": "kick",
-      "country": "Japan",
-      "email": "sanji@gmail.com",
-      "rol": "BUYER",
-      "comision": "PastryPro",
-      "id": "002b"
+      "comision": "AdministrativeTasks",
+      "token": "d1232"
     },
     {
       "firstName": "Nami",
@@ -49,8 +18,9 @@
       "country": "Coco Island",
       "email": "nami@gmail.com",
       "rol": "USER",
-      "comision": "PastryPro",
-      "id": "e02f"
+      "comision": "AdministrativeTasks",
+      "id": "e02f",
+      "token": "d12ass"
     },
     {
       "id": "43sd5",
@@ -60,28 +30,8 @@
       "country": "East Blue",
       "email": "luffy@gmail.com",
       "rol": "ADMIN",
-      "comision": "Cuisine Begin",
+      "comision": "AdministrativeTasks",
       "token": "luf23"
-    },
-    {
-      "firstName": "Roronoa",
-      "lastName": "Zoro",
-      "password": "swordsman",
-      "country": "East Blue",
-      "email": "zoro@gmail.com",
-      "rol": "BUYER",
-      "comision": "Cuisine Begin",
-      "id": "6232"
-    },
-    {
-      "firstName": "Nico",
-      "lastName": "Robin",
-      "password": "history",
-      "country": "East Blue",
-      "email": "robin@gmail.com",
-      "rol": "BUYER",
-      "comision": "Cuisine Begin",
-      "id": "7sd4f"
     },
     {
       "id": "8ert",
@@ -91,19 +41,8 @@
       "country": "East Blue",
       "email": "usopp@gmail.com",
       "rol": "ADMIN",
-      "comision": "Cuisine Pro",
+      "comision": "AdministrativeTasks",
       "token": "up123"
-    },
-    {
-      "id": "asd4",
-      "firstName": "Franky",
-      "lastName": "Shipwright",
-      "password": "colt",
-      "country": "East Blue",
-      "email": "franky@gmail.com",
-      "rol": "USER",
-      "comision": "Cuisine Pro",
-      "token": "fraky123"
     },
     {
       "id": "bsdf",
@@ -113,11 +52,27 @@
       "country": "Drum Island",
       "email": "chopper@gmail.com",
       "rol": "USER",
-      "comision": "Pastry Pro",
+      "comision": "AdministrativeTasks",
       "token": "cper3"
+    },
+    {
+      "id": "0128",
+      "firstName": "test",
+      "lastName": "test",
+      "password": "test",
+      "country": "test",
+      "email": "test@gmail.com",
+      "rol": "USER",
+      "comision": "AdministrativeTasks",
+      "token": "BIYU0"
     }
   ],
   "courses": [
+    {
+      "courseName": "Administrative tasks",
+      "createdAt": "2022-11-20T03:05:00.000Z",
+      "id": "sa111"
+    },
     {
       "courseName": "Cuisine Begin",
       "createdAt": "2024-12-20T03:00:00.000Z",
@@ -159,7 +114,8 @@
     {
       "courseName": "Goddest Cuisine",
       "createdAt": "2025-11-22T03:00:00.000Z",
-      "id": "6595"
+      "id": "6595",
+      "token": "TjFAMs"
     },
     {
       "id": "f527",
@@ -169,11 +125,6 @@
     }
   ],
   "inscriptions": [
-    {
-      "id": "1",
-      "userId": "002b",
-      "courseId": "6595"
-    },
     {
       "id": "399b",
       "courseId": "fdsa4",
@@ -192,27 +143,84 @@
     {
       "id": "aa89",
       "courseId": "096d",
-      "userId": "d3as"
+      "buyerId": "d3as"
     },
     {
       "id": "c02f",
       "courseId": "dc3a",
-      "userId": "as2d"
+      "buyerId": "as2d"
     },
     {
       "id": "e094",
       "courseId": "096d",
-      "userId": "as2d"
+      "buyerId": "as2d"
     },
     {
       "id": "26b6",
       "courseId": "745d",
-      "userId": "d3as"
+      "buyerId": "d3as"
     },
     {
       "id": "15be",
       "courseId": "6595",
-      "userId": "as2d"
+      "buyerId": "as2d"
+    }
+  ],
+  "buyers": [
+    {
+      "firstName": "America",
+      "lastName": "Zardelli",
+      "password": "b1122",
+      "country": "Colombia",
+      "email": "America@gmail.com",
+      "rol": "BUYER",
+      "comision": "CuisineBegin",
+      "id": "as2d",
+      "token": "cdas1"
+    },
+    {
+      "id": "d3as",
+      "firstName": "Judith",
+      "lastName": "Sanz",
+      "password": "c4321",
+      "country": "USA",
+      "email": "js@gmail.com",
+      "rol": "BUYER",
+      "comision": "Pastry Pro",
+      "token": "c1231"
+    },
+    {
+      "firstName": "Roronoa",
+      "lastName": "Zoro",
+      "password": "swordsman",
+      "country": "East Blue",
+      "email": "zoro@gmail.com",
+      "rol": "BUYER",
+      "comision": "Cuisine Begin",
+      "id": "6232",
+      "token": "11s32"
+    },
+    {
+      "firstName": "Nico",
+      "lastName": "Robin",
+      "password": "history",
+      "country": "East Blue",
+      "email": "robin@gmail.com",
+      "rol": "BUYER",
+      "comision": "Cuisine Begin",
+      "id": "7sd4f",
+      "token": "d1aaa"
+    },
+    {
+      "firstName": "Sanji",
+      "lastName": "Chief",
+      "password": "kick",
+      "country": "Japan",
+      "email": "sanji@gmail.com",
+      "rol": "BUYER",
+      "comision": "PastryPro",
+      "id": "002b",
+      "token": "d1222"
     }
   ]
 }

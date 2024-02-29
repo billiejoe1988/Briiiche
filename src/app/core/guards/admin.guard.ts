@@ -14,9 +14,8 @@ export const adminGuard: CanActivateFn = (route, state) => {
 
   return store.select(selectAuthUser).pipe(
     map((user) => {
-      return user?.rol === 'ADMIN'
-        ? true 
-        : router.createUrlTree(['dashboard', 'home']);
+      const isValidRole = user?.rol === 'ADMIN' || user?.rol === 'USER';
+      return isValidRole ? true : router.createUrlTree(['dashboard', 'home']);
     })
   );
 };

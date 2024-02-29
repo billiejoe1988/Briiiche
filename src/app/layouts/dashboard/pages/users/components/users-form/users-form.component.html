@@ -38,7 +38,6 @@
             <mat-select formControlName="rol" class="mx-2">
                 <mat-option value="ADMIN">ADMIN</mat-option>
                 <mat-option value="USER">USER</mat-option>
-                <mat-option value="BUYER">BUYER</mat-option>
             </mat-select>
             <mat-error>{{ userForm.get('rol')?.errors | validationErrors }}</mat-error>
         </mat-form-field>
@@ -56,6 +55,7 @@
                 <mat-option value="GoddestCuisine">Goddest Cuisine</mat-option>
                 <mat-option value="PastryMath">Pastry Math</mat-option>
                 <mat-option value="AdvancedBaking">Advanced Baking</mat-option>
+                <mat-option value="AdministrativeTasks">Administrative tasks</mat-option>
             </mat-select>
             <mat-error>{{ userForm.get('comision')?.errors | validationErrors }}</mat-error>
         </mat-form-field>

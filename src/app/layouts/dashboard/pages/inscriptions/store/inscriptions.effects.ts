@@ -8,6 +8,7 @@ import { InscriptionService } from '../inscription.service';
 import { UsersService } from '../../users/users.service';
 import { CoursesService } from '../../courses/courses.service';
 import { Inscription } from '../models';
+import { BuyersService } from '../../buyers/buyers.service';
 
 @Injectable()
 export class InscriptionsEffects {
@@ -16,7 +17,7 @@ export class InscriptionsEffects {
     private actions$: Actions,
     private store: Store,
     private inscriptionService: InscriptionService,
-    private usersService: UsersService,
+    private buyerService: BuyersService,
     private coursesService: CoursesService,
   ) {}
 
@@ -30,30 +31,12 @@ export class InscriptionsEffects {
       )
     );
   });
-
-  //updateInscription$ = createEffect(() => {
-   // return this.actions$.pipe(
-   //   ofType(InscriptionsActions.updateInscription),
-   //   mergeMap(action => {
-   //     if (action.id && (typeof action.id === 'string' || typeof action.id === 'number')) {
-   //       return this.inscriptionService.updateInscription(action.id.toString(), action.changes).pipe(
-   //         map(() => InscriptionsActions.updateInscriptionSuccess({ data: action.changes })),
-   //         catchError(error => of(InscriptionsActions.updateInscriptionFailure({ error })))
-    //      );
-     //   } else {
-      //    console.error('ID de inscripción no válido');
-       //   return EMPTY;
-        //}
-      //})
-   // );
-  //});
-  
   
   loadBuyer$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(InscriptionsActions.loadBuyers), 
       concatMap(() => 
-        this.usersService.getAllBuyers().pipe(
+        this.buyerService.getBuyers().pipe(
           map((resp) => InscriptionsActions.loadBuyersSuccess({ data: resp })),
           catchError((error) => of(InscriptionsActions.loadBuyersFailure({ error })))
         )

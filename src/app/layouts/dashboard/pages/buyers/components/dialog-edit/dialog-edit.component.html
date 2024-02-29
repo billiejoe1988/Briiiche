@@ -2,40 +2,68 @@
 <h2 mat-dialog-title appUppercaseTitles class="text-black p-3 text-center bg-white/80 rounded mb-8 text-2xl">Add Buyer</h2>
 
 <mat-dialog-content>
-  <form [formGroup]="buyerForm" class="py-10">
+  <form [formGroup]="buyerFormEdit" class="py-10">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <mat-form-field class="example-form-field" appearance="fill">
         <mat-label>First Name</mat-label>
         <input matInput formControlName="firstName" placeholder="Enter first name">
-        <mat-error *ngIf="buyerForm.get('firstName')?.errors?.['required']">First Name is required</mat-error>
-        <mat-error *ngIf="buyerForm.get('firstName')?.errors?.['minlength']">First Name must be at least 4 characters long</mat-error>
-        <mat-error *ngIf="buyerForm.get('firstName')?.errors?.['maxlength']">First Name cannot be more than 15 characters long</mat-error>
+        <mat-error>{{ buyerFormEdit.get('firstName')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-form-field" appearance="fill">
         <mat-label>Last Name</mat-label>
         <input matInput formControlName="lastName" placeholder="Enter last name">
-        <mat-error *ngIf="buyerForm.get('lastName')?.errors?.['required']">Last Name is required</mat-error>
-        <mat-error *ngIf="buyerForm.get('lastName')?.errors?.['minlength']">Last Name must be at least 4 characters long</mat-error>
-        <mat-error *ngIf="buyerForm.get('lastName')?.errors?.['maxlength']">Last Name cannot be more than 15 characters long</mat-error>
+        <mat-error>{{ buyerFormEdit.get('lastName')?.errors | validationErrors }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-form-field">
+        <mat-label>Password</mat-label>
+        <input [type]="revealPassword ? 'text' : 'password'" formControlName='password' matInput/>
+        <button (click)='revealPassword = !revealPassword' matSuffix mat-icon-button >
+            <mat-icon>visibility</mat-icon>
+        </button>
+        <mat-error>{{ buyerFormEdit.get('password')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-form-field" appearance="fill">
         <mat-label>Country</mat-label>
         <input matInput formControlName="country" placeholder="Enter country">
-        <mat-error *ngIf="buyerForm.get('country')?.errors?.['required']">Country is required</mat-error>
-        <mat-error *ngIf="buyerForm.get('country')?.errors?.['minlength']">Country must be at least 4 characters long</mat-error>
-        <mat-error *ngIf="buyerForm.get('country')?.errors?.['maxlength']">Country cannot be more than 15 characters long</mat-error>
+        <mat-error>{{ buyerFormEdit.get('country')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-form-field" appearance="fill">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" type="email" placeholder="Enter email">
-        <mat-error *ngIf="buyerForm.get('email')?.errors?.['required']">Email is required</mat-error>
-        <mat-error *ngIf="buyerForm.get('email')?.errors?.['email']">Invalid email format</mat-error>
-        <mat-error *ngIf="buyerForm.get('email')?.errors?.['minlength']">Email must be at least 4 characters long</mat-error>
-        <mat-error *ngIf="buyerForm.get('email')?.errors?.['maxlength']">Email cannot be more than 25 characters long</mat-error>
+        <mat-error>{{ buyerFormEdit.get('email')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
+
+      
+      <mat-form-field class="example-form-field">
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="rol">
+          <mat-option value="BUYER">BUYER</mat-option>
+        </mat-select>
+        <mat-error>{{ buyerFormEdit.get('rol')?.errors | validationErrors }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-form-field">
+        <mat-label>Comision</mat-label>
+        <mat-select formControlName="comision">
+          <mat-option value="CuisinePro">Cuisine Pro</mat-option>
+          <mat-option value="CuisineBegin">Cuisine Begin</mat-option>
+          <mat-option value="PastryPro">Pastry Pro</mat-option>
+          <mat-option value="Pastry">Pastry Begin</mat-option>
+          <mat-option value="CuisineOriental">Cuisine Oriental</mat-option>
+          <mat-option value="MolecularCuisine">Molecular Cuisine</mat-option>
+          <mat-option value="ExplosiveCuisine">Explosive Cuisine</mat-option>
+          <mat-option value="GoddestCuisine">Goddest Cuisine</mat-option>
+          <mat-option value="PastryMath">Pastry Math</mat-option>
+          <mat-option value="AdvancedBaking">Advanced Baking</mat-option>
+          <mat-option value="AdministrativeTasks">Administrative tasks</mat-option>
+        </mat-select>
+        <mat-error>{{ buyerFormEdit.get('comision')?.errors | validationErrors }}</mat-error>
+      </mat-form-field>
+
     </div>
   </form>
 </mat-dialog-content>

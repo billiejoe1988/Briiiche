@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable, of, mergeMap, catchError, throwError, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { enviroment } from '../../../../enviroments/enviroment';
+import { FormControl } from '@angular/forms';
 import { AlertsService } from '../../../../core/services/alerts.service';
-import { UserWithCoursesAndInscriptions, Course, Inscription } from '../users/models/complete';
+import { Buyer } from './model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,65 +12,57 @@ import { UserWithCoursesAndInscriptions, Course, Inscription } from '../users/mo
 export class BuyersService {
   constructor(private httpClient: HttpClient, private alerts: AlertsService) {}
 
-  getAllBuyersWithCourses(): Observable<UserWithCoursesAndInscriptions[]> {
-    return this.httpClient.get<any[]>(`${enviroment.apiURL}/inscriptions?_expand=user&_expand=course`).pipe(
-      map((inscriptions: any[]) => {
-        const buyersWithCourses: UserWithCoursesAndInscriptions[] = [];
-        inscriptions.forEach(inscription => {
-          const userInscription = inscription.user;
-          const courseId = inscription.course?.id;
-          const courseName = inscription.course?.courseName;
-          const courseCreatedAt = inscription.course?.createdAt;
-          
-          if (userInscription && courseId && courseName && courseCreatedAt) {
-            const courses: Course[] = [{ id: courseId, courseName: courseName, createdAt: new Date(courseCreatedAt) }];
-            const userCoursesAndInscriptions: UserWithCoursesAndInscriptions = {
-              id: userInscription.id,
-              firstName: userInscription.firstName,
-              lastName: userInscription.lastName,
-              password: userInscription.password,
-              country: userInscription.country,
-              email: userInscription.email,
-              rol: userInscription.rol,
-              comision: userInscription.comision,
-              token: userInscription.token,
-              courses: courses,
-              inscriptions: [{ id: inscription.id, courseId: courseId, userId: userInscription.id }]
-            };
-            buyersWithCourses.push(userCoursesAndInscriptions);
-          }
-        });
-        return buyersWithCourses;
-      }),
-      catchError((error) => {
-        this.alerts.showError('Error', 'An error occurred while fetching buyers with courses.');
-        return throwError(error);
-      })
-    );
+  generateString(length: number): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
   }
 
-  createBuyer(newBuyer: UserWithCoursesAndInscriptions): Observable<UserWithCoursesAndInscriptions> {
-    return this.httpClient.post<UserWithCoursesAndInscriptions>(`${enviroment.apiURL}/users`, newBuyer).pipe(
-      catchError((error) => {
-        this.alerts.showError('Error', 'An error occurred while creating the buyer.');
-        return throwError(error);
-      })
+    getBuyers() {
+      return this.httpClient.get<Buyer[]>(`${enviroment.apiURL}/buyers`);
+    }
+
+    getBuyersById(id: number | string) {
+      return this.httpClient.get<Buyer>(`${enviroment.apiURL}/buyers/${id}`);
+    }
+
+    createBuyer(payload: Buyer){
+      this.alerts.showSuccess('Success', 'User created successfully.');
+      return this.httpClient.post<Buyer[]>(`${enviroment.apiURL}/buyers`, {...payload, token: this.generateString(5),})
+      .pipe(mergeMap(() => this.getBuyers()));
+    }
+
+    updateBuyerById(updatedUser: Buyer): Observable<Buyer[]> {
+      return this.httpClient.put<Buyer>(`${enviroment.apiURL}/buyers/${updatedUser.id}`, updatedUser)
+        .pipe(
+          mergeMap(() => {
+            this.alerts.showSuccess('Success', 'User updated successfully.');
+            return this.getBuyers();
+          }),
+          catchError(error => {
+            this.alerts.showError('Error', 'Failed to update user.');
+            return throwError(error);
+          })
+        );
+    }
+
+  deleteBuyerById(buyerID: number) {
+    return this.httpClient.delete<Buyer>(`${enviroment.apiURL}/buyers/${buyerID}`)
+    .pipe(mergeMap(() => this.getBuyers()));
+  }
+  getBuyerDetails(buyerId: string): Observable<Buyer> {
+    const url = `${enviroment.apiURL}/buyers/${buyerId}`;
+    return this.httpClient.get<Buyer>(url).pipe(
     );
   }
-
-  updateBuyer(updatedBuyer: UserWithCoursesAndInscriptions): Observable<UserWithCoursesAndInscriptions> {
-    return this.httpClient.put<UserWithCoursesAndInscriptions>(`${enviroment.apiURL}/users/${updatedBuyer.id}`, updatedBuyer).pipe(
-      catchError((error) => {
-        this.alerts.showError('Error', 'An error occurred while updating the buyer.');
-        return throwError(error);
-      })
-    );
-  }
-
-  deleteBuyer(buyerId: string): Observable<void> {
-    return this.httpClient.delete<void>(`${enviroment.apiURL}/users/${buyerId}`).pipe(
-      catchError((error) => {
-        this.alerts.showError('Error', 'An error occurred while deleting the buyer.');
+  deleteInscription(buyerId: string, inscriptionId: string): Observable<void> {
+    return this.httpClient.delete<void>(`${enviroment.apiURL}/buyers/${buyerId}/inscriptions/${inscriptionId}`).pipe(
+      catchError(error => {
+        this.alerts.showError('Error', 'Failed to delete inscription.');
         return throwError(error);
       })
     );

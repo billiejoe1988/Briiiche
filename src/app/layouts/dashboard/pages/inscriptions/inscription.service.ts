@@ -3,8 +3,8 @@ import { Injectable } from "@angular/core";
 import { catchError, concatMap, throwError, mergeMap } from 'rxjs';
 import { enviroment } from "../../../../enviroments/enviroment";
 import { Inscription } from "./models";
-import { User } from "../users/models";
 import { CreateInscriptionData } from "./models";
+import { Buyer } from "../buyers/model";
 
 @Injectable({ providedIn: 'root'})
 export class InscriptionService {
@@ -12,16 +12,16 @@ export class InscriptionService {
   constructor(private http: HttpClient) {}
 
   getInscription() {
-    return this.http.get<Inscription[]>(`${enviroment.apiURL}/inscriptions?_embed=user&_embed=course`);    
+    return this.http.get<Inscription[]>(`${enviroment.apiURL}/inscriptions?_embed=buyers&_embed=course`);    
   }
 
-  getInscriptionsById(userId: string | number) {
-    return this.http.get<User>(`${enviroment.apiURL}/users/${userId}`).pipe(
-      concatMap((user) =>
-        this.http.get(`${enviroment.apiURL}/inscriptions?userId=${user.id}`)
+  getInscriptionsById(buyerId: string | number) {
+    return this.http.get<Buyer>(`${enviroment.apiURL}/buyers/${buyerId}`).pipe(
+      concatMap((buyer) =>
+        this.http.get(`${enviroment.apiURL}/inscriptions?buyerId=${buyerId}`)
       ),
       catchError((error) => {
-        console.error('Error fetching inscriptions by user ID:', error);
+        console.error('Error fetching inscriptions by buyer ID:', error);
         return throwError(() => error);
       })
     );

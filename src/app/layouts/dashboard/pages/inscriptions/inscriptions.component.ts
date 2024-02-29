@@ -20,7 +20,7 @@ export class InscriptionsComponent implements OnDestroy {
   isLoading$: Observable<boolean>;
   private destroyed$ = new Subject<void>();
 
-  displayedColumns: string[] = ['id', 'userId', 'lastName', 'courseId', 'courseName', 'actions'];
+  displayedColumns: string[] = ['id', 'buyerId', 'lastName', 'courseId', 'courseName', 'actions'];
 
   constructor(private store: Store, private matDialog: MatDialog, private alertsService: AlertsService) {
     this.store.select(selectInscription)

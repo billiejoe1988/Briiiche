@@ -9,7 +9,7 @@ import { UserWithCoursesAndInscriptions, Course, Inscription } from '../../model
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.scss'],
 })
-export class UserDetailComponent implements OnInit {
+export class UserDetailComponent  {
   user: UserWithCoursesAndInscriptions | undefined;
   userInscriptions: Inscription[] = [];
 
@@ -19,28 +19,8 @@ export class UserDetailComponent implements OnInit {
     private loadingService: LoadingService,
     private router: Router
   ) {}
-
-  ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const userId = params.get('id');
-      if (userId) {
-        this.usersService.getUserByIdWithCoursesAndInscriptions(userId).subscribe(user => {
-          this.user = user;
-          this.userInscriptions = user.inscriptions;
-        });
-      }
-    });
-  }
   
   goBackToList(): void {
     this.router.navigate(['../'], { relativeTo: this.route });
-  }
-
-  deleteInscription(inscriptionId: string): void {
-    const userId = this.user?.id;
-    if (userId && inscriptionId) {
-      this.usersService.deleteInscription(userId, inscriptionId).subscribe(() => {
-      });
-    }
   }
 }

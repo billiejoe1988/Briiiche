@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from '../../../users/models';
@@ -8,8 +8,11 @@ import { User } from '../../../users/models';
   templateUrl: './dialog-add.component.html',
   styleUrls: ['./dialog-add.component.scss']
 })
+
 export class DialogAddComponent {
   buyerForm: FormGroup;
+  isFormInvalid = false;
+  revealPassword =false;
 
   constructor(
     private fb: FormBuilder,
@@ -17,30 +20,23 @@ export class DialogAddComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.buyerForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]], 
-      lastName: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]],
-      country: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]],
-      email: ['', [Validators.required, Validators.email, Validators.maxLength(25), Validators.minLength(4)]],
-      rol: ['', [Validators.required]],
-      comision:  ['', [Validators.required]],
+      firstName: this.fb.control('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]), 
+      lastName: this.fb.control('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]),
+      password: this.fb.control('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]), 
+      country: this.fb.control('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]),
+      email: this.fb.control('', [ Validators.required, Validators.email, Validators.maxLength(25), Validators.minLength(4)]),
+      rol: this.fb.control('', [Validators.required]),
+      comision:  this.fb.control('', [Validators.required]),
     });
   }
-
-  onSave(): void {
-    if (this.buyerForm.valid) {
-      const newBuyer: User = this.buyerForm.value;
-      this.dialogRef.close(newBuyer);
+  onSubmit(): void {
+    if (this.buyerForm.invalid) {
+      this.isFormInvalid = true;
+      this.buyerForm.markAllAsTouched();
     } else {
-      this.markFormGroupTouched(this.buyerForm);
+      this.isFormInvalid = false;
+      this.buyerForm.reset();
     }
   }
 
-  private markFormGroupTouched(formGroup: FormGroup) {
-    Object.values(formGroup.controls).forEach(control => {
-      control.markAsTouched();
-      if (control instanceof FormGroup) {
-        this.markFormGroupTouched(control);
-      }
-    });
-  }
 }

@@ -67,23 +67,6 @@ export class UsersService {
         })
       );
   }
-
-  getAllBuyers(): Observable<User[]>{
-    return this.httpClient.get<User[]>(`${enviroment.apiURL}/users?rol=BUYER`)
-  }
-
-  deleteInscription(userId: string, inscriptionId: string): Observable<void> {
-    return this.httpClient.delete<void>(`${enviroment.apiURL}/users/${userId}/inscriptions/${inscriptionId}`).pipe(
-      catchError(error => {
-        this.alerts.showError('Error', 'Failed to delete inscription.');
-        return throwError(error);
-      })
-    );
-  }
-
-  getUserByIdWithCoursesAndInscriptions(userId: string): Observable<UserWithCoursesAndInscriptions> {
-    return this.httpClient.get<UserWithCoursesAndInscriptions>(`http://localhost:3000/users/${userId}`);
-  }
   
   getUserDetails(userId: string): Observable<UserWithCoursesAndInscriptions> {
     const url = `${enviroment.apiURL}/users/${userId}`;
