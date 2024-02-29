@@ -93,7 +93,6 @@ export class UsersComponent implements OnInit {
             this.users.push(result);
           },
           error: (error: any) => {
-            console.error('Error updating user:', error);
             this.alertsService.showError('Error', 'An error occurred while updating the user.');
           }
         });

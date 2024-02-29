@@ -1,11 +1,11 @@
 <h2 mat-dialog-title appUppercaseTitles class="text-black p-3 text-center bg-white/80 rounded mb-8 text-xl">Courses</h2>
 
 <mat-dialog-content>
-  <form [formGroup]="coursesForm">
+  <form [formGroup]="coursesEditForm">
     <mat-form-field>
       <mat-label>Course Name</mat-label>
       <input matInput formControlName="courseName">
-      <mat-error *ngIf="coursesForm.get('courseName')?.hasError('required')">Course Name is required</mat-error>
+      <mat-error *ngIf="coursesEditForm.get('courseName')?.hasError('required')">Course Name is required</mat-error>
     </mat-form-field>
     
     <mat-form-field class="p-3">
@@ -13,7 +13,7 @@
       <input matInput [matDatepicker]="dateCreatorPicker" formControlName="createdAt" class="p-2">
       <mat-datepicker-toggle matSuffix [for]="dateCreatorPicker"></mat-datepicker-toggle>
       <mat-datepicker #dateCreatorPicker></mat-datepicker>
-      <mat-error *ngIf="coursesForm.get('createdAt')?.hasError('required')">Date is required</mat-error>
+      <mat-error *ngIf="coursesEditForm.get('createdAt')?.hasError('required')">Date is required</mat-error>
     </mat-form-field>
     
   </form>
@@ -21,6 +21,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button mat-button (click)="onSave()" class="boton">Agree</button>
+    <button mat-button (click)="onSave()" class="boton">Save</button>
     <button mat-button mat-dialog-close class="boton">No Thanks</button>
 </mat-dialog-actions>

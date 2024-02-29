@@ -6,12 +6,13 @@ import { HttpClient } from '@angular/common/http';
 import { enviroment } from '../../../../enviroments/enviroment';
 import { AlertsService } from '../../../../core/services/alerts.service';
 import { Inscription } from '../inscriptions/models';
+import { Course } from '../users/models/complete';
 
     let courses: Courses [] = [];
 
     @Injectable()
     export class CoursesService {
-      constructor( private alerts: AlertsService, private loadingService: LoadingService, private httpClient: HttpClient) {}
+      constructor( private alerts: AlertsService, private loadingService: LoadingService, private httpClient: HttpClient, private alertsService: AlertsService) {}
 
       generateString(length: number): string {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -58,18 +59,17 @@ import { Inscription } from '../inscriptions/models';
         return this.httpClient.delete<Courses>(`${enviroment.apiURL}/courses/${courseID}`)
        .pipe(mergeMap(() => this.getCourses()));
       }
-     
-      updateCoursesById(courseID: number, data: Courses) {
-        return this.httpClient.put<Courses>(`${enviroment.apiURL}/courses/${courseID}`, data)
+      updateCoursesById(course: Courses): Observable<Courses[]> {
+        return this.httpClient.put<Courses>(`${enviroment.apiURL}/courses/${course.id}`, course)
           .pipe(
             mergeMap(() => {
-              this.alerts.showSuccess('Success', 'Course updated successfully.');
-              return of(data); 
+              this.alertsService.showSuccess('Success', 'Course updated successfully.');
+              return this.getCourses();
             }),
             catchError(error => {
-              this.alerts.showError('Error', 'Failed to update course.');
-              return throwError(error);
+              this.alertsService.showError('Error', 'Failed to update course.');
+              throw error;
             })
           );
       }
-  }
+  }   
