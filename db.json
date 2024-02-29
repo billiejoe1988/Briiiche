@@ -115,19 +115,6 @@
       "rol": "USER",
       "comision": "Pastry Pro",
       "token": "cper3"
-    },
-    {
-      "id": "46e8",
-      "firstName": "test",
-      "lastName": "test@test.com",
-      "password": "test",
-      "country": "test",
-      "email": "test@test.com",
-      "rol": "BUYER",
-      "comision": "PastryPro",
-      "token": "OKDmz",
-      "courses": [],
-      "inscriptions": []
     }
   ],
   "courses": [

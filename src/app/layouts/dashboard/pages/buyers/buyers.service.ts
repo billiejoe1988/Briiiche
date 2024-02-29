@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { User } from '../users/models';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { enviroment } from '../../../../enviroments/enviroment';
 import { AlertsService } from '../../../../core/services/alerts.service';
-import { UserWithCoursesAndInscriptions } from '../users/models/complete';
+import { UserWithCoursesAndInscriptions, Course, Inscription } from '../users/models/complete';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,35 @@ export class BuyersService {
   constructor(private httpClient: HttpClient, private alerts: AlertsService) {}
 
   getAllBuyersWithCourses(): Observable<UserWithCoursesAndInscriptions[]> {
-    return this.httpClient.get<UserWithCoursesAndInscriptions[]>(`${enviroment.apiURL}/users?rol=BUYER&_embed=courses&_embed=inscriptions`).pipe(
+    return this.httpClient.get<any[]>(`${enviroment.apiURL}/inscriptions?_expand=user&_expand=course`).pipe(
+      map((inscriptions: any[]) => {
+        const buyersWithCourses: UserWithCoursesAndInscriptions[] = [];
+        inscriptions.forEach(inscription => {
+          const userInscription = inscription.user;
+          const courseId = inscription.course?.id;
+          const courseName = inscription.course?.courseName;
+          const courseCreatedAt = inscription.course?.createdAt;
+          
+          if (userInscription && courseId && courseName && courseCreatedAt) {
+            const courses: Course[] = [{ id: courseId, courseName: courseName, createdAt: new Date(courseCreatedAt) }];
+            const userCoursesAndInscriptions: UserWithCoursesAndInscriptions = {
+              id: userInscription.id,
+              firstName: userInscription.firstName,
+              lastName: userInscription.lastName,
+              password: userInscription.password,
+              country: userInscription.country,
+              email: userInscription.email,
+              rol: userInscription.rol,
+              comision: userInscription.comision,
+              token: userInscription.token,
+              courses: courses,
+              inscriptions: [{ id: inscription.id, courseId: courseId, userId: userInscription.id }]
+            };
+            buyersWithCourses.push(userCoursesAndInscriptions);
+          }
+        });
+        return buyersWithCourses;
+      }),
       catchError((error) => {
         this.alerts.showError('Error', 'An error occurred while fetching buyers with courses.');
         return throwError(error);

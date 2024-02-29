@@ -5,7 +5,7 @@ import { DialogEditComponent } from './components/dialog-edit/dialog-edit.compon
 import { AlertsService } from '../../../../core/services/alerts.service';
 import { catchError, finalize } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { UserWithCoursesAndInscriptions, Course } from '../users/models/complete';
+import { UserWithCoursesAndInscriptions } from '../users/models/complete';
 import { DialogAddComponent } from './components/dialog-add/dialog-add.component';
 
 @Component({
