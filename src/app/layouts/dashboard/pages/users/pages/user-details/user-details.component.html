@@ -16,4 +16,11 @@
             <p><strong>Comision:</strong> {{ user.comision }}</p>
         </mat-card-content>
     </mat-card>
+
+    <div class="boton rounded-md">
+        <button mat-raised-button  (click)="editUser(user)">Edit User</button>
+    </div>
+    <div class="boton rounded-md">
+        <button mat-raised-button color="warn" (click)="deleteUser(user)">Delete User</button>
+    </div>
 </div>

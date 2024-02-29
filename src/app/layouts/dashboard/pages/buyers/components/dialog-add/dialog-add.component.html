@@ -1,5 +1,5 @@
 <mat-dialog-content>
-  <form [formGroup]="buyerForm" (ngSubmit)="onSubmit()" class="py-10">
+  <form [formGroup]="buyerForm" (ngSubmit)="onSubmitAndClose()" class="py-10">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <mat-form-field class="example-form-field" appearance="fill">
         <mat-label>First Name</mat-label>
@@ -60,3 +60,9 @@
     </div>
   </form>
 </mat-dialog-content>
+
+<mat-dialog-actions class="flex justify-center">
+  <button mat-button (click)="onSubmitAndClose()" class="boton">Agree</button>
+  <button mat-button mat-dialog-close class="boton">Cancel</button>
+</mat-dialog-actions>
+

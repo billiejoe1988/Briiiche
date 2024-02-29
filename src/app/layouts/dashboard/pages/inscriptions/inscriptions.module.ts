@@ -10,6 +10,7 @@ import { InscriptDialogComponent } from './components/inscript-dialog/inscript-d
 import { SharedModule } from '../../../../shared/shared.module';
 import { UsersModule } from '../users/users.module';
 import { CoursesModule } from '../courses/courses.module';
+import { BuyersModule } from '../buyers/buyers.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CoursesModule } from '../courses/courses.module';
     StoreModule.forFeature(inscriptionsFeature),
     EffectsModule.forFeature([InscriptionsEffects]),
     UsersModule,
-    CoursesModule
+    CoursesModule,
+    BuyersModule,
   ]
 })
 export class InscriptionsModule { }

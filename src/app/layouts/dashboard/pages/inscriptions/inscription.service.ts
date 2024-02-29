@@ -12,13 +12,13 @@ export class InscriptionService {
   constructor(private http: HttpClient) {}
 
   getInscription() {
-    return this.http.get<Inscription[]>(`${enviroment.apiURL}/inscriptions?_embed=buyers&_embed=course`);    
+    return this.http.get<Inscription[]>(`${enviroment.apiURL}/inscriptions?_embed=buyer&_embed=course`);    
   }
 
   getInscriptionsById(buyerId: string | number) {
     return this.http.get<Buyer>(`${enviroment.apiURL}/buyers/${buyerId}`).pipe(
       concatMap((buyer) =>
-        this.http.get(`${enviroment.apiURL}/inscriptions?buyerId=${buyerId}`)
+        this.http.get(`${enviroment.apiURL}/inscriptions?buyerId=${buyer.id}`)
       ),
       catchError((error) => {
         console.error('Error fetching inscriptions by buyer ID:', error);

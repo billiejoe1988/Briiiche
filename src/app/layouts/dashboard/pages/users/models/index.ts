@@ -14,3 +14,4 @@ export interface User {
   courses: Course[]; 
   inscriptions: Inscription[];
 }
+

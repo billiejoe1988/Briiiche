@@ -8,12 +8,12 @@
     <form [formGroup]="inscriptionForm">
         <mat-form-field class="px-5">
             <mat-label>Buyer</mat-label>
-            <mat-select formControlName="userId">
+            <mat-select formControlName="buyerId">
                 <mat-option [value]="buyer.id" *ngFor="let buyer of buyers$ | async ">
                     {{buyer.firstName}} {{buyer.lastName}}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="inscriptionForm.get('userId')?.invalid && inscriptionForm.get('userId')?.touched">
+            <mat-error *ngIf="inscriptionForm.get('buyerId')?.invalid && inscriptionForm.get('buyerId')?.touched">
                 Buyer is required
             </mat-error>
         </mat-form-field>

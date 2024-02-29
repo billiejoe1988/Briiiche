@@ -1,42 +1,46 @@
-import { Component, Inject, Output } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { User } from '../../../users/models';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Buyer } from '../../model';
+import { BuyersService } from '../../buyers.service';
 
 @Component({
   selector: 'app-dialog-add',
   templateUrl: './dialog-add.component.html',
   styleUrls: ['./dialog-add.component.scss']
 })
-
 export class DialogAddComponent {
   buyerForm: FormGroup;
   isFormInvalid = false;
-  revealPassword =false;
+  revealPassword = false;
+  @Output() buyerAdded: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<DialogAddComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    private buyersService: BuyersService,
+    private dialogRef: MatDialogRef<DialogAddComponent>
   ) {
     this.buyerForm = this.fb.group({
-      firstName: this.fb.control('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]), 
-      lastName: this.fb.control('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]),
-      password: this.fb.control('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]), 
-      country: this.fb.control('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]),
-      email: this.fb.control('', [ Validators.required, Validators.email, Validators.maxLength(25), Validators.minLength(4)]),
-      rol: this.fb.control('', [Validators.required]),
-      comision:  this.fb.control('', [Validators.required]),
+      firstName: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]],
+      lastName: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]],
+      country: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]],
+      email: ['', [Validators.required, Validators.email, Validators.maxLength(25), Validators.minLength(4)]],
+      rol: ['', [Validators.required]],
+      comision: ['', [Validators.required]],
     });
   }
-  onSubmit(): void {
-    if (this.buyerForm.invalid) {
+
+  onSubmitAndClose(): void {
+    if (this.buyerForm.valid) {
+      const buyerData = this.buyerForm.value as Buyer;
+      this.buyersService.createBuyer(buyerData).subscribe(() => {
+        this.buyerAdded.emit(); // Emitir el evento cuando se añade el comprador
+        this.dialogRef.close();
+      });
+    } else {
       this.isFormInvalid = true;
       this.buyerForm.markAllAsTouched();
-    } else {
-      this.isFormInvalid = false;
-      this.buyerForm.reset();
     }
   }
-
 }

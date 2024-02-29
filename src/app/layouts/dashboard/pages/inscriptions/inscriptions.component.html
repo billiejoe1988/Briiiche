@@ -17,23 +17,23 @@
           </ng-container>
 
         <ng-container matColumnDef="buyerId">
-          <th mat-header-cell *matHeaderCellDef> User ID </th>
+          <th mat-header-cell *matHeaderCellDef> Buyer ID </th>
           <td mat-cell *matCellDef="let inscription"> {{inscription.buyerId}} </td>
         </ng-container>
       
         <ng-container matColumnDef="courseId">
-          <th mat-header-cell *matHeaderCellDef> Course ID </th>
+          <th mat-header-cell *matHeaderCellDef> Buyer ID </th>
           <td mat-cell *matCellDef="let inscription"> {{inscription.courseId}} </td>
         </ng-container>\
 
         <ng-container matColumnDef="lastName">
             <th mat-header-cell *matHeaderCellDef> Last Name </th>
-            <td mat-cell *matCellDef="let inscription"> {{inscription.user.lastName}} </td>
+            <td mat-cell *matCellDef="let inscription"> {{inscription.buyer?.lastName}} </td>
         </ng-container>
           
         <ng-container matColumnDef="courseName">
             <th mat-header-cell *matHeaderCellDef> Course Name </th>
-            <td mat-cell *matCellDef="let inscription"> {{inscription.course.courseName}} </td>
+            <td mat-cell *matCellDef="let inscription"> {{inscription.course?.courseName}} </td>
         </ng-container>
         
         <ng-container matColumnDef="actions">

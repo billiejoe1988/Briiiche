@@ -1,12 +1,12 @@
+// inscript-dialog.component.ts
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { InscriptionsActions } from '../../store/inscriptions.actions';
 import { Observable } from 'rxjs';
 import { selectInscriptionBuyers, selectInscriptionLoadingBuyer, selectInscriptionCourses } from '../../store/inscriptions.selectors';
-import { User } from '../../../users/models';
+import { Buyer } from '../../../buyers/model';
 import { Courses } from '../../../courses/models';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AlertsService } from '../../../../../../core/services/alerts.service'; 
 
@@ -18,7 +18,7 @@ import { AlertsService } from '../../../../../../core/services/alerts.service';
  
 export class InscriptDialogComponent {
   isLoadingBuyers$: Observable<boolean>;
-  buyers$: Observable<User[]>;
+  buyers$: Observable<Buyer[]>;
   courses$: Observable<Courses[]>;
   inscriptionForm: FormGroup;
 
@@ -29,8 +29,8 @@ export class InscriptDialogComponent {
             ) {
 
     this.inscriptionForm = this.formBuilder.group({
+      buyerId: this.formBuilder.control('', [Validators.required]),
       courseId: this.formBuilder.control('', [Validators.required]),
-      userId: this.formBuilder.control('', [Validators.required]),
     })
 
     this.isLoadingBuyers$ = this.store.select(selectInscriptionLoadingBuyer);

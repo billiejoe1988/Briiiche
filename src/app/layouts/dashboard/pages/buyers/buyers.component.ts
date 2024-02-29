@@ -40,9 +40,6 @@ export class BuyersComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadBuyers();
-    this.buyerSavedSubject.subscribe(() => {
-      this.loadBuyers();
-    });
   }
 
   loadBuyers(): void {
@@ -129,12 +126,12 @@ export class BuyersComponent implements OnInit {
     });
   }
 
-
   openAddBuyerDialog(): void {
-    const dialogRef = this.dialog.open(DialogAddComponent, {
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
+    const dialogRef = this.dialog.open(DialogAddComponent);
+  
+    dialogRef.componentInstance.buyerAdded.subscribe(() => {
+      this.loadBuyers();
     });
   }
+  
 }

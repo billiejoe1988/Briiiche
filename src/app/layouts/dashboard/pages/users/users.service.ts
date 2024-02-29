@@ -68,9 +68,9 @@ export class UsersService {
       );
   }
   
-  getUserDetails(userId: string): Observable<UserWithCoursesAndInscriptions> {
+  getUserDetails(userId: string): Observable<User> {
     const url = `${enviroment.apiURL}/users/${userId}`;
-    return this.httpClient.get<UserWithCoursesAndInscriptions>(url).pipe(
+    return this.httpClient.get<User>(url).pipe(
     );
   }
 }
