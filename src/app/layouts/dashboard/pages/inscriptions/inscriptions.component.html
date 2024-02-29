@@ -39,10 +39,7 @@
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell *matCellDef="let inscription; let index = index;">
-                <button mat-icon-button (click)="onEdit(index)">
-                    <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-icon-button (click)="deleteInscription(index)">
+                <button class="Actions" mat-icon-button (click)="deleteInscription(index)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </td>

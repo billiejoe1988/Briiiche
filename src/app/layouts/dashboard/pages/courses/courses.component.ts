@@ -4,6 +4,8 @@ import { Courses } from './models/index';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertsService } from '../../../../core/services/alerts.service';
 import { CoursesDialogComponent } from './components/courses-dialog/courses-dialog.component';
+import { AuthService } from '../../../auth/auth.service';
+import { UsersService } from '../users/users.service';
 
 @Component({
   selector: 'app-courses',
@@ -12,10 +14,14 @@ import { CoursesDialogComponent } from './components/courses-dialog/courses-dial
 })
 export class CoursesComponent {
   displayedColumns = ['id', 'courseName', 'createdAt', 'actions'];
-
+  isAdmin: boolean = false;
   courses: Courses[] = [];
 
-  constructor(private coursesService: CoursesService, public dialog: MatDialog, private alertsService: AlertsService) { 
+  constructor(private coursesService: CoursesService, public dialog: MatDialog, private alertsService: AlertsService, private authService: AuthService, private userService: UsersService) { 
+    this.userService.getRoles().subscribe(roles => {
+      this.isAdmin = roles.includes('ADMIN');
+    });
+
     this.coursesService.getCourses().subscribe({
       next: (courses) => {
         this.courses = courses;
@@ -55,9 +61,17 @@ export class CoursesComponent {
     }).afterClosed().subscribe((result: any) => { 
       if (result) {
         this.coursesService.updateCoursesById(Number(course.id), result).subscribe({
-          next: (courses: Courses[]) => { 
-            this.courses = courses;
-            this.alertsService.showSuccess('Success', 'Course updated successfully.');
+          next: () => { 
+            this.coursesService.getCourses().subscribe({
+              next: (courses: Courses[]) => {
+                this.courses = courses;
+                this.alertsService.showSuccess('Success', 'Course updated successfully.');
+              },
+              error: (error: any) => {
+                console.error('Error retrieving courses after updating a course:', error);
+                this.alertsService.showError('Error', 'An error occurred while retrieving the courses after updating a course.');
+              }
+            });
           },
           error: (error: any) => {
             console.error('Error updating course:', error);
@@ -67,6 +81,7 @@ export class CoursesComponent {
       }
     });
   }
+  
   
   onDelete(id: number) {
     this.alertsService.showAlert({

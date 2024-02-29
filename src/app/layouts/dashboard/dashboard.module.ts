@@ -35,7 +35,7 @@ import { InscriptionsModule } from './pages/inscriptions/inscriptions.module';
     MatInputModule,
     ReactiveFormsModule,
     BuyersModule,
-    InscriptionsModule
+    InscriptionsModule,
   ],
   exports: [DashboardComponent],
 })

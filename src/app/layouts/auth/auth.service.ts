@@ -17,10 +17,10 @@ interface LoginData {
 @Injectable ({providedIn: 'root'})
 export class AuthService {
 
-    constructor(private router: Router, private alertsService: AlertsService, private loadingService: LoadingService, private httpClient: HttpClient, private store: Store, ) {}
+    constructor(private router: Router, private alertsService: AlertsService, private loadingService: LoadingService, private httpClient: HttpClient, private store: Store) {}
     
     private setAuthUser (user: User ): void{
-    
+
     this.store.dispatch(AuthActions.setAuthUser({ user }))
     localStorage.setItem('token', user.token);
     }
@@ -30,8 +30,8 @@ export class AuthService {
           .pipe(
             tap((response) => {
               if (!!response[0]) {
-                this.router.navigate(['dashboard', 'home']);
                 this.setAuthUser(response[0]);
+                this.router.navigate(['dashboard', 'home']);
               } else {
                 this.alertsService.showError('Error', 'Invalid Email or Password');
               }
@@ -64,4 +64,4 @@ export class AuthService {
           catchError(() => of(false))
         );
     }
-  }
+}

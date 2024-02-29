@@ -47,9 +47,15 @@
             <mat-label>Comision</mat-label>
             <mat-select formControlName="comision" class="mx-2">
                 <mat-option value="CuisinePro">Cuisine Pro</mat-option>
-                <mat-option value="CuisineBegin">Cuisin Begin</mat-option>
+                <mat-option value="CuisineBegin">Cuisine Begin</mat-option>
                 <mat-option value="PastryPro">Pastry Pro</mat-option>
                 <mat-option value="Pastry">Pastry Begin</mat-option>
+                <mat-option value="CuisineOriental">Cuisine Oriental</mat-option>
+                <mat-option value="MolecularCuisine">Molecular Cuisine</mat-option>
+                <mat-option value="ExplosiveCuisine">Explosive Cuisine</mat-option>
+                <mat-option value="GoddestCuisine">Goddest Cuisine</mat-option>
+                <mat-option value="PastryMath">Pastry Math</mat-option>
+                <mat-option value="AdvancedBaking">Advanced Baking</mat-option>
             </mat-select>
             <mat-error>{{ userForm.get('comision')?.errors | validationErrors }}</mat-error>
         </mat-form-field>

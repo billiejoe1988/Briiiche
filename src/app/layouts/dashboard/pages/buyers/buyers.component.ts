@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core'; 
-import { User } from '../users/models';
+import { Component, OnInit } from '@angular/core';
 import { BuyersService } from './buyers.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogEditComponent } from './components/dialog-edit/dialog-edit.component';
-import { DialogAddComponent } from './components/dialog-add/dialog-add.component';
 import { AlertsService } from '../../../../core/services/alerts.service';
 import { catchError, finalize } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { UserWithCoursesAndInscriptions, Course } from '../users/models/complete';
+import { DialogAddComponent } from './components/dialog-add/dialog-add.component';
 
 @Component({
   selector: 'app-buyers',
@@ -14,8 +14,8 @@ import { throwError } from 'rxjs';
   styleUrls: ['./buyers.component.scss']
 })
 export class BuyersComponent implements OnInit {
-  buyers: User[] = [];
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'country', 'actions'];
+  buyers: UserWithCoursesAndInscriptions[] = [];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'country', 'courses', 'actions'];
   loading = false;
 
   constructor(
@@ -30,7 +30,7 @@ export class BuyersComponent implements OnInit {
 
   refreshBuyersList(): void {
     this.loading = true;
-    this.buyersService.getAllBuyers().pipe(
+    this.buyersService.getAllBuyersWithCourses().pipe(
       catchError((error) => {
         console.error('Error fetching buyers:', error);
         this.alertsService.showError('Error', 'An error occurred while fetching the buyers.');
@@ -41,6 +41,7 @@ export class BuyersComponent implements OnInit {
       this.buyers = buyers;
     });
   }
+  
   onDelete(buyerId: string): void {
     this.alertsService.showAlert({
       title: 'Confirm Delete',
@@ -67,7 +68,7 @@ export class BuyersComponent implements OnInit {
     });
   }
 
-  onEdit(buyer: User): void {
+  onEdit(buyer: UserWithCoursesAndInscriptions): void {
     const dialogRef = this.dialog.open(DialogEditComponent, {
       data: buyer
     });

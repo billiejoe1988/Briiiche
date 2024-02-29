@@ -1,5 +1,6 @@
-<h1 appUppercaseTitles class="p-3 text-center bg-white/80 rounded mb-4">Courses Management</h1>
-<div class="flex justify-end mb-3">
+<h1 app-uppercase-titles class="p-3 text-center bg-white/80 rounded mb-4">Courses Management</h1>
+
+<div *ngIf="isAdmin"class="flex justify-end mb-3">
    <button (click)="onCreate()" mat-button class="boton">
      Agree
    </button>
@@ -21,24 +22,21 @@
         <td mat-cell *matCellDef="let element"> {{element.createdAt | date: 'dd/MM/YYYY HH:MM '}} </td>
       </ng-container>
 
-    <ng-container matColumnDef="actions">
+    <ng-container matColumnDef="actions" *ngIf="isAdmin">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let element">
-        <button (click)="onDelete(element.id)" mat-icon-button>
-          <mat-icon >delete</mat-icon>
+        <button class="Actions" (click)="onDelete(element.id)" mat-icon-button>
+          <mat-icon>delete</mat-icon>
         </button>
-        <button (click)="onEdit(element)" mat-icon-button>
+        <button class="Actions" (click)="onEdit(element)" mat-icon-button>
           <mat-icon>edit</mat-icon>
         </button>
-        <button [routerLink]="element.id" routerLinkActive="router-link-active" mat-icon-button >
+        <button class="Actions" [routerLink]="element.id" routerLinkActive="router-link-active" mat-icon-button >
           <mat-icon>visibility</mat-icon>
         </button>
-        
       </td>
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  
-  
+</table>

@@ -59,12 +59,12 @@ import { Inscription } from '../inscriptions/models';
        .pipe(mergeMap(() => this.getCourses()));
       }
      
-      updateCoursesById(id: number, data: Courses) {
-        return this.httpClient.put<Courses>(`${enviroment.apiURL}/courses/${id}`, data)
+      updateCoursesById(courseID: number, data: Courses) {
+        return this.httpClient.put<Courses>(`${enviroment.apiURL}/courses/${courseID}`, data)
           .pipe(
             mergeMap(() => {
               this.alerts.showSuccess('Success', 'Course updated successfully.');
-              return this.getCourses();
+              return of(data); 
             }),
             catchError(error => {
               this.alerts.showError('Error', 'Failed to update course.');
@@ -72,4 +72,4 @@ import { Inscription } from '../inscriptions/models';
             })
           );
       }
-    }
+  }

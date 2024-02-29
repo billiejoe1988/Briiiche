@@ -15,24 +15,6 @@ export class InscriptionService {
     return this.http.get<Inscription[]>(`${enviroment.apiURL}/inscriptions?_embed=user&_embed=course`);    
   }
 
-  updateInscription(id: string, changes: Partial<Inscription>) {
-    return this.http.get<Inscription>(`${enviroment.apiURL}/inscriptions/${id}`).pipe(
-      catchError(error => {
-        console.error('Error fetching inscription:', error);
-        return throwError(() => error);
-      }),
-      mergeMap(inscription => {
-        const updatedInscription: Inscription = { ...inscription, ...changes };
-        return this.http.put(`${enviroment.apiURL}/inscriptions/${id}`, updatedInscription).pipe(
-          catchError(error => {
-            console.error('Error updating inscription:', error);
-            return throwError(() => error);
-          })
-        );
-      })
-    );
-  }
-
   getInscriptionsById(userId: string | number) {
     return this.http.get<User>(`${enviroment.apiURL}/users/${userId}`).pipe(
       concatMap((user) =>
