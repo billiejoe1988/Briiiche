@@ -15,6 +15,7 @@ import { DialogEditComponent } from './components/dialog-edit/dialog-edit.compon
 })
 export class BuyersComponent implements OnInit {
   buyers: Buyer[] = [];
+  buyer: Buyer | undefined ;
   buyerForm: FormGroup;
   displayedColumns: string[] = ['id', 'fullName', 'password', 'country', 'email', 'rol', 'comision', 'actions'];
   loading = false;

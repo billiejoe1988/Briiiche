@@ -5,19 +5,19 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <mat-form-field class="example-form-field">
         <mat-label class="pt-4">First Name</mat-label>
-        <input matInput formControlName="firstName" type="text">
+        <input matInput formControlName="firstName" type="text" autocomplete="given-name">
         <mat-error>{{ userFormEdit.get('firstName')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-form-field">
         <mat-label>Last Name</mat-label>
-        <input matInput formControlName="lastName" type="text">
+        <input matInput formControlName="lastName" type="text" autocomplete="family-name">
         <mat-error>{{ userFormEdit.get('lastName')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-form-field">
         <mat-label>Password</mat-label>
-        <input [type]="revealPassword ? 'text' : 'password'" formControlName='password' matInput/>
+        <input [type]="revealPassword ? 'text' : 'password'" formControlName='password' matInput autocomplete="new-password"/>
         <button (click)='revealPassword = !revealPassword' matSuffix mat-icon-button >
             <mat-icon>visibility</mat-icon>
         </button>
@@ -26,19 +26,19 @@
 
       <mat-form-field class="example-form-field">
         <mat-label>Country</mat-label>
-        <input matInput formControlName="country" type="text">
+        <input matInput formControlName="country" type="text" autocomplete="country">
         <mat-error>{{ userFormEdit.get('country')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-form-field">
         <mat-label>Email</mat-label>
-        <input matInput formControlName="email" type="email">
+        <input matInput formControlName="email" type="email" autocomplete="email">
         <mat-error>{{ userFormEdit.get('email')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-form-field">
         <mat-label>Rol</mat-label>
-        <mat-select formControlName="rol">
+        <mat-select formControlName="rol" autocomplete="role">
           <mat-option value="ADMIN">ADMIN</mat-option>
           <mat-option value="USER">USER</mat-option>
         </mat-select>
@@ -47,17 +47,7 @@
 
       <mat-form-field class="example-form-field">
         <mat-label>Comision</mat-label>
-        <mat-select formControlName="comision">
-          <mat-option value="CuisinePro">Cuisine Pro</mat-option>
-          <mat-option value="CuisineBegin">Cuisine Begin</mat-option>
-          <mat-option value="PastryPro">Pastry Pro</mat-option>
-          <mat-option value="Pastry">Pastry Begin</mat-option>
-          <mat-option value="CuisineOriental">Cuisine Oriental</mat-option>
-          <mat-option value="MolecularCuisine">Molecular Cuisine</mat-option>
-          <mat-option value="ExplosiveCuisine">Explosive Cuisine</mat-option>
-          <mat-option value="GoddestCuisine">Goddest Cuisine</mat-option>
-          <mat-option value="PastryMath">Pastry Math</mat-option>
-          <mat-option value="AdvancedBaking">Advanced Baking</mat-option>
+        <mat-select formControlName="comision" autocomplete="off">
           <mat-option value="AdministrativeTasks">Administrative tasks</mat-option>
         </mat-select>
         <mat-error>{{ userFormEdit.get('comision')?.errors | validationErrors }}</mat-error>

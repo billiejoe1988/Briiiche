@@ -1,4 +1,3 @@
-import { User } from "../../users/models";
 import { Course } from "../../users/models/complete";
 import { Inscription } from "../../inscriptions/models";
 

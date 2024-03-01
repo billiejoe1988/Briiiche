@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { LoginComponent } from './login.component';
 import { MockProvider } from 'ng-mocks';
 import { AuthService } from '../../auth.service';
@@ -7,6 +7,7 @@ import { Validators } from '@angular/forms';
 
 describe('LoginComponent', () => {
     let component: LoginComponent;
+    let fixture: ComponentFixture<LoginComponent>;
   
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -15,7 +16,8 @@ describe('LoginComponent', () => {
         providers: [MockProvider(AuthService)],
       });
   
-      component = TestBed.createComponent(LoginComponent).componentInstance;
+      fixture = TestBed.createComponent(LoginComponent);
+      component = fixture.componentInstance;
     });
   
     it('LoginComponent should be instantiated correctly', () => {
@@ -49,4 +51,3 @@ describe('LoginComponent', () => {
       expect(spyOnMarkAllAsTouched).toHaveBeenCalled();
     });
   });
-  

@@ -3,40 +3,40 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <mat-form-field class="example-form-field" appearance="fill">
         <mat-label>First Name</mat-label>
-        <input matInput formControlName="firstName" placeholder="Enter first name">
+        <input matInput formControlName="firstName" placeholder="Enter first name" autocomplete="given-name">
         <mat-error>{{ buyerForm.get('firstName')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-form-field" appearance="fill">
         <mat-label>Last Name</mat-label>
-        <input matInput formControlName="lastName" placeholder="Enter last name">
+        <input matInput formControlName="lastName" placeholder="Enter last name" autocomplete="family-name">
         <mat-error>{{ buyerForm.get('lastName')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-form-field">
         <mat-label>Password</mat-label>
-        <input [type]="revealPassword ? 'text' : 'password'" formControlName='password' matInput/>
-        <button (click)='revealPassword = !revealPassword' matSuffix mat-icon-button >
+        <input [type]="revealPassword ? 'text' : 'password'" formControlName='password' matInput autocomplete="new-password"/>
+        <button (click)='revealPassword = !revealPassword' matSuffix mat-icon-button>
             <mat-icon>visibility</mat-icon>
         </button>
         <mat-error>{{ buyerForm.get('password')?.errors | validationErrors }}</mat-error>
-      </mat-form-field>
+      </mat-form-field>      
 
       <mat-form-field class="example-form-field" appearance="fill">
         <mat-label>Country</mat-label>
-        <input matInput formControlName="country" placeholder="Enter country">
-        <mat-error>{{ buyerForm.get('Country')?.errors | validationErrors }}</mat-error>
+        <input matInput formControlName="country" placeholder="Enter country" autocomplete="country">
+        <mat-error>{{ buyerForm.get('country')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-form-field" appearance="fill">
         <mat-label>Email</mat-label>
-        <input matInput formControlName="email" type="email" placeholder="Enter email">
+        <input matInput formControlName="email" type="email" placeholder="Enter email" autocomplete="email">
         <mat-error>{{ buyerForm.get('email')?.errors | validationErrors }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-form-field">
         <mat-label>Role</mat-label>
-        <mat-select formControlName="rol" class="mx-2">
+        <mat-select formControlName="rol" class="mx-2" autocomplete="role">
           <mat-option value="BUYER">BUYER</mat-option>
         </mat-select>
         <mat-error>{{ buyerForm.get('rol')?.errors | validationErrors }}</mat-error>
@@ -44,7 +44,7 @@
 
       <mat-form-field class="example-form-field">
         <mat-label>Comision</mat-label>
-        <mat-select formControlName="comision" class="mx-2">
+        <mat-select formControlName="comision" class="mx-2" autocomplete="off">
           <mat-option value="CuisinePro">Cuisine Pro</mat-option>
           <mat-option value="CuisineBegin">Cuisine Begin</mat-option>
           <mat-option value="PastryPro">Pastry Pro</mat-option>
@@ -61,8 +61,7 @@
   </form>
 </mat-dialog-content>
 
-<mat-dialog-actions class="flex justify-center">
+<div class="flex justify-center">
   <button mat-button (click)="onSubmitAndClose()" class="boton">Agree</button>
   <button mat-button mat-dialog-close class="boton">Cancel</button>
-</mat-dialog-actions>
-
+</div>

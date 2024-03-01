@@ -14,10 +14,10 @@
   </mat-card>
 
   <div class="boton rounded-md">
-    <button mat-raised-button  >Edit User</button>
+    <button mat-raised-button (click)="editCourse(course)" >Edit User</button>
   </div>
   <div class="boton rounded-md">
-      <button mat-raised-button color="warn" (click)="deleteCourse()">Delete User</button>
+      <button mat-raised-button color="warn" (click)="deleteCourse(course)">Delete User</button>
   </div>
 </div>
   

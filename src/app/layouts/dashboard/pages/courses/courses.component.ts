@@ -88,23 +88,15 @@ export class CoursesComponent {
   
     dialogRef.afterClosed().subscribe((result: Courses | undefined) => {
       if (result) {
-        // Asignar la ID del curso original al resultado actualizado
         result.id = course.id;
-  
-        // Llamar a la función de actualización con la ID y el objeto del curso actualizado
         this.coursesService.updateCoursesById(course.id, result).subscribe({
           next: () => {
-            // Recargar la lista de cursos después de la actualización
             this.loadCourses();
-  
-            // Mostrar una notificación de éxito
             this.alertsService.showSuccess('Success', 'Course updated successfully.');
-  
-            // Reemplazar el curso original con el curso actualizado en la lista
+
             this.courses = this.courses.map(c => c.id === course.id ? result : c);
           },
           error: (error: any) => {
-            // Manejar errores
             this.alertsService.showError('Error', 'An error occurred while updating the course.');
           }
         });

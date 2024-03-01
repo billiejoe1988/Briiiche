@@ -1,4 +1,4 @@
-export interface UserWithCoursesAndInscriptions {
+export interface UserClean{
     id: string;
     firstName: string;
     lastName: string;
@@ -8,8 +8,7 @@ export interface UserWithCoursesAndInscriptions {
     rol: string;
     comision: string;
     token: string;
-    courses: Course[];
-    inscriptions: Inscription[];
+
   }
   
   export interface Course {

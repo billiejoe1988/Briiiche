@@ -8,6 +8,7 @@ import { HttpClient } from "@angular/common/http";
 import { enviroment } from "../../enviroments/enviroment";
 import { AuthActions } from "../../core/store/auth/actions";
 import { Store } from '@ngrx/store';
+import { UserClean } from "../dashboard/pages/users/models/complete";
 
 interface LoginData {
   email: null | string;

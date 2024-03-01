@@ -34,15 +34,14 @@
       "token": "luf23"
     },
     {
-      "id": "8ert",
       "firstName": "Usopp",
       "lastName": "Sniper",
       "password": "sniperking",
       "country": "East Blue",
       "email": "usopp@gmail.com",
-      "rol": "ADMIN",
+      "rol": "USER",
       "comision": "AdministrativeTasks",
-      "token": "up123"
+      "id": "8ert"
     },
     {
       "id": "bsdf",
@@ -56,15 +55,14 @@
       "token": "cper3"
     },
     {
-      "id": "0128",
       "firstName": "test",
-      "lastName": "test",
-      "password": "test",
+      "lastName": "noww",
+      "password": "teste",
       "country": "test",
-      "email": "test@gmail.com",
-      "rol": "USER",
+      "email": "test@test.COM",
+      "rol": "ADMIN",
       "comision": "AdministrativeTasks",
-      "token": "BIYU0"
+      "id": "c8cb"
     }
   ],
   "courses": [
@@ -135,11 +133,6 @@
       "buyerId": "d3as"
     },
     {
-      "id": "15be",
-      "courseId": null,
-      "buyerId": "as2d"
-    },
-    {
       "id": "066f",
       "buyerId": "d3as",
       "courseId": "3dsad"
@@ -150,9 +143,19 @@
       "courseId": "fdsa4"
     },
     {
-      "id": "a4c1",
-      "buyerId": "002b",
-      "courseId": null
+      "id": "3e6a",
+      "buyerId": "6232",
+      "courseId": "dsad2"
+    },
+    {
+      "id": "ed3f",
+      "buyerId": "6232",
+      "courseId": "fdsa4"
+    },
+    {
+      "id": "eede",
+      "buyerId": "as2d",
+      "courseId": "saas1"
     }
   ],
   "buyers": [
@@ -160,7 +163,7 @@
       "firstName": "America",
       "lastName": "Zardelli",
       "password": "b1122",
-      "country": "Japon",
+      "country": "Japan",
       "email": "America@gmail.com",
       "rol": "BUYER",
       "comision": "CuisineBegin",
@@ -209,17 +212,6 @@
       "comision": "PastryPro",
       "id": "002b",
       "token": "d1222"
-    },
-    {
-      "id": "3b4f",
-      "firstName": "test",
-      "lastName": "test",
-      "password": "test",
-      "country": "test",
-      "email": "test@buyers",
-      "rol": "BUYER",
-      "comision": "GoddestCuisine",
-      "token": "KqgkO"
     }
   ]
 }

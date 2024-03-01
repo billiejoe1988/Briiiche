@@ -1,0 +1,27 @@
+<div *ngIf="buyer">
+    <div class="boton rounded-md">
+        <button mat-raised-button (click)="goBackToList()">Back to List</button>
+    </div>
+    <mat-card class="user-card mx-auto px-auto">
+        <mat-card-header>
+            <mat-card-title class="text-yellow-600 p-3 bg-white/80 rounded mb-8 text-2xl">Buyer Details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p><strong>ID:</strong> {{ buyer.id }}</p>
+            <p><strong>First Name:</strong> {{ buyer.firstName }}</p>
+            <p><strong>Last Name:</strong> {{ buyer.lastName }}</p>
+            <p><strong>Password:</strong> {{ buyer.password }}</p>
+            <p><strong>Country:</strong> {{ buyer.country }}</p>
+            <p><strong>Email:</strong> {{ buyer.email }}</p>
+            <p><strong>Role:</strong> {{ buyer.rol }}</p>
+            <p><strong>Comision:</strong> {{ buyer.comision }}</p>
+        </mat-card-content>
+    </mat-card>
+
+    <div class="boton rounded-md">
+        <button mat-raised-button  (click)="editBuyer(buyer)">Edit Buyer</button>
+    </div>
+    <div class="boton rounded-md">
+        <button mat-raised-button color="warn" (click)="deleteBuyer(buyer)">Delete Buyer</button>
+    </div>
+</div>

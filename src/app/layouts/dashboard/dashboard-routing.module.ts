@@ -5,6 +5,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { UserDetailComponent } from './pages/users/pages/user-details/user-details.component';
 import { adminGuard } from '../../core/guards/admin.guard';
 import { BuyersComponent } from './pages/buyers/buyers.component';
+import { BuyersDetailComponent } from './pages/buyers/pages/buyers-detail/buyers-detail.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: 'buyers',
         component: BuyersComponent,
+      },
+      {
+        path: 'buyers/:id',
+        component: BuyersDetailComponent,
       },
       {
         path: 'home',
