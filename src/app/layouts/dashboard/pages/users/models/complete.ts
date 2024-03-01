@@ -1,5 +1,5 @@
 export interface UserClean{
-    id: string;
+    id: any;
     firstName: string;
     lastName: string;
     password: string;
@@ -12,14 +12,14 @@ export interface UserClean{
   }
   
   export interface Course {
-    id: number;
+    id: any;
     courseName: string;
     createdAt: Date;
   }
   
   export interface Inscription {
-    id: number;
-    courseId: number;
-    userId: number;
+    id: any;
+    courseId: any;
+    userId: any;
   }
   

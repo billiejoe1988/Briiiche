@@ -76,16 +76,24 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
-  editUser(user: User): void {
+  editBuyer(user: User): void {
     const dialogRef = this.dialog.open(UsersDialogComponent, {
       width: '1000px',
       data: user 
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: User | undefined) => {
       if (result) {
-        this.user = result;
+        this.usersService.updateUserById(user).subscribe({
+          next: () => {
+            this.loadUserDetails(user.id);
+            this.alertsService.showSuccess('Success', 'buyer updated successfully.');
+          },
+          error: (error: any) => {
+            this.alertsService.showError('Error', 'An error occurred while updating the buyer.');
+          }
+        });
       }
     });
-  }
+   }
 }

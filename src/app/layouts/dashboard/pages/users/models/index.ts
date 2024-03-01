@@ -2,7 +2,7 @@ import { Course } from "./complete";
 import { Inscription } from "../../inscriptions/models";
 
 export interface User {
-  id: number;
+  id: any;
   firstName: string;
   lastName: string;
   password: string;

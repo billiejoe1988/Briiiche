@@ -15,6 +15,7 @@ import { BuyerDeleteService } from '../../buyer-delete.service';
 })
 export class BuyersDetailComponent implements OnInit {
   buyer: Buyer | undefined;
+  buyers: Buyer[] = []
 
   constructor(
     private route: ActivatedRoute,
@@ -82,10 +83,18 @@ export class BuyersDetailComponent implements OnInit {
       data: buyer 
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: Buyer | undefined) => {
       if (result) {
-        this.buyer = result;
+        this.buyersService.updateBuyerById(buyer).subscribe({
+          next: () => {
+            this.loadBuyerDetails(buyer.id);
+            this.alertsService.showSuccess('Success', 'buyer updated successfully.');
+          },
+          error: (error: any) => {
+            this.alertsService.showError('Error', 'An error occurred while updating the buyer.');
+          }
+        });
       }
     });
+   }
   }
-}

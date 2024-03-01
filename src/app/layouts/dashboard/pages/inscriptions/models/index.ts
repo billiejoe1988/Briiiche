@@ -11,6 +11,6 @@ export interface Inscription {
 }
 
 export interface CreateInscriptionData{
-    buyerId: number;
-    courseId: number;
+    buyerId: any;
+    courseId: any;
 }

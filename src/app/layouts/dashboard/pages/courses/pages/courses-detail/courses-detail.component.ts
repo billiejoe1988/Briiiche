@@ -16,6 +16,7 @@ import { CoursesEditDialogComponent } from '../../components/coursedialog-edit/c
 })
 export class CoursesDetailComponent implements OnInit {
   course: Courses | undefined;
+  courses: Courses[] = [];
   inscriptions: Inscription[] | undefined;
 
   constructor(
@@ -42,7 +43,6 @@ export class CoursesDetailComponent implements OnInit {
         this.course = course;
       },
       error: (error: any) => {
-        console.error('Error loading course details:', error);
         this.alertsService.showError('Error', 'An error occurred while loading course details.');
       }
     });
@@ -69,24 +69,30 @@ export class CoursesDetailComponent implements OnInit {
             this.router.navigate(['../'], { relativeTo: this.route }); 
           },
           error: (error: any) => {
-            console.error('Error deleting course:', error);
             this.alertsService.showError('Error', 'An error occurred while deleting the course.');
           }
         });
       }
     });
   }
+editCourse(course: Course): void {
+  const dialogRef = this.dialog.open(CoursesEditDialogComponent, {
+    width: '1000px',
+    data: course 
+  });
 
-  editCourse(course: Course): void {
-    const dialogRef = this.dialog.open(CoursesEditDialogComponent, {
-      width: '1000px',
-      data: course 
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.course = result;
-      }
-    });
-  }
+  dialogRef.afterClosed().subscribe((result: Courses | undefined) => {
+    if (result) {
+      this.coursesService.updateCoursesById(course.id, result).subscribe({
+        next: () => {
+          this.loadCoursesDetails(course.id);
+          this.alertsService.showSuccess('Success', 'Course updated successfully.');
+        },
+        error: (error: any) => {
+          this.alertsService.showError('Error', 'An error occurred while updating the course.');
+        }
+      });
+    }
+  });
+ }
 }
