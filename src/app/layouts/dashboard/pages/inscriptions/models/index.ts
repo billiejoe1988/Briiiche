@@ -7,6 +7,7 @@ export interface Inscription {
     courseId: string | number;
     buyer?: Buyer;
     course?: Courses;
+    courseDetails?: Courses;
 }
 
 export interface CreateInscriptionData{

@@ -5,7 +5,7 @@
     <mat-form-field>
       <mat-label>Course Name</mat-label>
       <input matInput formControlName="courseName">
-      <mat-error *ngIf="coursesForm.get('courseName')?.hasError('required')">Course Name is required</mat-error>
+      <mat-error>{{ coursesForm.get('courseName')?.errors | validationErrors }}</mat-error>
     </mat-form-field>
     
     <mat-form-field class="p-3">
@@ -13,14 +13,12 @@
       <input matInput [matDatepicker]="dateCreatorPicker" formControlName="createdAt" class="p-2">
       <mat-datepicker-toggle matSuffix [for]="dateCreatorPicker"></mat-datepicker-toggle>
       <mat-datepicker #dateCreatorPicker></mat-datepicker>
-      <mat-error *ngIf="coursesForm.get('createdAt')?.hasError('required')">Date is required</mat-error>
+      <mat-error>{{ coursesForm.get('createdAt')?.errors | validationErrors }}</mat-error>
     </mat-form-field>
-    
   </form>
-  
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button mat-button (click)="onSave()" class="boton">Agree</button>
+    <button mat-button (click)="onCreate()" class="boton">Agree</button>
     <button mat-button mat-dialog-close class="boton">No Thanks</button>
 </mat-dialog-actions>

@@ -5,11 +5,8 @@ import { AlertsService } from '../../../../core/services/alerts.service';
 import { HttpClient, HttpErrorResponse  } from '@angular/common/http';
 import { enviroment } from '../../../../enviroments/enviroment';
 import { Pagination } from '../../../../core/models/pagination';
-import { UserWithCoursesAndInscriptions } from './models/complete';
 
 const ROLES_DB: string[] = ['ADMIN', 'USER', 'BUYER'];
-
-let USERS_DB: User[] = [];
 
 @Injectable({
   providedIn: 'root'
@@ -70,7 +67,6 @@ export class UsersService {
   
   getUserDetails(userId: string): Observable<User> {
     const url = `${enviroment.apiURL}/users/${userId}`;
-    return this.httpClient.get<User>(url).pipe(
-    );
+    return this.httpClient.get<User>(url).pipe();
   }
 }

@@ -11,6 +11,7 @@ import { Inscription } from '../../../inscriptions/models';
 })
 export class CoursesDetailComponent implements OnInit {
   course: Courses | undefined;
+  inscriptions: Inscription[] | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,9 +33,7 @@ export class CoursesDetailComponent implements OnInit {
 
   loadInscriptions(courseId: string): void {
     this.coursesService.getInscriptionsByCourseId(courseId).subscribe(inscriptions => {
-      if (this.course) {
-        this.course.inscriptions = inscriptions;
-      }
+      this.inscriptions = inscriptions;
     });
   }
 
@@ -47,9 +46,8 @@ export class CoursesDetailComponent implements OnInit {
     if (courseId) {
       const courseIdNumber = parseInt(courseId, 10);
       this.coursesService.deleteCoursesById(courseIdNumber).subscribe(() => {
-        this.router.navigate(['/courses']);
+        this.router.navigate(['../'], { relativeTo: this.route }); 
       });
     }
   }
-  
 }

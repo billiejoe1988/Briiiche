@@ -117,7 +117,6 @@ export class UsersComponent implements OnInit {
             this.alertsService.showSuccess('Success', 'User deleted successfully.');
           },
           error: (error: any) => {
-            console.error('Error deleting user:', error);
             this.alertsService.showError('Error', 'An error occurred while deleting the user.');
           }
         });
@@ -132,7 +131,6 @@ export class UsersComponent implements OnInit {
         this.alertsService.showSuccess('Success', 'User added successfully.'); 
       },
       error: (error: any) => {
-        console.error('Error creating user:', error);
         this.alertsService.showError('Error', 'An error occurred while creating the user.');
       }
     });

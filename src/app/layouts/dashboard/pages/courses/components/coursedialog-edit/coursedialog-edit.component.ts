@@ -2,8 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Courses } from '../../models';
-import { CoursesService } from '../../courses.service';
 import { AlertsService } from '../../../../../../core/services/alerts.service';
+import { CoursesService } from '../../courses.service';
 
 @Component({
   selector: 'app-courses-edit-dialog', 
@@ -17,37 +17,34 @@ export class CoursesEditDialogComponent {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<CoursesEditDialogComponent>,
-    private coursesService: CoursesService,
     private alertsService: AlertsService,
+    private coursesService: CoursesService,
     @Inject(MAT_DIALOG_DATA) private editingCourses?: Courses
   ) {
-    this.isEditing = !!editingCourses;
     this.coursesEditForm = this.fb.group({
-      courseId: [this.isEditing ? editingCourses?.id : null],
-      courseName: [this.isEditing ? editingCourses?.courseName : '', [Validators.required]],
-      createdAt: [this.isEditing ? editingCourses?.createdAt : '', [Validators.required]]
+      courseName: ['', [Validators.required]],
+      createdAt: ['', [Validators.required]],
     });
   
-    if (this.isEditing && editingCourses) {
-      this.coursesEditForm.patchValue(editingCourses);
+    if (this.editingCourses) {
+      this.coursesEditForm.patchValue(this.editingCourses);
     }
   }
 
   onSave(): void {
     if (this.coursesEditForm.valid) {
-      const editedCourse: Courses = this.coursesEditForm.value;
-      this.coursesService.updateCoursesById(editedCourse).subscribe({
-        next: () => {
-          this.alertsService.showSuccess('Success', 'Course updated successfully.');
-          this.dialogRef.close(editedCourse);
-        },
-        error: (error) => {
-          console.error('Error updating course:', error);
-          this.alertsService.showError('Error', 'An error occurred while updating the course.');
-        }
-      });
+      this.dialogRef.close(this.coursesEditForm.value);
     } else {
-      this.alertsService.showError('Error', 'Please fill out all required fields.');
+      this.markFormGroupTouched(this.coursesEditForm);
     }
+  }
+
+  private markFormGroupTouched(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      }
+    });
   }
 }

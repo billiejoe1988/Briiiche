@@ -9,29 +9,29 @@
 <table mat-table [dataSource]="courses" class="mat-elevation-z8 demo-table">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      <td mat-cell *matCellDef="let course"> {{course.id}} </td>
     </ng-container>
   
     <ng-container matColumnDef="courseName">
       <th mat-header-cell *matHeaderCellDef> Course Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.courseName}} </td>
+      <td mat-cell *matCellDef="let course"> {{course.courseName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="createdAt">
         <th mat-header-cell *matHeaderCellDef> Created Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.createdAt | date: 'dd/MM/YYYY HH:MM '}} </td>
+        <td mat-cell *matCellDef="let course"> {{course.createdAt | date: 'dd/MM/YYYY HH:MM '}} </td>
       </ng-container>
 
     <ng-container matColumnDef="actions" *ngIf="isAdmin">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
-      <td mat-cell *matCellDef="let element">
-        <button class="Actions" (click)="onDelete(element.id)" mat-icon-button>
+      <td mat-cell *matCellDef="let course">
+        <button class="Actions" (click)="deleteCourse(course)" mat-icon-button>
           <mat-icon>delete</mat-icon>
         </button>
-        <button class="Actions" (click)="onEdit(element)" mat-icon-button>
+        <button class="Actions" (click)="onEdit(course)" mat-icon-button>
           <mat-icon>edit</mat-icon>
         </button>
-        <button class="Actions" [routerLink]="element.id" routerLinkActive="router-link-active" mat-icon-button >
+        <button class="Actions" [routerLink]="course.id" routerLinkActive="router-link-active" mat-icon-button >
           <mat-icon>visibility</mat-icon>
         </button>
       </td>
