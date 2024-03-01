@@ -76,7 +76,7 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
-  editBuyer(user: User): void {
+  editUser(user: User): void {
     const dialogRef = this.dialog.open(UsersDialogComponent, {
       width: '1000px',
       data: user 

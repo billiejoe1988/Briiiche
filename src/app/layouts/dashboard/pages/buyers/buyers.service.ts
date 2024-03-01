@@ -3,7 +3,6 @@ import { Observable, of, mergeMap, catchError, throwError, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { enviroment } from '../../../../enviroments/enviroment';
 import { FormControl } from '@angular/forms';
-
 import { AlertsService } from '../../../../core/services/alerts.service';
 import { Buyer } from './model';
 

@@ -9,8 +9,8 @@ export interface User {
   country: string;
   email: string;
   rol: string;
-  comision: string;
-  token: string;
+  comision: any;
+  token: any;
   courses: Course[]; 
   inscriptions: Inscription[];
 }
