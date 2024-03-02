@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UserDetailComponent } from './pages/users/pages/user-details/user-details.component';
-import { adminGuard } from '../../core/guards/admin.guard';
+import { userGuard } from '../../core/guards/user.guard';
 import { BuyersComponent } from './pages/buyers/buyers.component';
 import { BuyersDetailComponent } from './pages/buyers/pages/buyers-detail/buyers-detail.component';
 
@@ -14,6 +14,7 @@ const routes: Routes = [
     children: [
       {
         path: 'users',
+        canActivate: [userGuard],
         loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule) 
       },
       {

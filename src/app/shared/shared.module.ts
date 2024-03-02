@@ -15,6 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { ValidationErrorsPipe } from './validation-errors.pipe';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MatSelectModule } from '@angular/material/select';
   imports: [CommonModule],
   exports: [
     FullNamePipe,
+    MatProgressSpinnerModule,
     UppercaseTitlesDirective, 
     MatTableModule, 
     MatButtonModule, 
@@ -38,6 +40,7 @@ import { MatSelectModule } from '@angular/material/select';
     ValidationErrorsPipe,
     MatPaginatorModule,
     MatSelectModule,
+    RouterModule,
   ],
 })
 export class SharedModule {}

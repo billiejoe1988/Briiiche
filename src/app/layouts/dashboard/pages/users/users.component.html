@@ -1,6 +1,8 @@
 <div class="mb-5 ">
-  <h1 appUppercaseTitles class="text-black p-3 text-center bg-white/80 rounded mb-8">User Management</h1>
-  <app-users-form *ngIf="(authUser$ | async)?.rol === 'ADMIN'" (userSubmitted)="onUserSubmitted($event)"></app-users-form>
+  <h1 appUppercaseTitles class="text-black p-3 text-center bg-white/80 rounded mb-3">User Management</h1>
+  <div class="flex justify-end ">
+    <Button *ngIf="(authUser$ | async)?.rol === 'ADMIN'" (click)="onCreate()" class="boton">Enroll User</Button>
+  </div>
 </div>
 
 <table mat-table [dataSource]="users" class="mat-elevation-z8 shadow-2xl">

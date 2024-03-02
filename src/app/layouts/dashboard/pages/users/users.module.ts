@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersComponent } from './users.component';
 import {MatTableModule} from '@angular/material/table';
-import { UsersFormComponent } from './components/users-form/users-form.component';
 import {MatButtonModule} from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
@@ -17,14 +16,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { UsersDialogComponent } from './components/users-dialog/users-dialog.component';
 import { UserDetailComponent } from './pages/user-details/user-details.component';
-import { authGuard } from '../../../../core/guards/auth.guard';
+import { AddUsersFormDialogComponent } from './components/add-users-form-dialog/add-users-form-dialog.component';
 
 @NgModule({
   declarations: [
     UsersComponent,
-    UsersFormComponent,
     UserDetailComponent,
     UsersDialogComponent,
+    AddUsersFormDialogComponent,
   ],
   imports: [
     CommonModule,

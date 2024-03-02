@@ -1,6 +1,6 @@
 <h1 app-uppercase-titles class="p-3 text-center bg-white/80 rounded mb-4 title">Courses Management</h1>
 
-<div *ngIf="(authUser$ | async)?.rol === 'ADMIN'" class="flex justify-end mb-3">
+<div *ngIf="(authUser$ | async)?.rol === 'ADMIN'" class="flex justify-end mb-4">
    <button (click)="onCreate()" mat-button class="boton">
      Add Course
    </button>

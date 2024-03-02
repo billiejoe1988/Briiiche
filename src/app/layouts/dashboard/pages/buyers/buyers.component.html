@@ -1,12 +1,12 @@
-<h1 appUppercaseTitles class="p-3 text-center bg-white/80 rounded mb-4">Buyer Courses Management</h1>
+<h1 appUppercaseTitles class="p-3 text-center bg-white/80 rounded mb-3">Buyer Courses Management</h1>
   
-<div class="flex justify-end mb-3">
+<div class="flex justify-end">
   <button *ngIf="(authUser$ | async)?.rol === 'ADMIN'" (click)="openAddBuyerDialog()" mat-button class="boton">
      Submit Buyer
   </button>
 </div>
 
-<form [formGroup]="buyerForm" (ngSubmit)="onSubmit()" class="py-10">
+<form [formGroup]="buyerForm" (ngSubmit)="onSubmit()" class="py-4">
   <table mat-table [dataSource]="buyers" class="mat-elevation-z8 demo-table">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
