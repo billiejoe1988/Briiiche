@@ -31,7 +31,7 @@ export class BuyersDetailComponent implements OnInit {
     private router: Router,
     private alertsService: AlertsService,
     private buyerDeleteService: BuyerDeleteService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -124,6 +124,29 @@ export class BuyersDetailComponent implements OnInit {
         this.alertsService.showError('Error', 'An error occurred while loading inscriptions.');
       }
     );
+  }
+
+  deleteInscriptionCourse(inscription: Inscription): void {
+    this.alertsService.showAlert({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.inscriptionService.deleteInscription(inscription.id).subscribe({
+          next: () => {
+            this.alertsService.showSuccess('Success', 'Inscription deleted successfully.');
+            this.loadCoursesInscribed(this.buyer?.id || '');
+          },
+          error: (error: any) => {
+            this.alertsService.showError('Error', 'An error occurred while deleting the inscription.');
+          }
+        });
+      }
+    });
   }
 }
   
