@@ -1,20 +1,20 @@
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="py-5">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <mat-form-field class="example-form-field">
-            <mat-label class="pt-4">First Name</mat-label>
-            <input matInput formControlName="firstName" type="text" class="mx-2" autocomplete="given-name">
+            <mat-label class="pt-4" for="firstName">First Name</mat-label>
+            <input matInput formControlName="firstName" type="text" class="mx-2" autocomplete="given-name" id="firstName">
             <mat-error>{{ userForm.get('firstName')?.errors | validationErrors }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-form-field">
-            <mat-label>Last Name</mat-label>
-            <input matInput formControlName="lastName" type="text" class="mx-2" autocomplete="family-name">
+            <mat-label for="lastName">Last Name</mat-label>
+            <input matInput formControlName="lastName" type="text" class="mx-2" autocomplete="family-name" id="lastName">
             <mat-error>{{ userForm.get('lastName')?.errors | validationErrors }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-form-field">
-            <mat-label>Password</mat-label>
-            <input [type]="revealPassword ? 'text' : 'password'" formControlName='password' matInput autocomplete="new-password"/>
+            <mat-label for="password">Password</mat-label>
+            <input [type]="revealPassword ? 'text' : 'password'" formControlName='password' matInput autocomplete="new-password" id="password"/>
             <button (click)='revealPassword = !revealPassword' matSuffix mat-icon-button >
                 <mat-icon>visibility</mat-icon>
             </button>
@@ -22,20 +22,20 @@
         </mat-form-field>
 
         <mat-form-field class="example-form-field">
-            <mat-label>Country</mat-label>
-            <input matInput formControlName="country" type="text" class="mx-2" autocomplete="country">
+            <mat-label for="country">Country</mat-label>
+            <input matInput formControlName="country" type="text" class="mx-2" autocomplete="country" id="country">
             <mat-error>{{ userForm.get('country')?.errors | validationErrors }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-form-field">
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="email" type="email" class="mx-2" autocomplete="email">
+            <mat-label for="email">Email</mat-label>
+            <input matInput formControlName="email" type="email" class="mx-2" autocomplete="email" id="email">
             <mat-error>{{ userForm.get('email')?.errors | validationErrors }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-form-field">
-            <mat-label>Role</mat-label>
-            <mat-select formControlName="rol" class="mx-2" autocomplete="role">
+            <mat-label for="rol">Role</mat-label>
+            <mat-select formControlName="rol" class="mx-2" autocomplete="role" id="rol">
                 <mat-option value="ADMIN">ADMIN</mat-option>
                 <mat-option value="USER">USER</mat-option>
             </mat-select>
@@ -43,8 +43,8 @@
         </mat-form-field>
 
         <mat-form-field class="example-form-field">
-            <mat-label>Commission</mat-label>
-            <mat-select formControlName="comision" class="mx-2" autocomplete="off">
+            <mat-label for="comision">Commission</mat-label>
+            <mat-select formControlName="comision" class="mx-2" autocomplete="off" id="comision">
                 <mat-option value="AdministrativeTasks">Administrative tasks</mat-option>
             </mat-select>
             <mat-error>{{ userForm.get('comision')?.errors | validationErrors }}</mat-error>

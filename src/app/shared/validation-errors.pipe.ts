@@ -12,10 +12,10 @@ export class ValidationErrorsPipe implements PipeTransform {
 
       if (errors['required']) messages.push('Complete this Field');
       if (errors['email'])  messages.push('Its not the valid format');
-      if (errors['maxLength']) messages.push(`Max ${errors['maxLength']?.requiredLength} characters`);
-      if (errors['minLength']) messages.push(`Min ${errors['minLength']?.requiredLength} characters`);
+      if (errors['maxlength']) messages.push(`Max ${errors['maxlength']?.requiredLength} characters`);
+      if (errors['minlength']) messages.push(`Min ${errors['minlength']?.requiredLength} characters`);
 
-      return messages.join('. ') + '.';
+      return messages.join('. ') + '.'
     }
     return null;
   }
