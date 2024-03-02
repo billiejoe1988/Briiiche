@@ -1,10 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, concatMap, throwError, mergeMap } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
 import { enviroment } from "../../../../enviroments/enviroment";
 import { Inscription } from "./models";
 import { CreateInscriptionData } from "./models";
-import { Buyer } from "../buyers/model";
 
 @Injectable({ providedIn: 'root'})
 export class InscriptionService {

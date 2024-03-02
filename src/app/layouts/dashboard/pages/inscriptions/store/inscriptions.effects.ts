@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, mergeMap } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
+import { catchError, map, concatMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { InscriptionsActions } from './inscriptions.actions'; 
 import { Store } from '@ngrx/store';
 import { InscriptionService } from '../inscription.service';
-import { UsersService } from '../../users/users.service';
 import { CoursesService } from '../../courses/courses.service';
-import { Inscription } from '../models';
 import { BuyersService } from '../../buyers/buyers.service';
 
 @Injectable()

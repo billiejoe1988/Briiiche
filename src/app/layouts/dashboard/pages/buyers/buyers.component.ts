@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogAddComponent } from './components/dialog-add/dialog-add.component'; 
 import { AlertsService } from '../../../../core/services/alerts.service';
-import { throwError, Subject, Observable } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Buyer } from './model';
 import { Store } from '@ngrx/store';
 import { User } from '../users/models';

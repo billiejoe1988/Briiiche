@@ -4,7 +4,6 @@ import { CoursesService } from './courses.service';
 import { AlertsService } from '../../../../core/services/alerts.service';
 import { enviroment } from '../../../../enviroments/enviroment';
 import { Courses } from './models';
-import { of } from 'rxjs';
 
 describe('CoursesService', () => {
   let service: CoursesService;

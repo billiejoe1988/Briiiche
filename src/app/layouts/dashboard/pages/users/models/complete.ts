@@ -8,7 +8,6 @@ export interface UserClean{
   rol: string;
   comision: string;
   token: any;
-
 }
 
 export interface Course {

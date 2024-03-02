@@ -113,8 +113,6 @@ export class CoursesComponent implements OnInit {
       }
     });
   }
-  
-  
 
   loadCourses(): void {
     this.coursesService.getCourses().subscribe({
@@ -148,5 +146,5 @@ export class CoursesComponent implements OnInit {
       });
     }
   });
-}
+ }
 }

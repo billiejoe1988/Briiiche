@@ -2,7 +2,6 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Courses } from '../../models';
-import { Course } from '../../../users/models/complete';
 import { CoursesService } from '../../courses.service';
 import { AlertsService } from '../../../../../../core/services/alerts.service'; 
 

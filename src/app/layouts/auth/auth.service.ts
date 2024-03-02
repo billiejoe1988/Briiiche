@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { User } from "../dashboard/pages/users/models";
 import { Router } from "@angular/router";
 import { AlertsService } from "../../core/services/alerts.service";
-import { of, delay, map, finalize, tap, Observable, catchError } from "rxjs";
+import { of, map, tap, Observable, catchError } from "rxjs";
 import { LoadingService } from "../../core/services/loading.service";
 import { HttpClient } from "@angular/common/http";
 import { enviroment } from "../../enviroments/enviroment";

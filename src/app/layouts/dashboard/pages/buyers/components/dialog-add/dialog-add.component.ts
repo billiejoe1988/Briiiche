@@ -35,7 +35,7 @@ export class DialogAddComponent {
     if (this.buyerForm.valid) {
       const buyerData = this.buyerForm.value as Buyer;
       this.buyersService.createBuyer(buyerData).subscribe(() => {
-        this.buyerAdded.emit(); // Emitir el evento cuando se añade el comprador
+        this.buyerAdded.emit(); 
         this.dialogRef.close();
       });
     } else {

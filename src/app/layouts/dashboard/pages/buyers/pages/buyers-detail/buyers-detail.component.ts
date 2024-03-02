@@ -76,7 +76,6 @@ export class BuyersDetailComponent implements OnInit {
             this.router.navigate(['../'], { relativeTo: this.route }); 
           },
           error: (error: any) => {
-            console.error('Error deleting buyer:', error);
             this.alertsService.showError('Error', 'An error occurred while deleting the buyer.');
           }
         });

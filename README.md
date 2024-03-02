@@ -29,6 +29,18 @@ Brioche Culinary Academy is an online learning platform that offers high-quality
 - Node.js
 - Angular CLI
 - Angular Material
+- Karma for testing
+- TypeScript
+- Tailwind
+- JSON-Server
+- RxJS
+- ngrx
+- Redux
+- RESTful API
+- Lazy loading modules
+- Guards
+- Store
+- Routing
 
 ## Deployment Instructions
 

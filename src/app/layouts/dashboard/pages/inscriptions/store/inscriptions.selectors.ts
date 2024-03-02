@@ -1,6 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromInscriptions from './inscriptions.reducer';
-import { Inscription } from '../models';
 
 export const selectInscriptionsState = createFeatureSelector<fromInscriptions.State>(
   fromInscriptions.inscriptionsFeatureKey

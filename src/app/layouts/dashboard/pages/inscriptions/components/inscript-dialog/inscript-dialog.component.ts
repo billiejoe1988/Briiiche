@@ -1,4 +1,3 @@
-// inscript-dialog.component.ts
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { InscriptionsActions } from '../../store/inscriptions.actions';

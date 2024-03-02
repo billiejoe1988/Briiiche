@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from './models';
 import { Observable, of, mergeMap, catchError, throwError, tap, map } from 'rxjs';
 import { AlertsService } from '../../../../core/services/alerts.service';
-import { HttpClient, HttpErrorResponse  } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { enviroment } from '../../../../enviroments/enviroment';
 import { Pagination } from '../../../../core/models/pagination';
 

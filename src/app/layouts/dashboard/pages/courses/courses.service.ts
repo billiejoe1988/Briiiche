@@ -84,7 +84,6 @@ export class CoursesService {
       );
   }
   
-
   getInscriptonsWithCourseDetails(): Observable<Inscription[]> {
     return this.httpClient.get<Inscription[]>(`${enviroment.apiURL}/inscriptions`).pipe(
       mergeMap((inscriptions: Inscription[]) => {
