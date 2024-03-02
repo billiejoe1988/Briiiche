@@ -14,26 +14,26 @@
   </mat-card>
 
   <div class="boton rounded-md">
-    <button mat-raised-button (click)="editCourse(course)" >Edit User</button>
+    <button mat-raised-button (click)="editCourse(course)" >Edit Course</button>
   </div>
   <div class="boton rounded-md">
-      <button mat-raised-button color="warn" (click)="deleteCourse(course)">Delete User</button>
+      <button mat-raised-button color="warn" (click)="deleteCourse(course)">Delete Course</button>
   </div>
 </div>
   
-<mat-card class="user-card mx-auto px-auto mt-4">
+<mat-card class="courses-card mx-auto px-auto my-5">
   <mat-card-header>
-    <mat-card-title class="text-yellow-600 p-3 bg-white/80 rounded mb-8 text-2xl">Inscriptions</mat-card-title>
+      <mat-card-title class="text-yellow-600 p-3 bg-white/80 rounded mb-8 text-xl">Inscriptions</mat-card-title>
   </mat-card-header>
-  <mat-card-content>
-    <div *ngIf="inscriptions">
-      <mat-list>
-        <mat-list-item *ngFor="let inscription of inscriptions">
-          <p>Inscription ID: {{ inscription.id }}</p>
-          <p>Course ID: {{ inscription.courseId }}</p>
-          <p>Buyer ID: {{ inscription.buyerId }}</p>
-        </mat-list-item>
-      </mat-list>
-    </div>
+  <mat-card-content class="container">
+    <div *ngFor="let buyer of coursesRegister" class="px-3">
+      <p><strong>Buyer Last Name:</strong> {{ buyer.buyer.lastName }}</p>
+      <p><strong>Buyer Email:</strong> {{ buyer.buyer.email }}</p>
+      <button mat-icon-button class="button" (click)="deleteInscriptionCourse(buyer.inscription)">
+          <mat-icon>delete</mat-icon>
+      </button>
+      <hr class="divider">
+  </div>
+  
   </mat-card-content>
 </mat-card>

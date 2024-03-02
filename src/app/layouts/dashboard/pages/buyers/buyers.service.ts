@@ -59,12 +59,4 @@ export class BuyersService {
     return this.httpClient.get<Buyer>(url).pipe(
     );
   }
-  deleteInscription(buyerId: string, inscriptionId: string): Observable<void> {
-    return this.httpClient.delete<void>(`${enviroment.apiURL}/buyers/${buyerId}/inscriptions/${inscriptionId}`).pipe(
-      catchError(error => {
-        this.alerts.showError('Error', 'Failed to delete inscription.');
-        return throwError(error);
-      })
-    );
-  }
 }

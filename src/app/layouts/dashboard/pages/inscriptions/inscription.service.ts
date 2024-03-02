@@ -18,12 +18,18 @@ export class InscriptionService {
   getInscriptionsById(buyerId: string | number) {
     return this.http.get<Inscription[]>(`${enviroment.apiURL}/inscriptions?buyerId=${buyerId}`).pipe(
       catchError((error) => {
-        console.error('Error fetching inscriptions by buyer ID:', error);
         return throwError(() => error);
       })
     );
   }
-
+  getInscriptionsByCourseId(courseId: string | number) {
+    return this.http.get<Inscription[]>(`${enviroment.apiURL}/inscriptions?courseId=${courseId}`).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+  
   createInscription(data: CreateInscriptionData) {
     return this.http.post<Inscription>(`${enviroment.apiURL}/inscriptions`, data);
   }

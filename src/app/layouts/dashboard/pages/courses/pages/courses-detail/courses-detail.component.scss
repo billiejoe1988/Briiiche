@@ -15,3 +15,17 @@ height: 80px;
 .example-full-width {
 width: 100%;
 }
+.divider {
+  border-top: 1px solid orange; 
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.container {
+display: flex;
+align-items: center;
+padding-right: 15px;
+padding-left: 15px;
+}
+.button {
+margin-left: auto !important; 
+}

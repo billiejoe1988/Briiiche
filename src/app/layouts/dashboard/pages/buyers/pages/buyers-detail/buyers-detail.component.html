@@ -30,7 +30,7 @@
           <mat-card-title class="text-yellow-600 p-3 bg-white/80 rounded mb-8 text-xl">Inscriptions</mat-card-title>
       </mat-card-header>
       <mat-card-content class="container">
-          <div *ngFor="let course of buyersInscribed">
+          <div *ngFor="let course of buyersInscribed" class="px-3">
               <p><strong>Course Name:</strong> {{ course.course.courseName }}</p>
               <p><strong>Created At:</strong> {{ course.course.createdAt | date }}</p>
               <button mat-icon-button class="button">

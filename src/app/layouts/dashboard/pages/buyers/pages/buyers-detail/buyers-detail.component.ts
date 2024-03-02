@@ -50,7 +50,6 @@ export class BuyersDetailComponent implements OnInit {
         this.buyer = buyer;
       },
       error: (error: any) => {
-        console.error('Error loading buyer details:', error);
         this.alertsService.showError('Error', 'An error occurred while loading buyer details.');
       }
     });

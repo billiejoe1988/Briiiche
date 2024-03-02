@@ -23,7 +23,9 @@
 .container {
   display: flex;
   align-items: center;
-}
+  padding-right: 15px;
+  padding-left: 15px;
+  }
 .button {
   margin-left: auto !important; 
 }
