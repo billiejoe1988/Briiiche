@@ -16,10 +16,7 @@ export class InscriptionService {
   }
 
   getInscriptionsById(buyerId: string | number) {
-    return this.http.get<Buyer>(`${enviroment.apiURL}/buyers/${buyerId}`).pipe(
-      concatMap((buyer) =>
-        this.http.get(`${enviroment.apiURL}/inscriptions?buyerId=${buyer.id}`)
-      ),
+    return this.http.get<Inscription[]>(`${enviroment.apiURL}/inscriptions?buyerId=${buyerId}`).pipe(
       catchError((error) => {
         console.error('Error fetching inscriptions by buyer ID:', error);
         return throwError(() => error);

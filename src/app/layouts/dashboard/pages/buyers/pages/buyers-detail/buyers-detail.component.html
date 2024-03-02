@@ -18,10 +18,26 @@
         </mat-card-content>
     </mat-card>
 
-    <div class="boton rounded-md">
-        <button mat-raised-button  (click)="editBuyer(buyer)">Edit Buyer</button>
-    </div>
-    <div class="boton rounded-md">
-        <button mat-raised-button color="warn" (click)="deleteBuyer(buyer)">Delete Buyer</button>
-    </div>
+  <div class="boton rounded-md">
+      <button mat-raised-button  (click)="editBuyer(buyer)">Edit Buyer</button>
+  </div>
+  <div class="boton rounded-md">
+      <button mat-raised-button color="warn" (click)="deleteBuyer(buyer)">Delete Buyer</button>
+  </div>
+
+    <mat-card class="user-card mx-auto px-auto my-5">
+      <mat-card-header>
+          <mat-card-title class="text-yellow-600 p-3 bg-white/80 rounded mb-8 text-2xl">Inscriptions</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <div *ngFor="let course of buyersInscribed">
+              <p><strong>Course Name:</strong> {{ course.course.courseName }}</p>
+              <p><strong>Created At:</strong> {{ course.course.createdAt | date }}</p>
+              <button mat-icon-button>
+                <mat-icon>delete</mat-icon>
+              </button>
+              <hr class="divider">
+          </div>
+      </mat-card-content>
+  </mat-card>
 </div>

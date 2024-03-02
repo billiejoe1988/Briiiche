@@ -5,8 +5,13 @@ import { LoadingService } from '../../../../../../core/services/loading.service'
 import { MatDialog } from '@angular/material/dialog';
 import { BuyersService } from '../../buyers.service';
 import { Buyer } from '../../model';
+import { forkJoin } from 'rxjs';
 import { DialogEditComponent } from '../../components/dialog-edit/dialog-edit.component';
 import { BuyerDeleteService } from '../../buyer-delete.service';
+import { InscriptionService } from '../../../inscriptions/inscription.service';
+import { CoursesService } from '../../../courses/courses.service';
+import { Course } from '../../../users/models/complete';
+import { Inscription } from '../../../inscriptions/models';
 
 @Component({
   selector: 'app-buyers-detail',
@@ -15,11 +20,13 @@ import { BuyerDeleteService } from '../../buyer-delete.service';
 })
 export class BuyersDetailComponent implements OnInit {
   buyer: Buyer | undefined;
-  buyers: Buyer[] = []
+  buyersInscribed: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private buyersService: BuyersService,
+    private inscriptionService: InscriptionService,
+    private coursesService: CoursesService,
     private loadingService: LoadingService,
     private router: Router,
     private alertsService: AlertsService,
@@ -32,6 +39,7 @@ export class BuyersDetailComponent implements OnInit {
       const buyerId = params['id'];
       if (buyerId) {
         this.loadBuyerDetails(buyerId);
+        this.loadCoursesInscribed(buyerId);
       }
     });
   }
@@ -97,4 +105,26 @@ export class BuyersDetailComponent implements OnInit {
       }
     });
    }
+
+   loadCoursesInscribed(buyerId: string): void {
+    this.inscriptionService.getInscriptionsById(buyerId).subscribe(
+      (inscriptions: Inscription[]) => { 
+        const courseRequests = inscriptions.map(inscription =>
+          this.coursesService.getCoursesDetails(inscription.courseId.toString())
+        );
+  
+        forkJoin(courseRequests).subscribe((courses: Course[]) => {
+          const buyersInscribed = inscriptions.map((inscription, index) => ({
+            inscription: inscription,
+            course: courses[index]
+          }));
+          this.buyersInscribed = buyersInscribed;
+        });
+      },
+      (error: any) => { 
+        this.alertsService.showError('Error', 'An error occurred while loading inscriptions.');
+      }
+    );
   }
+}
+  
