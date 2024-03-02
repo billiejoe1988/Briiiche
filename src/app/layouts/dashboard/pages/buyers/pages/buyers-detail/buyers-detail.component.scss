@@ -20,3 +20,10 @@
     padding-top: 5px;
     padding-bottom: 5px;
 }
+.container {
+  display: flex;
+  align-items: center;
+}
+.button {
+  margin-left: auto !important; 
+}
