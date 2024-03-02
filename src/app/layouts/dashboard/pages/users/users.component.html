@@ -1,6 +1,6 @@
-<div class="mb-5">
+<div class="mb-5 ">
   <h1 appUppercaseTitles class="text-black p-3 text-center bg-white/80 rounded mb-8">User Management</h1>
-  <app-users-form (userSubmitted)="onUserSubmitted($event)"></app-users-form>
+  <app-users-form *ngIf="(authUser$ | async)?.rol === 'ADMIN'" (userSubmitted)="onUserSubmitted($event)"></app-users-form>
 </div>
 
 <table mat-table [dataSource]="users" class="mat-elevation-z8 shadow-2xl">
@@ -35,13 +35,13 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Actions </th>
     <td mat-cell *matCellDef="let user">
-      <button class="Actions" mat-icon-button (click)="onModify(user)">
+      <button *ngIf="(authUser$ | async)?.rol === 'ADMIN'" class="Actions" mat-icon-button (click)="onModify(user)">
         <mat-icon>edit</mat-icon>
       </button>
-      <button class="Actions" mat-icon-button (click)="deleteUser(user)">
+      <button *ngIf="(authUser$ | async)?.rol === 'ADMIN'" class="Actions" mat-icon-button (click)="deleteUser(user)">
         <mat-icon>delete</mat-icon>
       </button>
-      <button class="Actions" [routerLink]="user.id" routerLinkActive="router-link-active" mat-icon-button >
+      <button *ngIf="(authUser$ | async)?.rol === 'ADMIN'" class="Actions" [routerLink]="user.id" routerLinkActive="router-link-active" mat-icon-button >
         <mat-icon>visibility</mat-icon>
       </button>
     </td>

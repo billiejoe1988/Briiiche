@@ -4,8 +4,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogAddComponent } from './components/dialog-add/dialog-add.component'; 
 import { AlertsService } from '../../../../core/services/alerts.service';
-import { throwError, Subject } from 'rxjs';
+import { throwError, Subject, Observable } from 'rxjs';
 import { Buyer } from './model';
+import { Store } from '@ngrx/store';
+import { User } from '../users/models';
+import { selectAuthUser } from '../../../../core/store/auth/selectors';
 import { DialogEditComponent } from './components/dialog-edit/dialog-edit.component';
 
 @Component({
@@ -20,14 +23,19 @@ export class BuyersComponent implements OnInit {
   displayedColumns: string[] = ['id', 'fullName', 'password', 'country', 'email', 'rol', 'comision', 'actions'];
   loading = false;
   isFormInvalid = false;
+  authUser$: Observable<User | null>;
+
   private buyerSavedSubject: Subject<void> = new Subject<void>();
 
   constructor(
     private fb: FormBuilder,
     private buyersService: BuyersService,
     private dialog: MatDialog,
-    private alertsService: AlertsService
+    private alertsService: AlertsService,
+    private store: Store
   ) {
+    this.authUser$ = this.store.select(selectAuthUser);
+
     this.buyerForm = this.fb.group({
       firstName: this.fb.control('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]), 
       lastName: this.fb.control('', [Validators.required, Validators.maxLength(15), Validators.minLength(4)]),

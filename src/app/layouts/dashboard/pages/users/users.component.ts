@@ -4,10 +4,11 @@ import { UsersService} from './users.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertsService } from '../../../../core/services/alerts.service';
 import { UsersDialogComponent } from './components/users-dialog/users-dialog.component';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Pagination } from '../../../../core/models/pagination';
 import { PageEvent } from '@angular/material/paginator';
-
+import { Store } from '@ngrx/store';
+import { selectAuthUser } from '../../../../core/store/auth/selectors';
 
 @Component({
   selector: 'app-users',
@@ -17,6 +18,7 @@ import { PageEvent } from '@angular/material/paginator';
 export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['id', 'fullName', 'password', 'country', 'email', 'rol', 'comision', 'actions'];
   users: User[] = [];
+  authUser$: Observable<User | null>;
 
   totalItems =0;
   pageSize=5;
@@ -24,7 +26,8 @@ export class UsersComponent implements OnInit {
 
   private userSavedSubject: Subject<void> = new Subject<void>();
 
-  constructor(private usersService: UsersService, public dialog: MatDialog, private alertsService: AlertsService) { }
+  constructor(private usersService: UsersService, public dialog: MatDialog, private alertsService: AlertsService, private store: Store) {
+    this.authUser$ = this.store.select(selectAuthUser); }
 
   ngOnInit(): void {
     this.loadUsers();

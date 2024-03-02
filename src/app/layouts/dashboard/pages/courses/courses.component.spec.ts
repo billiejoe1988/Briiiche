@@ -3,6 +3,8 @@ import { CoursesComponent } from "./courses.component";
 import { MockProvider } from 'ng-mocks';
 import { CoursesService } from "./courses.service";
 import { of } from "rxjs";
+import { StoreModule } from '@ngrx/store'; 
+import { HttpClientTestingModule } from "@angular/common/http/testing"; 
 
 describe('courses tests', () => {
   let component: CoursesComponent;
@@ -10,6 +12,10 @@ describe('courses tests', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CoursesComponent],
+      imports: [
+        HttpClientTestingModule,
+        StoreModule.forRoot({}) 
+      ],
       providers:[MockProvider(CoursesService, {
         getCourses: () => of ([
             {
@@ -33,7 +39,7 @@ describe('courses tests', () => {
               createdAt: new Date (),
           },])
       })],
-    }); 
+    }).compileComponents();
     component = TestBed.createComponent(CoursesComponent).componentInstance;
   });
 

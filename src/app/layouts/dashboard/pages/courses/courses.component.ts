@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Courses } from './models/index';
 import { Subject } from 'rxjs';
@@ -7,16 +7,22 @@ import { AlertsService } from '../../../../core/services/alerts.service';
 import { CoursesDialogComponent } from './components/courses-dialog/courses-dialog.component';
 import { Course } from '../users/models/complete';
 import { CoursesEditDialogComponent } from './components/coursedialog-edit/coursedialog-edit.component';
+import { AuthService } from '../../../auth/auth.service';
+import { UsersService } from '../users/users.service';
+import { User } from '../users/models';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectAuthUser } from '../../../../core/store/auth/selectors';
 
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.scss']
 })
-export class CoursesComponent {
+export class CoursesComponent implements OnInit {
   displayedColumns = ['id', 'courseName', 'createdAt', 'actions'];
-  isAdmin: boolean = false;
   courses: Courses[] = [];
+  authUser$: Observable<User | null>;
 
   private coursesSavedSubject: Subject<void> = new Subject<void>();
 
@@ -24,16 +30,20 @@ export class CoursesComponent {
     private dialog: MatDialog,
     private coursesService: CoursesService,
     private alertsService: AlertsService,
-  ) { }
+    private authService: AuthService,
+    private userService: UsersService,
+    private store: Store
+    ) { 
+      this.authUser$ = this.store.select(selectAuthUser);
+  }
      
   ngOnInit(): void {
-      this.isAdmin = true;
+    this.loadCourses();
+    this.coursesSavedSubject.subscribe(() => {
       this.loadCourses();
-      this.coursesSavedSubject.subscribe(() => {
-        this.loadCourses();
-      });
+    });
   }
-
+  
   onDelete(id: number) {
     this.alertsService.showAlert({
       title: 'Are you sure?',

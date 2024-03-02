@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from './models';
-import { Observable, of, mergeMap, catchError, throwError, tap } from 'rxjs';
+import { Observable, of, mergeMap, catchError, throwError, tap, map } from 'rxjs';
 import { AlertsService } from '../../../../core/services/alerts.service';
 import { HttpClient, HttpErrorResponse  } from '@angular/common/http';
 import { enviroment } from '../../../../enviroments/enviroment';
@@ -63,6 +63,12 @@ export class UsersService {
           return throwError(error);
         })
       );
+  }
+
+  getUserRoleById(userId: any): Observable<string> {
+    return this.httpClient.get<User>(`${enviroment.apiURL}/users/${userId}`).pipe(
+      map((user: User) => user.rol) 
+    );
   }
   
   getUserDetails(userId: string): Observable<User> {

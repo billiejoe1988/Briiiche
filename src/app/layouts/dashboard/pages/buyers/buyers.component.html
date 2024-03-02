@@ -1,7 +1,7 @@
 <h1 appUppercaseTitles class="p-3 text-center bg-white/80 rounded mb-4">Buyer Courses Management</h1>
   
 <div class="flex justify-end mb-3">
-  <button (click)="openAddBuyerDialog()" mat-button class="boton">
+  <button *ngIf="(authUser$ | async)?.rol === 'ADMIN'" (click)="openAddBuyerDialog()" mat-button class="boton">
     Agree
   </button>
 </div>
@@ -42,13 +42,13 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let buyer">
-        <button class="Actions" (click)="deleteBuyer(buyer)" mat-icon-button>
+        <button *ngIf="(authUser$ | async)?.rol === 'ADMIN'" class="Actions" (click)="deleteBuyer(buyer)" mat-icon-button>
           <mat-icon>delete</mat-icon>
         </button>
-        <button class="Actions" (click)="onModify(buyer)" mat-icon-button>
+        <button *ngIf="(authUser$ | async)?.rol === 'ADMIN'" class="Actions" (click)="onModify(buyer)" mat-icon-button>
           <mat-icon>edit</mat-icon>
         </button>
-        <button class="Actions" [routerLink]="buyer.id" routerLinkActive="router-link-active" mat-icon-button >
+        <button *ngIf="(authUser$ | async)?.rol === 'ADMIN'" class="Actions" [routerLink]="buyer.id" routerLinkActive="router-link-active" mat-icon-button >
           <mat-icon>visibility</mat-icon>
         </button>        
       </td>
